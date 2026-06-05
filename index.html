@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Starlin Tatis</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#111;--bg:#fff;--sidebar:290px}
+body{font-family:Helvetica,Arial,sans-serif;background:#fff;color:#111}
+.shell{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
+.left{padding:28px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.logo,.nav a,a{color:#111;text-decoration:none}
+.nav{display:flex;flex-direction:column;margin-top:20px}
+.nav a{line-height:2}
+.nav a.active{font-weight:bold}
+.artist{margin-top:auto;font-size:2rem;font-weight:700}
+.right{padding:32px 40px 80px}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.work-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.about-body,p{font-size:14px;line-height:1.8;max-width:65ch}
+.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin:30px 0 14px}
+@media(max-width:768px){
+.shell{grid-template-columns:1fr}
+.left{position:relative;height:auto}
+.works-grid{grid-template-columns:repeat(2,1fr)}
+.right{padding:20px}
+}
+</style>
+
+<script>
+// =====================================================
+// EDITA SOLO ESTA PARTE
+// =====================================================
+
+const BIO = {
+intro: `Write your biography here.`,
+statement: `Write your artist statement here.`,
+ongoing: `Describe your current project here.`
+};
+
+const CONTACT = {
+email: 'starlintatis@gmail.com',
+location: 'Santo Domingo, Dominican Republic',
+instagram: 'https://instagram.com/starlintatis'
+};
+
+const PRINTS = {
+intro: `Information about your printing process.`,
+shipping: `Shipping and edition information.`
+};
+
+const WORKS = [
+{
+image:'work-1.jpg',
+title:'Untitled',
+material:'Digital Silver Print Fiber Gloss',
+size:'8 × 11"'
+},
+{
+image:'work-2.jpg',
+title:'Untitled II',
+material:'Digital Silver Print Fiber Gloss',
+size:'11 × 14"'
+}
+];
+
+// =====================================================
+// NO TOCAR DEBAJO
+// =====================================================
+
+let page='works';
+
+function show(p){
+page=p;
+render();
+}
+
+function render(){
+
+document.querySelectorAll('.nav a').forEach(a=>{
+a.classList.toggle('active',a.dataset.page===page);
+});
+
+const app=document.getElementById('app');
+
+if(page==='works'){
+app.innerHTML=`
+<div class="works-grid">
+${WORKS.map(w=>`
+<div class="work-item">
+<img src="images/${w.image}" alt="${w.title}">
+<p>${w.title}<br>${w.material}<br>${w.size}</p>
+</div>
+`).join('')}
+</div>`;
+}
+
+if(page==='about'){
+app.innerHTML=`
+<div class="section-title">About</div>
+<p class="about-body">${BIO.intro}</p>
+<div class="section-title">Statement</div>
+<p class="about-body">${BIO.statement}</p>
+<div class="section-title">Ongoing</div>
+<p class="about-body">${BIO.ongoing}</p>
+`;
+}
+
+if(page==='prints'){
+app.innerHTML=`
+<div class="section-title">Prints</div>
+<p>${PRINTS.intro}</p>
+<div class="section-title">Orders</div>
+<p>${PRINTS.shipping}</p>
+`;
+}
+
+if(page==='contact'){
+app.innerHTML=`
+<div class="section-title">Contact</div>
+<p><a href="mailto:${CONTACT.email}">${CONTACT.email}</a></p>
+<p>${CONTACT.location}</p>
+<p><a href="${CONTACT.instagram}" target="_blank">Instagram</a></p>
+`;
+}
+}
+
+window.onload=render;
+</script>
+</head>
+
+<body>
+
+<div class="shell">
+
+<div class="left">
+<a class="logo" href="#" onclick="show('works')">Starlin Tatis</a>
+
+<nav class="nav">
+<a href="#" data-page="works" onclick="show('works')">Works</a>
+<a href="#" data-page="about" onclick="show('about')">About</a>
+<a href="#" data-page="prints" onclick="show('prints')">Prints Info.</a>
+<a href="#" data-page="contact" onclick="show('contact')">Contact</a>
+</nav>
+
+<div class="artist">Starlin Tatis</div>
+</div>
+
+<div class="right" id="app"></div>
+
+</div>
+
+</body>
+</html>
