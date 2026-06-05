@@ -1,0 +1,87 @@
+backend:
+  name: github
+  repo: starlintatis/starlintatis.github.io
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+
+  # ── WORKS ────────────────────────────────────────────────────
+  - name: "works"
+    label: "Works"
+    label_singular: "Work"
+    folder: "_data/works"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "id"
+    fields:
+      - { label: "ID (único, sin espacios)", name: "id", widget: "string" }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Imagen", name: "src", widget: "image" }
+      - { label: "Material / Tipo de impresión", name: "material", widget: "string" }
+      - { label: "Dimensiones (ej: 8 × 11\")", name: "size", widget: "string" }
+      - { label: "Orden en galería", name: "order", widget: "number", default: 99 }
+
+  # ── ABOUT ────────────────────────────────────────────────────
+  - name: "about"
+    label: "About"
+    files:
+      - label: "Texto About"
+        name: "about"
+        file: "_data/about.yml"
+        fields:
+          - { label: "Foto (about.jpg)", name: "photo", widget: "image" }
+          - label: "Párrafos principales"
+            name: "paragraphs"
+            widget: "list"
+            field: { label: "Párrafo", name: "text", widget: "text" }
+          - label: "Sección Ongoing"
+            name: "ongoing"
+            widget: "object"
+            fields:
+              - { label: "Título del proyecto", name: "title", widget: "string" }
+              - { label: "Descripción", name: "description", widget: "text" }
+
+  # ── PRINTS INFO ───────────────────────────────────────────────
+  - name: "prints"
+    label: "Prints Info"
+    files:
+      - label: "Contenido Prints"
+        name: "prints"
+        file: "_data/prints.yml"
+        fields:
+          - { label: "Introducción DSI (párrafo 1)", name: "intro1", widget: "text" }
+          - { label: "Introducción DSI (párrafo 2)", name: "intro2", widget: "string" }
+          - label: "Bullets (características)"
+            name: "bullets"
+            widget: "list"
+            field: { label: "Punto", name: "text", widget: "string" }
+          - label: "Papeles disponibles"
+            name: "papers"
+            widget: "list"
+            fields:
+              - { label: "Nombre del papel", name: "name", widget: "string" }
+              - { label: "Descripción", name: "desc", widget: "text" }
+          - { label: "Órdenes — párrafo 1", name: "orders1", widget: "text" }
+          - { label: "Órdenes — párrafo 2", name: "orders2", widget: "text" }
+          - { label: "Envío", name: "shipping", widget: "string" }
+
+  # ── CONTACT ───────────────────────────────────────────────────
+  - name: "contact"
+    label: "Contact"
+    files:
+      - label: "Datos de contacto"
+        name: "contact"
+        file: "_data/contact.yml"
+        fields:
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Ubicación", name: "location", widget: "string" }
+          - { label: "Nota / descripción", name: "note", widget: "text" }
+          - label: "Redes sociales"
+            name: "social"
+            widget: "list"
+            fields:
+              - { label: "Nombre (ej: Instagram)", name: "name", widget: "string" }
+              - { label: "URL", name: "link", widget: "string" }
