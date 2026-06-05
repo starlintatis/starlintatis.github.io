@@ -1,1 +1,0 @@
-# starlintatis.github.io
