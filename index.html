@@ -1,158 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Starlin Tatis</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#111;--bg:#fff;--sidebar:290px}
-body{font-family:Helvetica,Arial,sans-serif;background:#fff;color:#111}
-.shell{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh}
-.left{padding:28px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
-.logo,.nav a,a{color:#111;text-decoration:none}
-.nav{display:flex;flex-direction:column;margin-top:20px}
-.nav a{line-height:2}
-.nav a.active{font-weight:bold}
-.artist{margin-top:auto;font-size:2rem;font-weight:700}
-.right{padding:32px 40px 80px}
+:root{--ink:#111;--bg:#fff;--lw:290px}
+body{font-family:Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+a{text-decoration:none;color:var(--ink);cursor:pointer}
+a:hover{opacity:0.45}
+
+.shell{display:grid;grid-template-columns:var(--lw) 1fr;min-height:100vh}
+
+/* LEFT SIDEBAR */
+.left{padding:28px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{font-size:13px;font-weight:400;margin-bottom:28px;display:block;letter-spacing:.01em}
+.nav{display:flex;flex-direction:column;gap:1px;margin-bottom:28px}
+.nav a{font-size:13px;line-height:2.1;font-weight:400}
+.nav a.active{font-weight:700}
+.ann{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.55;opacity:.5}
+.artist{margin-top:auto;font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:-0.02em;padding-top:24px;cursor:pointer}
+
+/* RIGHT */
+.right{min-height:100vh}
+
+/* HOME hero */
+.hero-img{width:100%;height:100vh;background:#e8e8e8;overflow:hidden;position:relative}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.3)}
+
+/* CONTENT pages */
+.content{padding:32px 40px 80px}
+.page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
+
+/* WORKS grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.work-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.about-body,p{font-size:14px;line-height:1.8;max-width:65ch}
-.section-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.5;margin:30px 0 14px}
+.work-item{display:block;overflow:hidden;background:#e0e0e0;cursor:pointer}
+.work-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:opacity .25s}
+.work-item:hover img{opacity:.8}
+.wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
+
+/* WORK DETAIL */
+.work-meta{font-size:13px;line-height:1.9;margin-bottom:24px;opacity:.65}
+.work-nav{display:flex;gap:20px;margin-bottom:36px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.inq-btn{display:inline-block;margin-top:4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:2px;opacity:.65}
+.inq-btn:hover{opacity:1}
+.work-img img{width:100%;display:block}
+
+/* ABOUT */
+.about-photo{margin-bottom:40px}
+.about-photo img{width:100%;max-width:620px;display:block}
+.about-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.about-body{font-size:13.5px;line-height:1.8;max-width:60ch;margin-bottom:36px}
+
+/* PRINTS INFO */
+.prints-section{margin-bottom:44px}
+.prints-feature{display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+.prints-feature li{font-size:13.5px;line-height:1.8;list-style:none;padding-left:14px;position:relative;max-width:60ch}
+.prints-feature li::before{content:'·';position:absolute;left:0}
+.paper-block{border-top:1px solid rgba(0,0,0,.1);padding-top:20px;margin-bottom:20px;max-width:60ch}
+.paper-name{font-size:13.5px;font-weight:700;margin-bottom:6px}
+.paper-desc{font-size:13px;line-height:1.75;opacity:.7}
+
+/* CONTACT */
+.contact-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.contact-block{margin-bottom:36px}
+.contact-block p{font-size:13.5px;line-height:1.9}
+.contact-block a{display:block;font-size:13.5px;line-height:2}
+
+/* RESPONSIVE */
 @media(max-width:768px){
-.shell{grid-template-columns:1fr}
-.left{position:relative;height:auto}
-.works-grid{grid-template-columns:repeat(2,1fr)}
-.right{padding:20px}
+  .shell{grid-template-columns:1fr}
+  .left{position:relative;height:auto}
+  .hero-img{height:65vw}
+  .works-grid{grid-template-columns:repeat(2,1fr)}
+  .content{padding:24px 20px 48px}
 }
 </style>
-
-<script>
-// =====================================================
-// EDITA SOLO ESTA PARTE
-// =====================================================
-
-const BIO = {
-intro: `Write your biography here.`,
-statement: `Write your artist statement here.`,
-ongoing: `Describe your current project here.`
-};
-
-const CONTACT = {
-email: 'starlintatis@gmail.com',
-location: 'Santo Domingo, Dominican Republic',
-instagram: 'https://instagram.com/starlintatis'
-};
-
-const PRINTS = {
-intro: `Information about your printing process.`,
-shipping: `Shipping and edition information.`
-};
-
-const WORKS = [
-{
-image:'work-1.jpg',
-title:'Untitled',
-material:'Digital Silver Gelatin Fiber Gloss',
-size:'8 × 11" 1/2 in'
-'edition: 'Limited edition',
-
-},
-{
-image:'work-2.jpg',
-title:'Untitled II',
-material:'Digital Silver Print Fiber Gloss',
-size:'11 × 14"'
-}
-];
-
-// =====================================================
-// NO TOCAR DEBAJO
-// =====================================================
-
-let page='works';
-
-function show(p){
-page=p;
-render();
-}
-
-function render(){
-
-document.querySelectorAll('.nav a').forEach(a=>{
-a.classList.toggle('active',a.dataset.page===page);
-});
-
-const app=document.getElementById('app');
-
-if(page==='works'){
-app.innerHTML=`
-<div class="works-grid">
-${WORKS.map(w=>`
-<div class="work-item">
-<img src="images/${w.image}" alt="${w.title}">
-<p>${w.title}<br>${w.material}<br>${w.size}</p>
-</div>
-`).join('')}
-</div>`;
-}
-
-if(page==='about'){
-app.innerHTML=`
-<div class="section-title">About</div>
-<p class="about-body">${BIO.intro}</p>
-<div class="section-title">Statement</div>
-<p class="about-body">${BIO.statement}</p>
-<div class="section-title">Ongoing</div>
-<p class="about-body">${BIO.ongoing}</p>
-`;
-}
-
-if(page==='prints'){
-app.innerHTML=`
-<div class="section-title">Prints</div>
-<p>${PRINTS.intro}</p>
-<div class="section-title">Orders</div>
-<p>${PRINTS.shipping}</p>
-`;
-}
-
-if(page==='contact'){
-app.innerHTML=`
-<div class="section-title">Contact</div>
-<p><a href="mailto:${CONTACT.email}">${CONTACT.email}</a></p>
-<p>${CONTACT.location}</p>
-<p><a href="${CONTACT.instagram}" target="_blank">Instagram</a></p>
-`;
-}
-}
-
-window.onload=render;
-</script>
 </head>
-
 <body>
 
 <div class="shell">
 
-<div class="left">
-<a class="logo" href="#" onclick="show('works')">Starlin Tatis</a>
+  <!-- LEFT SIDEBAR -->
+  <div class="left">
+    <a class="logo" onclick="go('works')">Starlin Tatis</a>
+    <nav class="nav" id="nav">
+      <a onclick="go('works')" data-p="works">Works</a>
+      <a onclick="go('about')" data-p="about">About</a>
+      <a onclick="go('prints')" data-p="prints">Prints Info.</a>
+      <a onclick="go('contact')" data-p="contact">Contact</a>
+    </nav>
+    <div class="ann">
+      <a href="mailto:starlintatis@gmail.com">Available for commissions</a>
+    </div>
+    <div class="artist" onclick="go('works')">Starlin Tatis</div>
+  </div>
 
-<nav class="nav">
-<a href="#" data-page="works" onclick="show('works')">Works</a>
-<a href="#" data-page="about" onclick="show('about')">About</a>
-<a href="#" data-page="prints" onclick="show('prints')">Prints Info.</a>
-<a href="#" data-page="contact" onclick="show('contact')">Contact</a>
-</nav>
+  <!-- RIGHT CONTENT -->
+  <div class="right" id="right"></div>
 
-<div class="artist">Starlin Tatis</div>
 </div>
 
-<div class="right" id="app"></div>
+<script>
+// ============================================================
+// WORKS — agrega tus fotos aquí
+// Cada entrada tiene:
+//   id:       identificador único (sin espacios)
+//   src:      ruta a la imagen, ej: 'images/nombre.jpg'
+//   title:    título de la obra
+//   material: tipo de impresión
+//   size:     dimensiones, ej: '8 × 11"'
+// ============================================================
+const WORKS = [
+  {
+    id: 'work-1',
+    src: 'images/work-1.jpg',
+    title: 'Untitled',
+    material: 'Digital Silver Print Fiber Gloss',
+    size: '8 × 11"'
+  },
+  // Para agregar más obras, copia el bloque de arriba y pégalo aquí
+  // separado por una coma
+];
 
-</div>
+// ============================================================
+// CONTACT
+// ============================================================
+const CONTACT = {
+  email: 'starlintatis@gmail.com',
+  location: 'Santo Domingo, Dominican Republic',
+  social: [
+    { name: 'Instagram', link: 'https://instagram.com/starlintatis' },
+  ],
+  note: 'For print inquiries, exhibition proposals, and editorial commissions.'
+};
 
+// ============================================================
+// ROUTING — no editar debajo de esta línea
+// ============================================================
+let state = { page: 'works', workId: null };
+
+function go(page, id) {
+  state = { page, workId: page === 'work-detail' ? id : null };
+  render();
+  window.scrollTo(0, 0);
+}
+
+function setActive(p) {
+  document.querySelectorAll('#nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.p === p);
+  });
+}
+
+function render() {
+  const R = document.getElementById('right');
+  const { page, workId } = state;
+
+  // WORKS LIST
+  if (page === 'works') {
+    setActive('works');
+    const grid = WORKS.map(w => `
+      <div class="work-item" onclick="go('work-detail','${w.id}')">
+        <img src="${w.src}" alt="${w.title}"
+          onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>`;
+    return;
+  }
+
+  // WORK DETAIL
+  if (page === 'work-detail') {
+    setActive('works');
+    const w = WORKS.find(x => x.id === workId) || WORKS[0];
+    const i = WORKS.indexOf(w);
+    const prev = WORKS[i - 1];
+    const next = WORKS[i + 1];
+    R.innerHTML = `
+      <div class="content">
+        <div class="work-nav">
+          ${prev ? `<a onclick="go('work-detail','${prev.id}')">← Prev</a>` : ''}
+          <a onclick="go('works')">All works</a>
+          ${next ? `<a onclick="go('work-detail','${next.id}')">Next →</a>` : ''}
+        </div>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-meta">
+            ${w.title}<br>
+            ${w.material}<br>
+            ${w.size}
+          </div>
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">Inquiries</a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // ABOUT
+  if (page === 'about') {
+    setActive('about');
+    R.innerHTML = `
+      <div class="content">
+        <div class="about-photo">
+          <img src="images/about.jpg" alt="Starlin Tatis"
+            onerror="this.parentNode.style.display='none'"/>
+        </div>
+        <div class="about-h">About</div>
+        <p class="about-body">Starlin Tatis is a self-taught photographer and creative director based in Santo Domingo, Dominican Republic, who works at the intersection of editorial portraiture and fashion photography. Active since 2010, his work is defined by a constant focus on presence: the meaningful silence between subject and lens that transforms a photograph into something closer to a document of intimacy than a mere record of appearance.</p>
+        <p class="about-body">Without formal academic training, Tatis built his visual language through an unwavering commitment to the craft itself, developing a practice rooted in formal precision and psychological depth that rejects spectacle in favor of stillness. His aesthetic draws from both the traditions of artistic portraiture and the codes of contemporary fashion, shaped entirely by the discipline of constant observation and creation.</p>
+        <p class="about-body">His photographs have been exhibited internationally at CONTEXT Art Miami, Art Basel Miami Beach, the TRImarchi Graphic Design Festival (Mar del Plata, Argentina), and Espacio Falso Gallery (Santiago, Chile). His work has been published in Inkult Magazine, BALAM Magazine, Bass Culture Islands, Oh! Magazine, and Pandora Magazine, and selected for PhotoVogue, Vogue Italia's platform for emerging photography talent. His photographs are part of private collections on several continents.</p>
+        <p class="about-body">Tatis produces his fine art editions on archival papers in collaboration with specialized printers in the United States, using processes including Gelatin Silver and C-Type printing. His work is available as limited-edition fine art prints.</p>
+        <div class="about-h">Ongoing</div>
+        <p class="about-body"><em>Unforgettable</em> — An intimate archival series created in collaboration with Dominican actor Juan Fernández. The project explores memory, identity, and subtlety through black and white and fashion. To be released as archival rag prints.</p>
+      </div>`;
+    return;
+  }
+
+  // PRINTS INFO
+  if (page === 'prints') {
+    setActive('prints');
+    R.innerHTML = `
+      <div class="content">
+        <div class="prints-section">
+          <div class="about-h">DSI Digital Silver Prints</div>
+          <p class="about-body">DSI Digital Silver Prints are true black-and-white, silver-halide photographic prints produced directly from digital files using laser technology. Utilizing a LightJet 430 laser printer to expose light-sensitive Ilford paper which is then developed in chemicals, this process offers the archival longevity and tonal depth of traditional darkroom prints without color casts, superior to inkjet or standard color-paper prints.</p>
+          <p class="about-body">Digital Silver prints are the best B&amp;W print available.</p>
+          <ul class="prints-feature">
+            <li>True archival permanence of silver gelatin</li>
+            <li>No color casts ever</li>
+            <li>Superior tonal range and shadow detail</li>
+            <li>Proven longevity exceeding other digital print processes</li>
+            <li>Durability – these prints can be re-washed if needed and are naturally moisture and fingerprint resistant</li>
+            <li>Light fastness – silver gelatin prints have a high resistance to fading due to light exposure</li>
+          </ul>
+        </div>
+
+        <div class="prints-section">
+          <div class="about-h">Papers</div>
+          <div class="paper-block">
+            <div class="paper-name">B&amp;W DSI Digital Silver Print Fiber Gloss</div>
+            <p class="paper-desc">Premium Quality Silver Gelatin on Baryta Coated Fibre Base — the "gold standard" in black &amp; white fine art prints.</p>
+          </div>
+          <div class="paper-block">
+            <div class="paper-name">B&amp;W DSI Digital Silver Print RC Pearl</div>
+            <p class="paper-desc">Professional Quality on Resin Coated Base — ideal for tough environments and frequent handling while still retaining all the beauty of a silver gelatin print.</p>
+          </div>
+        </div>
+
+        <div class="prints-section">
+          <div class="about-h">Orders</div>
+          <p class="about-body">All my works are limited editions (unframed). All orders within the US ship via UPS Ground or United States Postal Service (USPS). Shipping estimates are subject to change. Because every order is different, I package orders to best protect your images.</p>
+          <p class="about-body">5 to 7 business days. Fiber-based prints may take 7 to 10 days because of archival washing and air drying.</p>
+          <p class="about-body">Free shipping.</p>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // CONTACT
+  if (page === 'contact') {
+    setActive('contact');
+    const socialHtml = CONTACT.social.map(s =>
+      `<a href="${s.link}">${s.name}</a>`).join('');
+    R.innerHTML = `
+      <div class="content">
+        <div class="contact-block">
+          <div class="contact-h">Contact</div>
+          <p class="about-body" style="margin-bottom:8px">${CONTACT.note}</p>
+          <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>
+        </div>
+        <div class="contact-block">
+          <div class="contact-h">Location</div>
+          <p>${CONTACT.location}</p>
+        </div>
+        ${CONTACT.social.length ? `
+        <div class="contact-block">
+          <div class="contact-h">Social</div>
+          ${socialHtml}
+        </div>` : ''}
+      </div>`;
+    return;
+  }
+}
+
+render();
+</script>
 </body>
 </html>
