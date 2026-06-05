@@ -125,14 +125,14 @@ const WORKS = [
     src: 'images/work-1.jpg',
     title: 'Untitled No. 03',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '11 × 17½" — Limited edition'
+    size: '11 x 17" 1/2 in.\nLimited edition'
   },
   {
     id: 'work-2',
     src: 'images/work-2.jpg',
     title: 'Untitled No. 02',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '11 × 17½" — Limited edition'
+    size: '11 x 17" 1/2 in.\nLimited edition'
   },
   // Para agregar más obras, copia el bloque de arriba y pégalo aquí
   // separado por una coma
@@ -208,7 +208,7 @@ function render() {
           <div class="work-meta">
             ${w.title}<br>
             ${w.material}<br>
-            ${w.size}
+            ${w.size.replace(/\n/g,'<br>')}
           </div>
           <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">Inquiries</a>
         </div>
