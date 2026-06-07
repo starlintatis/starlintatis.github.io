@@ -39,12 +39,10 @@ a:hover{opacity:0.45}
 .page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
 /* WORKS grid */
-.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:8px}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
 .work-item{display:block;background:#fff;cursor:pointer}
-.work-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:opacity .3s;background:#fff}
+.work-item img{width:100%;display:block;transition:opacity .3s;background:#fff}
 .work-item:hover img{opacity:.75}
-.work-item-label{display:block;padding:7px 0 0;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .3s}
-.work-item:hover .work-item-label{opacity:1}
 .wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
 /* WORK DETAIL */
@@ -196,7 +194,6 @@ function render() {
       <div class="work-item" onclick="go('work-detail','${w.id}')">
         <img src="${w.src}" alt="${w.title}"
           onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
-        <div class="work-item-label">${w.title}</div>
       </div>`
     ).join('');
     R.innerHTML = `
@@ -274,7 +271,7 @@ function render() {
           <p class="about-body">Todas las fotografías se imprimen bajo pedido en papel Archival Rag de fibra de algodón o utilizando el aclamado proceso Digital Silver Gelatin sobre auténtico papel de Haluro de plata. El proceso Digital Silver Gelatin son impresiones fotográficas de verdadero blanco y negro producidas directamente desde archivos digitales mediante tecnología láser, utilizando haluros de plata como medio de imagen.</p>
           <p class="about-body">Una impresora láser LightJet 430 expone papel Ilford Silver Gelatin sensible a la luz, que posteriormente se procesa en fotoquímicos, combinando la precisión digital contemporánea con la riqueza tonal y la permanencia del revelado en cuarto oscuro.</p>
           <p class="about-body">Dado que la imagen se forma con plata en lugar de tinta, las impresiones están permanentemente libres de virados de color y mantienen una consistencia visual excepcional a lo largo del tiempo. Los materiales Silver Gelatin son también naturalmente resistentes a la humedad, las huellas dactilares y el desvanecimiento por exposición prolongada a la luz.</p>
-          <p class="about-body">Se ofrecen dos papeles Silver Gelatin:</p>
+          <p class="about-body"><strong>Se ofrecen dos papeles Silver Gelatin:</strong></p>
           <div class="paper-block">
             <div class="paper-name">Fiber Gloss (Baryta Coated)</div>
             <p class="paper-desc">Calidad premium en Silver Gelatin sobre Baryta Coated Fiber Base 310gsm. El referente absoluto en impresión de bellas artes en blanco y negro. Tonos ricos y acentuados, excelente contraste y todas las hermosas características que ofrece este acabado.</p>
@@ -287,7 +284,8 @@ function render() {
 
         <div class="prints-section">
           <div class="about-h">Tamaños desde</div>
-          <p class="about-body">5x7" · 8×10" · 11×14/17" · 16×20" · 20×24" — Dimensiones y tipo de papel personalizadas bajo pedido.</p>
+          <p class="about-body">5x7" · 8×10" · 11×14/17" · 16×20" · 20×24"</p>
+          <p class="about-body" style="font-style:italic;opacity:.65">Dimensiones y tipo de papel personalizadas bajo pedido.</p>
         </div>
 
         <div class="prints-section">
