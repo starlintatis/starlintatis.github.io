@@ -26,7 +26,7 @@ a:hover{opacity:0.45}
 
 /* RIGHT */
 .right{min-height:100vh}
-.right-inner{animation:fadeIn .2s ease}
+.right-inner{animation:fadeIn .35s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* HOME hero */
@@ -40,10 +40,10 @@ a:hover{opacity:0.45}
 
 /* WORKS grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:8px}
-.work-item{display:block;overflow:hidden;background:#fff;cursor:pointer;position:relative}
-.work-item img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;transition:opacity .25s;background:#fff}
+.work-item{display:block;background:#fff;cursor:pointer;position:relative}
+.work-item img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;transition:opacity .3s;background:#fff}
 .work-item:hover img{opacity:.75}
-.work-item-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .25s;background:linear-gradient(transparent,rgba(255,255,255,.92))}
+.work-item-label{padding:8px 2px 0;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .3s;height:22px}
 .work-item:hover .work-item-label{opacity:1}
 .wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
@@ -133,24 +133,24 @@ const WORKS = [
     src: 'images/work-1.jpg',
     title: 'Untitled No. 03',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '11 × 17½ in',
-    sizeCm: '27.9 × 44.5 cm'
+    size: '11 x 17" 1/2 in',
+    sizeCm: '27.9 × 44.5 cm 1.3 cm'
   },
   {
     id: 'work-2',
     src: 'images/work-2.jpg',
     title: 'Untitled No. 02',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '11 × 17½ in',
-    sizeCm: '27.9 × 44.5 cm'
+    size: '11 x 17" 1/2 in',
+    sizeCm: '27.9 × 44.5 cm 1.3 cm'
   },
   {
     id: 'work-3',
     src: 'images/work-3.jpg',
     title: 'Untitled (Test)',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '16.8 × 26.8 in',
-    sizeCm: '42.7 × 68.1 cm'
+    size: '16.8 x 26.8" 1/2 in',
+    sizeCm: '42.7 × 68.1 cm 1.3 cm'
   },
   // Para agregar más obras, copia el bloque de arriba y pégalo aquí
   // separado por una coma
