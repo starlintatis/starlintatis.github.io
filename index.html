@@ -3,288 +3,85 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Starlin Tatis — Portfolio</title>
-<!-- Importación de tipografías premium para el entorno de arte -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
+<title>Starlin Tatis</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root {
-  --ink: #111111;
-  /* Un blanco con un matiz cálido casi imperceptible (estilo pared de museo o papel de archivo) */
-  --bg: #F9F9F9; 
-  --lw: 280px;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-}
+:root{--ink:#111;--bg:#fff;--lw:290px}
+body{font-family:Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+a{text-decoration:none;color:var(--ink);cursor:pointer}
+a:hover{opacity:0.45}
 
-body {
-  font-family: var(--font-sans);
-  background: var(--bg);
-  color: var(--ink);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
+.shell{display:grid;grid-template-columns:var(--lw) 1fr;min-height:100vh}
 
-a {
-  text-decoration: none;
-  color: var(--ink);
-  cursor: pointer;
-  transition: opacity 0.4s ease;
-}
-a:hover { opacity: 0.4; }
+/* LEFT SIDEBAR */
+.left{padding:28px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{font-size:13px;font-weight:400;margin-bottom:28px;display:block;letter-spacing:.01em}
+.nav{display:flex;flex-direction:column;gap:1px;margin-bottom:28px}
+.nav a{font-size:13px;line-height:2.1;font-weight:400}
+.nav a.active{font-weight:700}
+.ann{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.55;opacity:.5}
+.artist{margin-top:auto;font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:-0.02em;padding-top:24px;cursor:pointer}
 
-.shell { display: grid; grid-template-columns: var(--lw) 1fr; min-height: 100vh; }
+/* RIGHT */
+.right{min-height:100vh}
 
-/* LEFT SIDEBAR (La Galería Lateral) */
-.left {
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  border-right: 1px solid rgba(0,0,0,0.03); /* Línea divisoria quirúrgica y sutil */
-}
+/* HOME hero */
+.hero-img{width:100%;height:100vh;background:#e8e8e8;overflow:hidden;position:relative}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.3)}
 
-.logo {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
-  margin-bottom: 48px;
-  display: block;
-  letter-spacing: -0.01em;
-}
+/* CONTENT pages */
+.content{padding:32px 40px 80px}
+.page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
-.nav { display: flex; flex-direction: column; gap: 6px; margin-bottom: 48px; }
-.nav a {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 400;
-  padding: 4px 0;
-}
-.nav a.active {
-  font-weight: 500;
-  border-bottom: 1px solid var(--ink);
-  width: max-content;
-}
+/* WORKS grid */
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.work-item{display:block;overflow:hidden;background:#fff;cursor:pointer}
+.work-item img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;transition:opacity .25s;background:#fff}
+.work-item:hover img{opacity:.8}
+.wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
-.ann {
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  line-height: 1.6;
-  opacity: 0.5;
-  margin-top: auto;
-}
+/* WORK DETAIL */
+.work-meta{font-size:13px;line-height:1.9;margin-bottom:24px;opacity:.65}
+.work-nav{display:flex;gap:20px;margin-bottom:36px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.inq-btn{display:inline-block;margin-top:4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:2px;opacity:.65}
+.inq-btn:hover{opacity:1}
+.work-img{max-width:480px;margin:0 auto}
+.work-img img{width:100%;display:block}
 
-/* Nombre de firma en la parte inferior izquierda, emulando un catálogo impreso */
-.artist {
-  margin-top: 24px;
-  font-family: var(--font-serif);
-  font-size: 32px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  padding-top: 16px;
-  cursor: pointer;
-  border-top: 1px solid rgba(0,0,0,0.05);
-}
+/* ABOUT */
+.about-photo{margin-bottom:40px}
+.about-photo img{width:100%;max-width:620px;display:block}
+.about-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.about-body{font-size:13.5px;line-height:1.8;max-width:60ch;margin-bottom:36px}
 
-/* RIGHT CONTENT */
-.right { min-height: 100vh; background: var(--bg); }
-
-/* CONTENT PAGES (Espacio negativo expandido para que la obra respire) */
-.content { padding: 60px 80px 120px; max-width: 1400px; }
-
-.page-title {
-  font-family: var(--font-serif);
-  font-size: 24px;
-  font-weight: 400;
-  margin-bottom: 48px;
-  font-style: italic;
-}
-
-/* WORKS GRID (Convertido en una instalación limpia de museo) */
-.works-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Reducido a 2 columnas para dar un tamaño más imponente a cada obra */
-  gap: 48px; /* Espacio amplio entre marcos */
-}
-
-.work-item {
-  display: block;
-  overflow: hidden;
-  background: transparent;
-  cursor: pointer;
-  padding: 20px; /* Crea un 'passepartout' o margen visual alrededor de la foto */
-  background: #ffffff; /* La foto descansa sobre un fondo blanco puro simulando el papel montado */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.015); /* Sombra física hiper-sutil */
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.work-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.03);
-}
-
-.work-item img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.4s ease;
-}
-
-.wg-ph {
-  aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-size: 16px;
-  font-style: italic;
-  color: rgba(0,0,0,0.4);
-  background: #fff;
-}
-
-/* WORK DETAIL (Estructura de Ficha de Lote de Subasta) */
-.work-detail-container {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr; /* Diseño asimétrico elegante */
-  gap: 64px;
-  align-items: start;
-  margin-top: 32px;
-}
-
-.work-img-box {
-  background: #ffffff;
-  padding: 30px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
-}
-.work-img-box img { width: 100%; display: block; height: auto; }
-
-.work-info-box {
-  position: sticky;
-  top: 60px;
-}
-
-.work-nav {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 40px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.5;
-}
-
-/* Tipografía de la ficha técnica */
-.work-title-detail {
-  font-family: var(--font-serif);
-  font-size: 28px;
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 6px;
-}
-.work-artist-detail {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.5;
-  margin-bottom: 28px;
-}
-
-.work-specs-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 40px;
-}
-.work-specs-table td {
-  padding: 12px 0;
-  font-size: 13px;
-  line-height: 1.6;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-.work-specs-table td.label {
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  opacity: 0.4;
-  width: 30%;
-}
-
-/* Botón de Adquisición Premium */
-.inq-btn {
-  display: block;
-  text-align: center;
-  background: var(--ink);
-  color: var(--bg);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 16px 24px;
-  font-weight: 500;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-.inq-btn:hover {
-  background: rgba(0,0,0,0.8);
-  opacity: 1;
-}
-
-/* TEXT PAGES (About & Prints Info) */
-.about-photo { margin-bottom: 48px; background: #fff; padding: 16px; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.01); }
-.about-photo img { width: 100%; max-width: 580px; display: block; }
-
-.about-h {
-  font-family: var(--font-serif);
-  font-size: 20px;
-  font-style: italic;
-  margin: 0 0 20px;
-  font-weight: 400;
-}
-.about-body {
-  font-size: 14px;
-  line-height: 1.9;
-  max-width: 58ch;
-  margin-bottom: 28px;
-  color: #222;
-  text-align: justify;
-}
-
-/* PRINTS INFO SPECIFICS */
-.prints-section { margin-bottom: 56px; }
-.paper-block {
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  max-width: 58ch;
-}
-.paper-name { font-family: var(--font-serif); font-size: 18px; font-weight: 400; margin-bottom: 6px; }
-.paper-desc { font-size: 13.5px; line-height: 1.7; opacity: 0.7; }
+/* PRINTS INFO */
+.prints-section{margin-bottom:44px}
+.prints-feature{display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+.prints-feature li{font-size:13.5px;line-height:1.8;list-style:none;padding-left:14px;position:relative;max-width:60ch}
+.prints-feature li::before{content:'·';position:absolute;left:0}
+.paper-block{padding-top:20px;margin-bottom:20px;max-width:60ch}
+.paper-name{font-size:13.5px;font-weight:700;margin-bottom:6px}
+.paper-desc{font-size:13px;line-height:1.75;opacity:.7}
 
 /* CONTACT */
-.contact-block { margin-bottom: 40px; }
-.contact-block a { display: inline-block; font-size: 14px; margin-top: 8px; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+.contact-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.contact-block{margin-bottom:36px}
+.contact-block p{font-size:13.5px;line-height:1.9}
+.contact-block a{display:block;font-size:13.5px;line-height:2}
 
-/* RESPONSIVE DESIGN REFINADO */
-@media(max-width:900px){
-  .work-detail-container { grid-template-columns: 1fr; gap: 32px; }
-  .content { padding: 40px 30px 80px; }
-  .works-grid { grid-template-columns: 1fr; gap: 32px; }
-}
-
+/* RESPONSIVE */
 @media(max-width:768px){
-  .shell { grid-template-columns: 1fr; }
-  .left { position: relative; height: auto; padding: 24px 20px; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); }
-  .logo { margin-bottom: 16px; font-size: 20px; }
-  .nav { flex-direction: row; gap: 16px; margin-bottom: 0; flex-wrap: wrap; }
-  .nav a { font-size: 11px; }
-  .ann, .artist { display: none; }
-  .content { padding: 32px 20px 60px; }
+  .shell{grid-template-columns:1fr}
+  .left{position:relative;height:auto;padding:16px 20px 12px;flex-direction:column;gap:10px}
+  .logo{margin-bottom:0;font-size:14px;font-weight:700}
+  .nav{flex-direction:row;gap:16px;margin-bottom:0;flex-wrap:wrap}
+  .nav a{font-size:12px;line-height:1.6}
+  .ann{display:none}
+  .artist{display:none}
+  .hero-img{height:65vw}
+  .works-grid{grid-template-columns:repeat(2,1fr)}
+  .content{padding:16px 16px 48px}
 }
 </style>
 </head>
@@ -302,7 +99,7 @@ a:hover { opacity: 0.4; }
       <a onclick="go('contact')" data-p="contact">Contact</a>
     </nav>
     <div class="ann">
-      <a href="mailto:starlintatis@gmail.com">Available for international commissions & projects.</a>
+      <a href="mailto:starlintatis@gmail.com">Available for commissions</a>
     </div>
     <div class="artist" onclick="go('works')">Starlin Tatis</div>
   </div>
@@ -313,7 +110,15 @@ a:hover { opacity: 0.4; }
 </div>
 
 <script>
-// Mantenemos tus colecciones de datos idénticas para que no pierdas compatibilidad
+// ============================================================
+// WORKS — agrega tus fotos aquí
+// Cada entrada tiene:
+//   id:       identificador único (sin espacios)
+//   src:      ruta a la imagen, ej: 'images/nombre.jpg'
+//   title:    título de la obra
+//   material: tipo de impresión
+//   size:     dimensiones, ej: '8 × 11"'
+// ============================================================
 const WORKS = [
   {
     id: 'work-1',
@@ -335,18 +140,26 @@ const WORKS = [
     title: 'Untitled (Test)',
     material: 'Digital Silver Gelatin Fiber Gloss',
     size: '16.8 x 26.8" 1/2 in\nLimited edition'
-  }
+  },
+  // Para agregar más obras, copia el bloque de arriba y pégalo aquí
+  // separado por una coma
 ];
 
+// ============================================================
+// CONTACT
+// ============================================================
 const CONTACT = {
   email: 'starlintatis@gmail.com',
   location: 'Santo Domingo, Dominican Republic',
   social: [
     { name: 'Instagram', link: 'https://instagram.com/starlintatis' },
   ],
-  note: 'For print inquiries, exhibition proposals, and architectural/editorial commissions.'
+  note: 'For print inquiries, exhibition proposals, and editorial commissions.'
 };
 
+// ============================================================
+// ROUTING — no editar debajo de esta línea
+// ============================================================
 let state = { page: 'works', workId: null };
 
 function go(page, id) {
@@ -365,7 +178,7 @@ function render() {
   const R = document.getElementById('right');
   const { page, workId } = state;
 
-  // GALERÍA PRINCIPAL (FOTOS PRESENTADAS COMO INSTALACIÓN)
+  // WORKS LIST
   if (page === 'works') {
     setActive('works');
     const grid = WORKS.map(w => `
@@ -381,59 +194,36 @@ function render() {
     return;
   }
 
-  // DETALLE DE OBRA (FICHA DE LOTE DE CASA DE SUBASTAS DE ÉLITE)
+  // WORK DETAIL
   if (page === 'work-detail') {
     setActive('works');
     const w = WORKS.find(x => x.id === workId) || WORKS[0];
     const i = WORKS.indexOf(w);
     const prev = WORKS[i - 1];
     const next = WORKS[i + 1];
-    
-    // Formatear las dimensiones y líneas limpiamente
-    const sizeFormatted = w.size.replace(/\n/g, ' · ');
-
     R.innerHTML = `
       <div class="content">
         <div class="work-nav">
-          ${prev ? `<a onclick="go('work-detail','${prev.id}')">← Previous</a>` : '<span style="opacity:0.3">← Previous</span>'}
-          <a onclick="go('works')">Overview</a>
-          ${next ? `<a onclick="go('work-detail','${next.id}')">Next →</a>` : '<span style="opacity:0.3">Next →</span>'}
+          ${prev ? `<a onclick="go('work-detail','${prev.id}')">← Prev</a>` : ''}
+          <a onclick="go('works')">All works</a>
+          ${next ? `<a onclick="go('work-detail','${next.id}')">Next →</a>` : ''}
         </div>
-        
-        <div class="work-detail-container">
-          <div class="work-img-box">
-            <img src="${w.src}" alt="${w.title}"/>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-meta">
+            ${w.title}<br>
+            ${w.material}<br>
+            ${w.size.replace(/\n/g,'<br>')}
           </div>
-          
-          <div class="work-info-box">
-            <h1 class="work-title-detail"><em>${w.title}</em></h1>
-            <p class="work-artist-detail">Starlin Tatis</p>
-            
-            <table class="work-specs-table">
-              <tr>
-                <td class="label">Medium</td>
-                <td>${w.material}</td>
-              </tr>
-              <tr>
-                <td class="label">Dimensions</td>
-                <td>${sizeFormatted}</td>
-              </tr>
-              <tr>
-                <td class="label">Classification</td>
-                <td>Museum-grade archival print, traditional darkroom chemistry alternative.</td>
-              </tr>
-            </table>
-            
-            <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Acquisition Inquiry: ${w.title}">
-              Request Acquisition Details
-            </a>
-          </div>
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">Inquiries</a>
         </div>
       </div>`;
     return;
   }
 
-  // BIOGRAFÍA / ABOUT
+  // ABOUT
   if (page === 'about') {
     setActive('about');
     R.innerHTML = `
@@ -442,68 +232,68 @@ function render() {
           <img src="images/about.jpg" alt="Starlin Tatis"
             onerror="this.parentNode.style.display='none'"/>
         </div>
-        <div class="about-h">About the Artist</div>
-        <p class="about-body">${R.innerHTML = 'Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda, desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano, un registro único y memorable.'}</p>
-        <p class="about-body">Sin formación académica formal, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.</p>
-        <p class="about-body">Su obra ha sido expuesta internacionalmente en CONTEXT Art Miami y Art Basel Miami Beach, dos de las plataformas más relevantes del arte contemporáneo en las Américas, así como en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, y la Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), Oh! Magazine y Pandora Magazine, y seleccionada para PhotoVogue, la plataforma de Vogue Italia dedicada al talento fotográfico emergente a nivel mundial. Sus fotografías forman parte de colecciones privadas en varios continentes.</p>
+        <div class="about-h">About</div>
+        <p class="about-body">Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda, desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano, un registro único y memorable.</p>
+        <p class="about-body">Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.</p>
+        <p class="about-body">Su obra ha sido expuesta internacionalmente en CONTEXT Art Miami y Art Basel Miami Beach, dos de las plataformas más relevantes del arte contemporáneo en las Américas, así como en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, y la Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), Bass Culture Islands, Oh! Magazine y Pandora Magazine, y seleccionada para PhotoVogue, la plataforma de Vogue Italia dedicada al talento fotográfico emergente a nivel mundial. Sus fotografías forman parte de colecciones privadas en varios continentes.</p>
+
       </div>`;
     return;
   }
 
-  // INFORMACIÓN DE IMPRESIONES (PRINTS INFO)
+  // PRINTS INFO
   if (page === 'prints') {
     setActive('prints');
     R.innerHTML = `
       <div class="content">
         <div class="prints-section">
-          <div class="about-h">The Medium & Archival Quality</div>
-          <p class="about-body">Todas las fotografías se imprimen bajo riguroso pedido en papel Archival Rag de fibra de algodón o utilizando el aclamado proceso <strong>Digital Silver Gelatin</strong> sobre auténtico papel de Haluro de plata. El proceso Digital Silver Gelatin produce impresiones fotográficas de verdadero blanco y negro directamente desde archivos digitales mediante tecnología láser, utilizando haluros de plata como medio de imagen.</p>
-          <p class="about-body">Una impresora láser LightJet expone el papel Ilford Silver Gelatin sensible a la luz, que posteriormente se procesa mediante fotoquímicos tradicionales, combinando la precisión digital contemporánea con la riqueza tonal y la permanencia mítica del revelado en cuarto oscuro.</p>
-          <p class="about-body">Dado que la imagen se forma con plata pura en lugar de tintas de inyección, las impresiones están permanentemente libres de virados cromáticos desviados y mantienen una consistencia visual excepcional a lo largo de los siglos. Los materiales Silver Gelatin son inherentemente estables y altamente resistentes al desvanecimiento por exposición prolongada a la luz ultravioleta de exhibición.</p>
-          
+          <p class="about-body">Todas las fotografías se imprimen bajo pedido en papel Archival Rag de fibra de algodón o utilizando el aclamado proceso Digital Silver Gelatin sobre auténtico papel de Haluro de plata. El proceso Digital Silver Gelatin son impresiones fotográficas de verdadero blanco y negro producidas directamente desde archivos digitales mediante tecnología láser, utilizando haluros de plata como medio de imagen.</p>
+          <p class="about-body">Una impresora láser LightJet 430 expone papel Ilford Silver Gelatin sensible a la luz, que posteriormente se procesa en fotoquímicos, combinando la precisión digital contemporánea con la riqueza tonal y la permanencia del revelado en cuarto oscuro.</p>
+          <p class="about-body">Dado que la imagen se forma con plata en lugar de tinta, las impresiones están permanentemente libres de virados de color y mantienen una consistencia visual excepcional a lo largo del tiempo. Los materiales Silver Gelatin son también naturalmente resistentes a la humedad, las huellas dactilares y el desvanecimiento por exposición prolongada a la luz.</p>
+          <p class="about-body">Se ofrecen dos papeles Silver Gelatin:</p>
           <div class="paper-block">
-            <div class="paper-name">Fiber Gloss (Baryta)</div>
-            <p class="paper-desc">El referente absoluto e indiscutible en la fotografía de bellas artes en blanco y negro. Soporte de fibra de barita de alto gramaje con un brillo profundo y negros ciegos.</p>
+            <div class="paper-name">Fiber Gloss</div>
+            <p class="paper-desc">Calidad premium en Silver Gelatin sobre Baryta Coated Fibre Base. El referente absoluto en impresión de bellas artes en blanco y negro.</p>
           </div>
           <div class="paper-block">
             <div class="paper-name">RC Pearl</div>
-            <p class="paper-desc">Calidad profesional sobre base recubierta de resina, ideal para una manipulación más frecuente o entornos de montaje exigentes, manteniendo la misma escala tonal plateada.</p>
+            <p class="paper-desc">Calidad profesional sobre Resin Coated Base, ideal para entornos exigentes y manipulación frecuente, sin sacrificar ninguna de las cualidades estéticas propias de un Silver Gelatin print.</p>
           </div>
         </div>
 
         <div class="prints-section">
-          <div class="about-h">Available Dimensions</div>
-          <p class="about-body">Formatos estándar de archivo: 5x7" · 8×10" · 11×14" · 11×17" · 16×20" · 20×24". Dimensiones monumentales o especificaciones de montaje personalizadas están disponibles bajo consulta directa.</p>
+          <div class="about-h">Tamaños desde</div>
+          <p class="about-body">5x7" · 8×10" · 11×14/17" · 16×20" · 20×24" — Dimensiones y tipo de papel personalizadas bajo pedido.</p>
         </div>
 
         <div class="prints-section">
-          <div class="about-h">Edition Details & Shipping Logistics</div>
-          <p class="about-body">Las obras se entregan como ediciones limitadas estrictas, numeradas y firmadas por el artista en el reverso (se envían sin enmarcar, con un margen perimetral blanco para su correcto enmarcado de conservación).</p>
-          <p class="about-body">Los envíos internacionales se gestionan con embalajes reforzados de alta seguridad para garantizar la integridad física de las fibras. Debido al delicado proceso de lavado de archivo, secado por aire natural y aplanado de las impresiones de fibra de barita, el tiempo de producción e inspección final puede oscilar entre 7 y 12 días laborables antes del despacho.</p>
+          <div class="about-h">Pedidos</div>
+          <p class="about-body">Las impresiones son ediciones limitadas que se imprimen bajo pedido (sin enmarcar). Todas las impresiones incluyen un borde blanco.</p>
+          <p class="about-body">Todos los pedidos dentro de EE. UU. se envían a través de UPS Ground o del Servicio Postal de Estados Unidos (USPS). Los plazos de envío estimados están sujetos a pequeños cambios. Dado que cada pedido es diferente, empaquetamos cada uno de ellos para proteger mejor sus imágenes. De 5 a 7 días laborables. Las impresiones sobre papel de fibra pueden tardar de 7 a 10 días debido al proceso, lavado de archivo y al secado al aire.</p>
         </div>
       </div>`;
     return;
   }
 
-  // CONTACTO
+  // CONTACT
   if (page === 'contact') {
     setActive('contact');
     const socialHtml = CONTACT.social.map(s =>
-      `<a href="${s.link}" target="_blank">${s.name}</a>`).join('');
+      `<a href="${s.link}">${s.name}</a>`).join('');
     R.innerHTML = `
       <div class="content">
         <div class="contact-block">
-          <div class="about-h">Inquiries & Commissions</div>
-          <p class="about-body" style="margin-bottom:12px">${CONTACT.note}</p>
+          <div class="contact-h">Contact</div>
+          <p class="about-body" style="margin-bottom:8px">${CONTACT.note}</p>
           <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>
         </div>
         <div class="contact-block">
-          <div class="about-h">Current Location</div>
-          <p class="about-body">${CONTACT.location}</p>
+          <div class="contact-h">Location</div>
+          <p>${CONTACT.location}</p>
         </div>
         ${CONTACT.social.length ? `
         <div class="contact-block">
-          <div class="about-h">Digital Presence</div>
+          <div class="contact-h">Social</div>
           ${socialHtml}
         </div>` : ''}
       </div>`;
