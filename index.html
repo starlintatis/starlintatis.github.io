@@ -40,10 +40,10 @@ a:hover{opacity:0.45}
 
 /* WORKS grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:8px}
-.work-item{display:block;background:#fff;cursor:pointer;position:relative}
+.work-item{display:block;background:#fff;cursor:pointer}
 .work-item img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;transition:opacity .3s;background:#fff}
 .work-item:hover img{opacity:.75}
-.work-item-label{padding:8px 2px 0;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .3s;height:22px}
+.work-item-label{display:block;padding:7px 0 0;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .3s}
 .work-item:hover .work-item-label{opacity:1}
 .wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
