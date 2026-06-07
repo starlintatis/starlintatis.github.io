@@ -4,9 +4,12 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Starlin Tatis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#111;--bg:#fff;--lw:290px}
+:root{--ink:#111;--bg:#fff;--lw:290px;--serif:'Cormorant Garamond',Georgia,serif}
 body{font-family:Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
 a{text-decoration:none;color:var(--ink);cursor:pointer}
 a:hover{opacity:0.45}
@@ -23,6 +26,8 @@ a:hover{opacity:0.45}
 
 /* RIGHT */
 .right{min-height:100vh}
+.right-inner{animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* HOME hero */
 .hero-img{width:100%;height:100vh;background:#e8e8e8;overflow:hidden;position:relative}
@@ -34,15 +39,17 @@ a:hover{opacity:0.45}
 .page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
 /* WORKS grid */
-.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.work-item{display:block;overflow:hidden;background:#fff;cursor:pointer}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:8px}
+.work-item{display:block;overflow:hidden;background:#fff;cursor:pointer;position:relative}
 .work-item img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;transition:opacity .25s;background:#fff}
-.work-item:hover img{opacity:.8}
+.work-item:hover img{opacity:.75}
+.work-item-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .25s;background:linear-gradient(transparent,rgba(255,255,255,.92))}
+.work-item:hover .work-item-label{opacity:1}
 .wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
 /* WORK DETAIL */
-.work-artist{font-size:1.35rem;font-weight:700;line-height:1.2;margin-bottom:4px}
-.work-title{font-size:1.2rem;font-style:italic;color:#888;margin-bottom:18px}
+.work-artist{font-family:var(--serif);font-size:1.55rem;font-weight:600;line-height:1.2;margin-bottom:4px;letter-spacing:.01em}
+.work-title{font-family:var(--serif);font-size:1.35rem;font-style:italic;font-weight:400;color:#888;margin-bottom:18px}
 .work-meta{font-size:13px;line-height:1.9;margin-bottom:6px;color:#888}
 .work-edition{display:flex;align-items:center;gap:6px;font-size:13px;color:#888;margin-top:2px;margin-bottom:24px}
 .work-edition svg{opacity:.6}
@@ -96,7 +103,7 @@ a:hover{opacity:0.45}
     <nav class="nav" id="nav">
       <a onclick="go('works')" data-p="works">Works</a>
       <a onclick="go('about')" data-p="about">About</a>
-      <a onclick="go('prints')" data-p="prints">Prints Info.</a>
+      <a onclick="go('prints')" data-p="prints">Editions</a>
       <a onclick="go('contact')" data-p="contact">Contact</a>
     </nav>
     <div class="ann">
@@ -189,11 +196,14 @@ function render() {
       <div class="work-item" onclick="go('work-detail','${w.id}')">
         <img src="${w.src}" alt="${w.title}"
           onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        <div class="work-item-label">${w.title}</div>
       </div>`
     ).join('');
     R.innerHTML = `
+      <div class="right-inner">
       <div class="content">
         <div class="works-grid">${grid}</div>
+      </div>
       </div>`;
     return;
   }
@@ -206,6 +216,7 @@ function render() {
     const prev = WORKS[i - 1];
     const next = WORKS[i + 1];
     R.innerHTML = `
+      <div class="right-inner">
       <div class="content">
         <div class="work-nav">
           ${prev ? `<a onclick="go('work-detail','${prev.id}')">← Prev</a>` : ''}
@@ -228,6 +239,7 @@ function render() {
           </div>
           <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">Inquiries</a>
         </div>
+      </div>
       </div>`;
     return;
   }
@@ -236,6 +248,7 @@ function render() {
   if (page === 'about') {
     setActive('about');
     R.innerHTML = `
+      <div class="right-inner">
       <div class="content">
         <div class="about-photo">
           <img src="images/about.jpg" alt="Starlin Tatis"
@@ -246,6 +259,7 @@ function render() {
         <p class="about-body">Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.</p>
         <p class="about-body">Su obra ha sido expuesta internacionalmente en CONTEXT Art Miami y Art Basel Miami Beach, dos de las plataformas más relevantes del arte contemporáneo en las Américas, así como en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, y la Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), Bass Culture Islands, Oh! Magazine y Pandora Magazine, y seleccionada para PhotoVogue, la plataforma de Vogue Italia dedicada al talento fotográfico emergente a nivel mundial. Sus fotografías forman parte de colecciones privadas en varios continentes.</p>
 
+      </div>
       </div>`;
     return;
   }
@@ -254,6 +268,7 @@ function render() {
   if (page === 'prints') {
     setActive('prints');
     R.innerHTML = `
+      <div class="right-inner">
       <div class="content">
         <div class="prints-section">
           <p class="about-body">Todas las fotografías se imprimen bajo pedido en papel Archival Rag de fibra de algodón o utilizando el aclamado proceso Digital Silver Gelatin sobre auténtico papel de Haluro de plata. El proceso Digital Silver Gelatin son impresiones fotográficas de verdadero blanco y negro producidas directamente desde archivos digitales mediante tecnología láser, utilizando haluros de plata como medio de imagen.</p>
@@ -280,6 +295,7 @@ function render() {
           <p class="about-body">Las impresiones son ediciones limitadas que se imprimen bajo pedido (sin enmarcar). Todas las impresiones incluyen un borde blanco.</p>
           <p class="about-body">Todos los pedidos dentro de EE. UU. se envían a través de UPS Ground o del Servicio Postal de Estados Unidos (USPS). Los plazos de envío estimados están sujetos a pequeños cambios. Dado que cada pedido es diferente, empaquetamos cada uno de ellos para proteger mejor sus imágenes. De 5 a 7 días laborables. Las impresiones sobre papel de fibra pueden tardar de 7 a 10 días debido al proceso, lavado de archivo y al secado al aire.</p>
         </div>
+      </div>
       </div>`;
     return;
   }
@@ -290,6 +306,7 @@ function render() {
     const socialHtml = CONTACT.social.map(s =>
       `<a href="${s.link}">${s.name}</a>`).join('');
     R.innerHTML = `
+      <div class="right-inner">
       <div class="content">
         <div class="contact-block">
           <div class="contact-h">Contact</div>
@@ -305,6 +322,7 @@ function render() {
           <div class="contact-h">Social</div>
           ${socialHtml}
         </div>` : ''}
+      </div>
       </div>`;
     return;
   }
