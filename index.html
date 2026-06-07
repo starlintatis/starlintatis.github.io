@@ -39,11 +39,11 @@ a:hover{opacity:0.45}
 .page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
 /* WORKS grid */
-.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px}
 .work-item{display:block;background:#fff;cursor:pointer}
-.work-item img{width:100%;display:block;transition:opacity .3s;background:#fff}
+.work-item img{width:100%;aspect-ratio:3/4;object-fit:contain;display:block;transition:opacity .3s;background:#f8f8f8}
 .work-item:hover img{opacity:.75}
-.wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
+.wg-ph{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
 /* WORK DETAIL */
 .work-artist{font-family:var(--serif);font-size:1.55rem;font-weight:600;line-height:1.2;margin-bottom:4px;letter-spacing:.01em}
