@@ -15,7 +15,6 @@ a:hover{opacity:0.45}
 
 /* LEFT SIDEBAR */
 .left{padding:28px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
-.logo{font-size:13px;font-weight:400;margin-bottom:28px;display:block;letter-spacing:.01em}
 .nav{display:flex;flex-direction:column;gap:1px;margin-bottom:28px}
 .nav a{font-size:13px;line-height:2.1;font-weight:400}
 .nav a.active{font-weight:700}
@@ -25,9 +24,10 @@ a:hover{opacity:0.45}
 /* RIGHT */
 .right{min-height:100vh}
 
-/* HOME */
-.home-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px}
-.home-wrap img{display:block;max-width:420px;width:100%;height:auto;object-fit:contain}
+/* HOME hero */
+.hero-img{width:100%;height:100vh;background:#e8e8e8;overflow:hidden;position:relative}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.3)}
 
 /* CONTENT pages */
 .content{padding:32px 40px 80px}
@@ -98,7 +98,7 @@ a:hover{opacity:0.45}
     <div class="ann">
       <a href="mailto:starlintatis@gmail.com">Available for commissions</a>
     </div>
-    <div class="artist" onclick="go('home')">Starlin Tatis</div>
+    <div class="artist" onclick="go('works')">Starlin Tatis</div>
   </div>
 
   <!-- RIGHT CONTENT -->
@@ -157,7 +157,7 @@ const CONTACT = {
 // ============================================================
 // ROUTING — no editar debajo de esta línea
 // ============================================================
-let state = { page: 'home', workId: null };
+let state = { page: 'works', workId: null };
 
 function go(page, id) {
   state = { page, workId: page === 'work-detail' ? id : null };
@@ -174,16 +174,6 @@ function setActive(p) {
 function render() {
   const R = document.getElementById('right');
   const { page, workId } = state;
-
-  // HOME
-  if (page === 'home') {
-    setActive('');
-    R.innerHTML = `
-      <div class="home-wrap">
-        <img src="images/home.jpg" alt="Starlin Tatis"/>
-      </div>`;
-    return;
-  }
 
   // WORKS LIST
   if (page === 'works') {
