@@ -41,7 +41,7 @@ a:hover{opacity:0.45}
 /* WORKS grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:8px}
 .work-item{display:block;background:#fff;cursor:pointer}
-.work-item img{width:100%;object-fit:contain;display:block;transition:opacity .3s;background:#fff}
+.work-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:opacity .3s;background:#fff}
 .work-item:hover img{opacity:.75}
 .work-item-label{display:block;padding:7px 0 0;font-family:var(--serif);font-size:13px;font-style:italic;color:#111;opacity:0;transition:opacity .3s}
 .work-item:hover .work-item-label{opacity:1}
@@ -276,12 +276,12 @@ function render() {
           <p class="about-body">Dado que la imagen se forma con plata en lugar de tinta, las impresiones están permanentemente libres de virados de color y mantienen una consistencia visual excepcional a lo largo del tiempo. Los materiales Silver Gelatin son también naturalmente resistentes a la humedad, las huellas dactilares y el desvanecimiento por exposición prolongada a la luz.</p>
           <p class="about-body">Se ofrecen dos papeles Silver Gelatin:</p>
           <div class="paper-block">
-            <div class="paper-name">Fiber Gloss</div>
-            <p class="paper-desc">Calidad premium en Silver Gelatin sobre Baryta Coated Fibre Base. El referente absoluto en impresión de bellas artes en blanco y negro.</p>
+            <div class="paper-name">Fiber Gloss (Baryta Coated)</div>
+            <p class="paper-desc">Calidad premium en Silver Gelatin sobre Baryta Coated Fiber Base 310gsm. El referente absoluto en impresión de bellas artes en blanco y negro. Tonos ricos y acentuados, excelente contraste y todas las hermosas características que ofrece este acabado.</p>
           </div>
           <div class="paper-block">
             <div class="paper-name">RC Pearl</div>
-            <p class="paper-desc">Calidad profesional sobre Resin Coated Base, ideal para entornos exigentes y manipulación frecuente, sin sacrificar ninguna de las cualidades estéticas propias de un Silver Gelatin print.</p>
+            <p class="paper-desc">Verdadero Silver Gelatin Resin (RC) 190gsm, papel Ilford Pearl con acabado similar a una base lustre. Ideal para entornos exigentes y manipulación frecuente, sin sacrificar ninguna de las cualidades estéticas propias de un Silver Gelatin print.</p>
           </div>
         </div>
 
