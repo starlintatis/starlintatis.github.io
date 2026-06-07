@@ -41,7 +41,11 @@ a:hover{opacity:0.45}
 .wg-ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
 
 /* WORK DETAIL */
-.work-meta{font-size:13px;line-height:1.9;margin-bottom:24px;opacity:.65}
+.work-artist{font-size:1.35rem;font-weight:700;line-height:1.2;margin-bottom:4px}
+.work-title{font-size:1.2rem;font-style:italic;color:#888;margin-bottom:18px}
+.work-meta{font-size:13px;line-height:1.9;margin-bottom:6px;color:#888}
+.work-edition{display:flex;align-items:center;gap:6px;font-size:13px;color:#888;margin-top:2px;margin-bottom:24px}
+.work-edition svg{opacity:.6}
 .work-nav{display:flex;gap:20px;margin-bottom:36px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .inq-btn{display:inline-block;margin-top:4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:2px;opacity:.65}
 .inq-btn:hover{opacity:1}
@@ -122,21 +126,24 @@ const WORKS = [
     src: 'images/work-1.jpg',
     title: 'Untitled No. 03',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '11 x 17" 1/2 in\nLimited edition'
+    size: '11 × 17½ in',
+    sizeCm: '27.9 × 44.5 cm'
   },
   {
     id: 'work-2',
     src: 'images/work-2.jpg',
     title: 'Untitled No. 02',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '11 x 17" 1/2 in\nLimited edition'
+    size: '11 × 17½ in',
+    sizeCm: '27.9 × 44.5 cm'
   },
   {
     id: 'work-3',
     src: 'images/work-3.jpg',
     title: 'Untitled (Test)',
     material: 'Digital Silver Gelatin Fiber Gloss',
-    size: '16.8 x 26.8" 1/2 in\nLimited edition'
+    size: '16.8 × 26.8 in',
+    sizeCm: '42.7 × 68.1 cm'
   },
   // Para agregar más obras, copia el bloque de arriba y pégalo aquí
   // separado por una coma
@@ -209,10 +216,15 @@ function render() {
           <img src="${w.src}" alt="${w.title}"/>
         </div>
         <div style="margin-top:24px">
+          <div class="work-artist">Starlin Tatis</div>
+          <div class="work-title">${w.title}</div>
           <div class="work-meta">
-            ${w.title}<br>
             ${w.material}<br>
-            ${w.size.replace(/\n/g,'<br>')}
+            ${w.size} | ${w.sizeCm}
+          </div>
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            Part of a limited edition
           </div>
           <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">Inquiries</a>
         </div>
