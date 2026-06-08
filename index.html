@@ -78,6 +78,13 @@ a:hover{opacity:0.45}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
 
+/* LANG TOGGLE */
+.lang-toggle{display:flex;gap:6px;align-items:center;font-size:11px;letter-spacing:.08em;margin-bottom:16px}
+.lang-toggle button{background:none;border:none;padding:0;font-size:11px;letter-spacing:.08em;cursor:pointer;color:var(--ink);opacity:.35;font-family:Helvetica,Arial,sans-serif}
+.lang-toggle button.lang-active{opacity:1;font-weight:700}
+.lang-toggle button:hover{opacity:.7}
+.lang-toggle span{opacity:.25}
+
 /* RESPONSIVE */
 @media(max-width:768px){
   .shell{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:100vh}
@@ -101,13 +108,18 @@ a:hover{opacity:0.45}
   <div class="left">
     <div class="artist" onclick="go('works')">Starlin Tatis</div>
     <nav class="nav" id="nav">
-      <a onclick="go('works')" data-p="works">Works</a>
-      <a onclick="go('about')" data-p="about">About</a>
-      <a onclick="go('prints')" data-p="prints">Editions</a>
-      <a onclick="go('contact')" data-p="contact">Contact</a>
+      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
+      <a onclick="go('about')" data-p="about" data-i18n="nav_about">About</a>
+      <a onclick="go('prints')" data-p="prints" data-i18n="nav_prints">Editions</a>
+      <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
+    <div class="lang-toggle">
+      <button id="btn-en" onclick="setLang('en')" class="lang-active">EN</button>
+      <span>/</span>
+      <button id="btn-es" onclick="setLang('es')">ES</button>
+    </div>
     <div class="ann">
-      <a href="mailto:starlintatis@gmail.com">Available for commissions</a>
+      <a href="mailto:starlintatis@gmail.com" data-i18n="commissions">Available for commissions</a>
     </div>
   </div>
 
@@ -243,12 +255,117 @@ const CONTACT = {
   location: 'Santo Domingo, Dominican Republic',
   social: [
     { name: 'Instagram', link: 'https://instagram.com/starlintatis' },
+    { name: 'Patreon', link: 'https://www.patreon.com/starlintatis' },
   ],
   note: 'For print inquiries, exhibition proposals, and editorial commissions.'
 };
 
 // ============================================================
-// ROUTING — no editar debajo de esta línea
+// i18n — traducciones EN / ES
+// ============================================================
+const T = {
+  en: {
+    nav_works:    'Works',
+    nav_about:    'About',
+    nav_prints:   'Editions',
+    nav_contact:  'Contact',
+    commissions:  'Available for commissions',
+
+    // Work detail
+    all_works:    'All works',
+    ltd_edition:  'Part of a limited edition',
+    inquiries:    'Inquiries',
+
+    // About
+    about_h:      'About',
+    about_p1: 'Starlin Tatis is a self-taught photographer and creative director based in Santo Domingo, Dominican Republic. A practice situated at the intersection of editorial portraiture and fashion photography since 2010, defined by a sustained attention to presence — the silence between subject and lens that transforms a photograph into something closer: a unique and memorable record.',
+    about_p2: 'Without formal academic training in large part, a visual language was built through an unwavering commitment to the artist\'s craft, developing a practice grounded in formal precision and psychological depth — taking the performing arts as near-total inspiration in fashion. The aesthetic draws from traditions of artistic portraiture and the codes of contemporary fashion, shaped entirely by the discipline of observation and constant creation, rejecting spectacle in favor of stillness.',
+    about_p3: 'Work has been exhibited internationally at CONTEXT Art Miami and Art Basel Miami Beach, two of the most relevant platforms for contemporary art in the Americas, as well as at TRImarchi Graphic Design Festival in Mar del Plata, Argentina, and Galería Espacio Falso in Santiago, Chile. Published in Inkult Magazine (Mexico City), BALAM Magazine (Buenos Aires), Bass Culture Islands, Oh! Magazine, and Pandora Magazine, and selected for PhotoVogue, Vogue Italia\'s platform dedicated to emerging photographic talent worldwide. Photographs are held in private collections across several continents.',
+
+    // Prints
+    prints_p1: 'All photographs are printed to order on archival cotton rag paper or using the Digital Silver Gelatin process — negatives exposed onto silver halide paper. This true black-and-white photographic development technique is produced directly from digital files via laser technology, using silver halides as the imaging medium, not ink.',
+    prints_p2: 'A LightJet 430 laser printer exposes light-sensitive Ilford Silver Gelatin paper, which is then processed in photochemicals — combining contemporary digital precision with the tonal richness and permanence of darkroom development.',
+    prints_p3: 'Because the image is formed with silver rather than ink, prints are permanently free of color shifts and maintain exceptional visual consistency over time. Silver Gelatin materials are also naturally resistant to humidity, fingerprints, and fading from prolonged light exposure.',
+    prints_p4: '<strong>Two Silver Gelatin papers are available:</strong>',
+    paper1_name: 'Fiber Gloss (Baryta Coated)',
+    paper1_desc: 'Premium Silver Gelatin quality on Baryta Coated Fiber Base 310gsm. The absolute reference in fine art black-and-white printing. Rich, deep tones, excellent contrast, and all the beautiful characteristics this finish offers.',
+    paper2_name: 'RC Pearl',
+    paper2_desc: 'True Silver Gelatin Resin (RC) 190gsm, Ilford Pearl paper with a lustre-base-like finish. Ideal for demanding environments and frequent handling, without sacrificing any of the aesthetic qualities inherent to a Silver Gelatin print.',
+    sizes_h:     'Sizes from',
+    sizes_note:  'Custom dimensions and paper type available on request.',
+    orders_h:    'Orders',
+    orders_p1:   'Prints are limited editions produced to order (unframed). All prints include a white border.',
+    orders_p2:   'All orders within the U.S. ship via UPS Ground or USPS. Estimated shipping times are subject to minor changes. Since each order is different, each is packaged individually to best protect your prints. 5 to 7 business days. Fiber paper prints may take 7 to 10 days due to the process, archival washing, and air drying.',
+
+    // Contact
+    contact_h:   'Contact',
+    location_h:  'Location',
+    social_h:    'Social',
+    contact_note: 'For print inquiries, exhibition proposals, and editorial commissions.',
+  },
+
+  es: {
+    nav_works:    'Obras',
+    nav_about:    'Acerca de',
+    nav_prints:   'Ediciones',
+    nav_contact:  'Contacto',
+    commissions:  'Disponible para encargos',
+
+    // Work detail
+    all_works:    'Todas las obras',
+    ltd_edition:  'Parte de una edición limitada',
+    inquiries:    'Consultas',
+
+    // About
+    about_h:      'Acerca de',
+    about_p1: 'Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano: un registro único y memorable.',
+    about_p2: 'Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.',
+    about_p3: 'Su obra ha sido expuesta internacionalmente en CONTEXT Art Miami y Art Basel Miami Beach, dos de las plataformas más relevantes del arte contemporáneo en las Américas, así como en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, y la Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), Bass Culture Islands, Oh! Magazine y Pandora Magazine, y seleccionada para PhotoVogue, la plataforma de Vogue Italia dedicada al talento fotográfico emergente a nivel mundial. Sus fotografías forman parte de colecciones privadas en varios continentes.',
+
+    // Prints
+    prints_p1: 'Todas las fotografías se imprimen bajo pedido en papel Archival Rag de fibra de algodón o utilizando el proceso de impresión Digital Silver Gelatin, negativos expuestos sobre papel de haluro de plata. Esta técnica de revelado fotográfico en verdadero blanco y negro es producida directamente desde archivos digitales mediante tecnología láser, utilizando haluros de plata como medio de imagen, no tinta.',
+    prints_p2: 'Una impresora láser LightJet 430 expone papel Ilford Silver Gelatin sensible a la luz, que posteriormente se procesa en fotoquímicos, combinando la precisión digital contemporánea con la riqueza tonal y la permanencia del revelado en cuarto oscuro.',
+    prints_p3: 'Dado que la imagen se forma con plata en lugar de tinta, las impresiones están permanentemente libres de virados de color y mantienen una consistencia visual excepcional a lo largo del tiempo. Los materiales Silver Gelatin son también naturalmente resistentes a la humedad, las huellas dactilares y el desvanecimiento por exposición prolongada a la luz.',
+    prints_p4: '<strong>Se ofrecen dos papeles Silver Gelatin:</strong>',
+    paper1_name: 'Fiber Gloss (Baryta Coated)',
+    paper1_desc: 'Calidad premium en Silver Gelatin sobre Baryta Coated Fiber Base 310gsm. El referente absoluto en impresión de bellas artes en blanco y negro. Tonos ricos y acentuados, excelente contraste y todas las hermosas características que ofrece este acabado.',
+    paper2_name: 'RC Pearl',
+    paper2_desc: 'Verdadero Silver Gelatin Resin (RC) 190gsm, papel Ilford Pearl con acabado similar a una base lustre. Ideal para entornos exigentes y manipulación frecuente, sin sacrificar ninguna de las cualidades estéticas propias de un Silver Gelatin print.',
+    sizes_h:     'Tamaños desde',
+    sizes_note:  'Dimensiones y tipo de papel personalizadas bajo pedido.',
+    orders_h:    'Pedidos',
+    orders_p1:   'Las impresiones son ediciones limitadas que se imprimen bajo pedido (sin enmarcar). Todas las impresiones incluyen un borde blanco.',
+    orders_p2:   'Todos los pedidos dentro de EE. UU. se envían a través de UPS Ground o del Servicio Postal de Estados Unidos (USPS). Los plazos de envío estimados están sujetos a pequeños cambios. Dado que cada pedido es diferente, empaquetamos cada uno de ellos para proteger mejor sus imágenes. De 5 a 7 días laborables. Las impresiones sobre papel de fibra pueden tardar de 7 a 10 días debido al proceso, lavado de archivo y al secado al aire.',
+
+    // Contact
+    contact_h:   'Contacto',
+    location_h:  'Ubicación',
+    social_h:    'Redes',
+    contact_note: 'Para consultas sobre impresiones, propuestas de exposición y encargos editoriales.',
+  }
+};
+
+let lang = localStorage.getItem('lang') || 'en';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  // Toggle button states
+  document.getElementById('btn-en').classList.toggle('lang-active', l === 'en');
+  document.getElementById('btn-es').classList.toggle('lang-active', l === 'es');
+  // Update static nav elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[l][key] !== undefined) el.textContent = T[l][key];
+  });
+  // Re-render current page
+  render();
+}
+
+function t(key) {
+  return T[lang][key] || T['en'][key] || key;
+}
+
 // ============================================================
 let state = { page: 'works', workId: null };
 
@@ -297,9 +414,9 @@ function render() {
       <div class="right-inner">
       <div class="content">
         <div class="work-nav">
-          ${prev ? `<a onclick="go('work-detail','${prev.id}')">← Prev</a>` : ''}
-          <a onclick="go('works')">All works</a>
-          ${next ? `<a onclick="go('work-detail','${next.id}')">Next →</a>` : ''}
+          ${prev ? `<a onclick="go('work-detail','${prev.id}')">← ${t('nav_works')}</a>` : ''}
+          <a onclick="go('works')">${t('all_works')}</a>
+          ${next ? `<a onclick="go('work-detail','${next.id}')">→</a>` : ''}
         </div>
         <div class="work-img">
           <img src="${w.src}" alt="${w.title}"/>
@@ -313,9 +430,9 @@ function render() {
           </div>
           <div class="work-edition">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
-            Part of a limited edition
+            ${t('ltd_edition')}
           </div>
-          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">Inquiries</a>
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>
         </div>
       </div>
       </div>`;
@@ -332,11 +449,10 @@ function render() {
           <img src="images/about.jpg" alt="Starlin Tatis"
             onerror="this.parentNode.style.display='none'"/>
         </div>
-        <div class="about-h">About</div>
-        <p class="about-body">Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda, desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano, un registro único y memorable.</p>
-        <p class="about-body">Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.</p>
-        <p class="about-body">Su obra ha sido expuesta internacionalmente en CONTEXT Art Miami y Art Basel Miami Beach, dos de las plataformas más relevantes del arte contemporáneo en las Américas, así como en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, y la Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), Bass Culture Islands, Oh! Magazine y Pandora Magazine, y seleccionada para PhotoVogue, la plataforma de Vogue Italia dedicada al talento fotográfico emergente a nivel mundial. Sus fotografías forman parte de colecciones privadas en varios continentes.</p>
-
+        <div class="about-h">${t('about_h')}</div>
+        <p class="about-body">${t('about_p1')}</p>
+        <p class="about-body">${t('about_p2')}</p>
+        <p class="about-body">${t('about_p3')}</p>
       </div>
       </div>`;
     return;
@@ -349,30 +465,30 @@ function render() {
       <div class="right-inner">
       <div class="content">
         <div class="prints-section">
-          <p class="about-body">Todas las fotografías se imprimen bajo pedido en papel Archival Rag de fibra de algodón o utilizando el proceso de impresion Digital Silver Gelatin, negativos expuestos sobre papel de haluro de plata. Esta tecnica de revelado fotográfico en verdadero blanco y negro son producidas directamente desde archivos digitales mediante tecnología láser, utilizando haluros de plata como medio de imagen, no tinta.</p>
-          <p class="about-body">Una impresora láser LightJet 430 expone papel Ilford Silver Gelatin sensible a la luz, que posteriormente se procesa en fotoquímicos, combinando la precisión digital contemporánea con la riqueza tonal y la permanencia del revelado en cuarto oscuro.</p>
-          <p class="about-body">Dado que la imagen se forma con plata en lugar de tinta, las impresiones están permanentemente libres de virados de color y mantienen una consistencia visual excepcional a lo largo del tiempo. Los materiales Silver Gelatin son también naturalmente resistentes a la humedad, las huellas dactilares y el desvanecimiento por exposición prolongada a la luz.</p>
-          <p class="about-body"><strong>Se ofrecen dos papeles Silver Gelatin:</strong></p>
+          <p class="about-body">${t('prints_p1')}</p>
+          <p class="about-body">${t('prints_p2')}</p>
+          <p class="about-body">${t('prints_p3')}</p>
+          <p class="about-body">${t('prints_p4')}</p>
           <div class="paper-block">
-            <div class="paper-name">Fiber Gloss (Baryta Coated)</div>
-            <p class="paper-desc">Calidad premium en Silver Gelatin sobre Baryta Coated Fiber Base 310gsm. El referente absoluto en impresión de bellas artes en blanco y negro. Tonos ricos y acentuados, excelente contraste y todas las hermosas características que ofrece este acabado.</p>
+            <div class="paper-name">${t('paper1_name')}</div>
+            <p class="paper-desc">${t('paper1_desc')}</p>
           </div>
           <div class="paper-block">
-            <div class="paper-name">RC Pearl</div>
-            <p class="paper-desc">Verdadero Silver Gelatin Resin (RC) 190gsm, papel Ilford Pearl con acabado similar a una base lustre. Ideal para entornos exigentes y manipulación frecuente, sin sacrificar ninguna de las cualidades estéticas propias de un Silver Gelatin print.</p>
+            <div class="paper-name">${t('paper2_name')}</div>
+            <p class="paper-desc">${t('paper2_desc')}</p>
           </div>
         </div>
 
         <div class="prints-section">
-          <div class="about-h">Tamaños desde</div>
+          <div class="about-h">${t('sizes_h')}</div>
           <p class="about-body">5x7" · 8×10" · 11×14/17" · 16×20" · 20×24"</p>
-          <p class="about-body" style="font-style:italic;opacity:.65">Dimensiones y tipo de papel personalizadas bajo pedido.</p>
+          <p class="about-body" style="font-style:italic;opacity:.65">${t('sizes_note')}</p>
         </div>
 
         <div class="prints-section">
-          <div class="about-h">Pedidos</div>
-          <p class="about-body">Las impresiones son ediciones limitadas que se imprimen bajo pedido (sin enmarcar). Todas las impresiones incluyen un borde blanco.</p>
-          <p class="about-body">Todos los pedidos dentro de EE. UU. se envían a través de UPS Ground o del Servicio Postal de Estados Unidos (USPS). Los plazos de envío estimados están sujetos a pequeños cambios. Dado que cada pedido es diferente, empaquetamos cada uno de ellos para proteger mejor sus imágenes. De 5 a 7 días laborables. Las impresiones sobre papel de fibra pueden tardar de 7 a 10 días debido al proceso, lavado de archivo y al secado al aire.</p>
+          <div class="about-h">${t('orders_h')}</div>
+          <p class="about-body">${t('orders_p1')}</p>
+          <p class="about-body">${t('orders_p2')}</p>
         </div>
       </div>
       </div>`;
@@ -388,17 +504,17 @@ function render() {
       <div class="right-inner">
       <div class="content">
         <div class="contact-block">
-          <div class="contact-h">Contact</div>
-          <p class="about-body" style="margin-bottom:8px">${CONTACT.note}</p>
+          <div class="contact-h">${t('contact_h')}</div>
+          <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
           <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>
         </div>
         <div class="contact-block">
-          <div class="contact-h">Location</div>
+          <div class="contact-h">${t('location_h')}</div>
           <p>${CONTACT.location}</p>
         </div>
         ${CONTACT.social.length ? `
         <div class="contact-block">
-          <div class="contact-h">Social</div>
+          <div class="contact-h">${t('social_h')}</div>
           ${socialHtml}
         </div>` : ''}
       </div>
@@ -407,7 +523,8 @@ function render() {
   }
 }
 
-render();
+// Apply saved language on load, then render
+setLang(lang);
 </script>
 </body>
 </html>
