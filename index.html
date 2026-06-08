@@ -35,7 +35,7 @@ a:hover{opacity:0.45}
 .hero-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.3)}
 
 /* CONTENT pages */
-.content{padding:32px 40px 80px}
+.content{padding:32px 40px 80px;margin-left:auto;max-width:640px}
 .page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
 /* WORKS grid */
@@ -60,7 +60,7 @@ a:hover{opacity:0.45}
 /* ABOUT */
 .about-photo{margin-bottom:40px}
 .about-photo img{width:100%;max-width:620px;display:block}
-.about-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.about-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#111}
 .about-body{font-size:13.5px;line-height:1.75;max-width:60ch;margin-bottom:18px}
 
 /* PRINTS INFO */
@@ -69,14 +69,17 @@ a:hover{opacity:0.45}
 .prints-feature li{font-size:13.5px;line-height:1.75;list-style:none;padding-left:14px;position:relative;max-width:60ch}
 .prints-feature li::before{content:'·';position:absolute;left:0}
 .paper-block{padding-top:14px;margin-bottom:14px;max-width:60ch}
-.paper-name{font-size:13.5px;font-weight:700;margin-bottom:4px}
-.paper-desc{font-size:13px;line-height:1.7}
+.paper-block+.prints-section{border-top:1px solid #888;padding-top:28px;margin-top:8px}
+.paper-name{font-size:13.5px;font-weight:700;margin-bottom:4px;color:#111}
+.paper-desc{font-size:13px;line-height:1.7;color:#111}
 
 /* CONTACT */
-.contact-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.contact-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#111}
 .contact-block{margin-bottom:36px}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
+.contact-block a.email{text-decoration:underline}
+.contact-block a.social-bold{font-weight:700}
 
 /* LANG TOGGLE */
 .lang-toggle{display:flex;gap:6px;align-items:center;font-size:11px;letter-spacing:.08em;margin-bottom:16px}
@@ -482,7 +485,7 @@ function render() {
         <div class="prints-section">
           <div class="about-h">${t('sizes_h')}</div>
           <p class="about-body">5x7" · 8×10" · 11×14/17" · 16×20" · 20×24"</p>
-          <p class="about-body" style="font-style:italic;opacity:.65">${t('sizes_note')}</p>
+          <p class="about-body" style="font-style:italic;color:#111">${t('sizes_note')}</p>
         </div>
 
         <div class="prints-section">
@@ -499,14 +502,14 @@ function render() {
   if (page === 'contact') {
     setActive('contact');
     const socialHtml = CONTACT.social.map(s =>
-      `<a href="${s.link}">${s.name}</a>`).join('');
+      `<a class="social-bold" href="${s.link}">${s.name}</a>`).join('');
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
         <div class="contact-block">
           <div class="contact-h">${t('contact_h')}</div>
           <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
-          <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>
+          <a class="email" href="mailto:${CONTACT.email}">${CONTACT.email}</a>
         </div>
         <div class="contact-block">
           <div class="contact-h">${t('location_h')}</div>
