@@ -60,7 +60,7 @@ a:hover{opacity:0.45}
 /* ABOUT */
 .about-photo{margin-bottom:40px}
 .about-photo img{width:100%;max-width:620px;display:block}
-.about-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.about-h{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin:0 0 14px;opacity:1;color:#111}
 .about-body{font-size:13.5px;line-height:1.75;max-width:60ch;margin-bottom:18px}
 
 /* PRINTS INFO */
@@ -73,7 +73,7 @@ a:hover{opacity:0.45}
 .paper-desc{font-size:13px;line-height:1.7}
 
 /* CONTACT */
-.contact-h{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;opacity:.5}
+.contact-h{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin:0 0 14px;opacity:1;color:#111}
 .contact-block{margin-bottom:36px}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
@@ -499,14 +499,14 @@ function render() {
   if (page === 'contact') {
     setActive('contact');
     const socialHtml = CONTACT.social.map(s =>
-      `<a href="${s.link}">${s.name}</a>`).join('');
+      `<a href="${s.link}" style="font-weight:700">${s.name}</a>`).join('');
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
         <div class="contact-block">
           <div class="contact-h">${t('contact_h')}</div>
           <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
-          <a href="mailto:${CONTACT.email}">${CONTACT.email}</a>
+          <a href="mailto:${CONTACT.email}" style="text-decoration:underline">${CONTACT.email}</a>
         </div>
         <div class="contact-block">
           <div class="contact-h">${t('location_h')}</div>
