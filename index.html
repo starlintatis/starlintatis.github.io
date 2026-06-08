@@ -130,22 +130,23 @@ a:hover{opacity:0.45}
 
 <script>
 // ============================================================
-// WORKS — agrega tus fotos aquí
+// WORKS — agrega tus obras aquí
 // Cada entrada tiene:
-//   id:       identificador único (sin espacios)
 //   src:      ruta a la imagen, ej: 'images/nombre.jpg'
 //   title:    título de la obra
+//   year:     año, ej: '2019'
 //   material: tipo de impresión
-//   size:     dimensiones, ej: '8 × 11"'
+//   size:     dimensiones en pulgadas, ej: '5 × 7" in'
+//   sizeCm:   dimensiones en centímetros, ej: '12.7 × 17.8 cm'
 // ============================================================
 const WORKS = [
   {
-    id: 'work-1',
     src: 'images/work-1.jpg',
     title: 'Untitled',
+    year: '2019',
     material: 'Digital Gelatin Silver Print',
-    size: 'from 5 × 7" to 16 × 20" in',
-    sizeCm: '12.7 × 17.8 cm to 40.6 × 50.8 cm'
+    size: '5 × 7" in',
+    sizeCm: '12.7 × 17.8 cm'
   },
   // Para agregar más obras, copia el bloque de arriba y pégalo aquí
   // separado por una coma
@@ -275,10 +276,10 @@ function t(key) {
 }
 
 // ============================================================
-let state = { page: 'works', workId: null };
+let state = { page: 'works', workIdx: null };
 
-function go(page, id) {
-  state = { page, workId: page === 'work-detail' ? id : null };
+function go(page, idx) {
+  state = { page, workIdx: page === 'work-detail' ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
@@ -291,13 +292,13 @@ function setActive(p) {
 
 function render() {
   const R = document.getElementById('right');
-  const { page, workId } = state;
+  const { page, workIdx } = state;
 
   // WORKS LIST
   if (page === 'works') {
     setActive('works');
-    const grid = WORKS.map(w => `
-      <div class="work-item" onclick="go('work-detail','${w.id}')">
+    const grid = WORKS.map((w, i) => `
+      <div class="work-item" onclick="go('work-detail',${i})">
         <img src="${w.src}" alt="${w.title}"
           onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
       </div>`
@@ -314,18 +315,18 @@ function render() {
   // WORK DETAIL — navegación mejorada
   if (page === 'work-detail') {
     setActive('works');
-    const w = WORKS.find(x => x.id === workId) || WORKS[0];
-    const i = WORKS.indexOf(w);
-    const prev = WORKS[i - 1];
-    const next = WORKS[i + 1];
+    const i = workIdx !== null ? workIdx : 0;
+    const w = WORKS[i] || WORKS[0];
+    const prev = i > 0 ? i - 1 : null;
+    const next = i < WORKS.length - 1 ? i + 1 : null;
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
         <div class="work-nav">
           <div class="work-nav-group">
-            ${prev ? `<a class="nav-prev" onclick="go('work-detail','${prev.id}')">← ${t('prev_work')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            ${prev !== null ? `<a class="nav-prev" onclick="go('work-detail',${prev})">← ${t('prev_work')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
             <a onclick="go('works')">${t('all_works')}</a>
-            ${next ? `<a class="nav-next" onclick="go('work-detail','${next.id}')">${t('next_work')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+            ${next !== null ? `<a class="nav-next" onclick="go('work-detail',${next})">${t('next_work')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
           </div>
         </div>
         <div class="work-img">
@@ -335,8 +336,9 @@ function render() {
           <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
+            ${w.year}<br>
             ${w.material}<br>
-            ${w.size} | ${w.sizeCm}
+            ${w.size} / ${w.sizeCm}
           </div>
           <div class="work-edition">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
