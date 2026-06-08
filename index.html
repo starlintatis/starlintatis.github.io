@@ -395,7 +395,7 @@ function render() {
     return;
   }
 
-  // WORK DETAIL — con URL en el botón de inquiries (solo obra, ID y URL)
+  // WORK DETAIL — con mensaje claro para el cliente
   if (page === 'work-detail') {
     setActive('works');
     const w = WORKS.find(x => x.id === workId) || WORKS[0];
@@ -427,7 +427,7 @@ function render() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
             ${t('ltd_edition')}
           </div>
-          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title} (${w.id})&body=Obra: ${w.title}%0AID: ${w.id}%0AURL: ${workUrl}%0A%0A---%0AMensaje del cliente:%0A%0A">${t('inquiries')}</a>
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title} (${w.id})&body=--- FOR THE ARTIST ---%0AObra: ${w.title}%0AID: ${w.id}%0AURL: ${workUrl}%0A%0A--- WRITE YOUR MESSAGE BELOW ---%0A%0A%0A%0A">${t('inquiries')}</a>
         </div>
       </div>
       </div>`;
