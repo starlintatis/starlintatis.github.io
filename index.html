@@ -131,6 +131,12 @@ a:hover{opacity:0.45}
 <script>
 // ============================================================
 // WORKS — agrega tus fotos aquí
+// Cada entrada tiene:
+//   id:       identificador único (sin espacios)
+//   src:      ruta a la imagen, ej: 'images/nombre.jpg'
+//   title:    título de la obra
+//   material: tipo de impresión
+//   size:     dimensiones, ej: '8 × 11"'
 // ============================================================
 const WORKS = [
   {
@@ -236,7 +242,9 @@ const WORKS = [
     material: 'Digital Gelatin Silver Print',
     size: 'from 5 × 7" to 16 × 20" in',
     sizeCm: '12.7 × 17.8 cm to 40.6 × 50.8 cm'
-  }
+  },
+  // Para agregar más obras, copia el bloque de arriba y pégalo aquí
+  // separado por una coma
 ];
 
 // ============================================================
@@ -346,12 +354,15 @@ let lang = localStorage.getItem('lang') || 'en';
 function setLang(l) {
   lang = l;
   localStorage.setItem('lang', l);
+  // Toggle button states
   document.getElementById('btn-en').classList.toggle('lang-active', l === 'en');
   document.getElementById('btn-es').classList.toggle('lang-active', l === 'es');
+  // Update static nav elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (T[l][key] !== undefined) el.textContent = T[l][key];
   });
+  // Re-render current page
   render();
 }
 
@@ -359,6 +370,7 @@ function t(key) {
   return T[lang][key] || T['en'][key] || key;
 }
 
+// ============================================================
 let state = { page: 'works', workId: null };
 
 function go(page, id) {
@@ -395,14 +407,13 @@ function render() {
     return;
   }
 
-  // WORK DETAIL — con mensaje claro para el cliente
+  // WORK DETAIL — navegación mejorada
   if (page === 'work-detail') {
     setActive('works');
     const w = WORKS.find(x => x.id === workId) || WORKS[0];
     const i = WORKS.indexOf(w);
     const prev = WORKS[i - 1];
     const next = WORKS[i + 1];
-    const workUrl = window.location.href.split('#')[0] + `#work-detail&id=${w.id}`;
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
@@ -427,7 +438,7 @@ function render() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
             ${t('ltd_edition')}
           </div>
-          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title} (${w.id})&body=--- FOR THE ARTIST ---%0AObra: ${w.title}%0AID: ${w.id}%0AURL: ${workUrl}%0A%0A--- WRITE YOUR MESSAGE BELOW ---%0A%0A%0A%0A">${t('inquiries')}</a>
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>
         </div>
       </div>
       </div>`;
@@ -518,6 +529,7 @@ function render() {
   }
 }
 
+// Apply saved language on load, then render
 setLang(lang);
 </script>
 </body>
