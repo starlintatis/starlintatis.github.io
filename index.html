@@ -109,6 +109,7 @@ a:hover{opacity:0.45}
     <div class="artist" onclick="go('works')">Starlin Tatis</div>
     <nav class="nav" id="nav">
       <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
+      <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Light Test</a>
       <a onclick="go('about')" data-p="about" data-i18n="nav_about">About</a>
       <a onclick="go('prints')" data-p="prints" data-i18n="nav_prints">Editions</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
@@ -191,6 +192,59 @@ const WORKS = [
 ];
 
 // ============================================================
+// LIGHT TEST — Light Painting series
+// Dimensiones: from 5 × 7" to 16 × 24"
+// Los nombres de archivo están en orden de IMG_4743 en adelante.
+// Si hay gaps en la numeración, ajusta los src aquí.
+// ============================================================
+const LIGHT_TEST = [
+  { src: 'Light Painting/IMG_4743.jpg', title: 'Test 01', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4744.jpg', title: 'Test 02', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4745.jpg', title: 'Test 03', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4746.jpg', title: 'Test 04', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4747.jpg', title: 'Test 05', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4748.jpg', title: 'Test 06', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4749.jpg', title: 'Test 07', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4750.jpg', title: 'Test 08', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4751.jpg', title: 'Test 09', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4752.jpg', title: 'Test 10', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4753.jpg', title: 'Test 11', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4754.jpg', title: 'Test 12', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4755.jpg', title: 'Test 13', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4756.jpg', title: 'Test 14', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4757.jpg', title: 'Test 15', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4758.jpg', title: 'Test 16', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4759.jpg', title: 'Test 17', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4760.jpg', title: 'Test 18', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4761.jpg', title: 'Test 19', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4762.jpg', title: 'Test 20', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4763.jpg', title: 'Test 21', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4764.jpg', title: 'Test 22', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4765.jpg', title: 'Test 23', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4766.jpg', title: 'Test 24', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4767.jpg', title: 'Test 25', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4768.jpg', title: 'Test 26', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4769.jpg', title: 'Test 27', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4770.jpg', title: 'Test 28', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4771.jpg', title: 'Test 29', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4772.jpg', title: 'Test 30', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4773.jpg', title: 'Test 31', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4774.jpg', title: 'Test 32', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4775.jpg', title: 'Test 33', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4776.jpg', title: 'Test 34', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4777.jpg', title: 'Test 35', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4778.jpg', title: 'Test 36', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4779.jpg', title: 'Test 37', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4780.jpg', title: 'Test 38', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4781.jpg', title: 'Test 39', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4782.jpg', title: 'Test 40', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4783.jpg', title: 'Test 41', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4784.jpg', title: 'Test 42', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4785.jpg', title: 'Test 43', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Painting/IMG_4786.jpg', title: 'Test 44', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+];
+
+// ============================================================
 // CONTACT
 // ============================================================
 const CONTACT = {
@@ -208,18 +262,24 @@ const CONTACT = {
 // ============================================================
 const T = {
   en: {
-    nav_works:    'Works',
-    nav_about:    'About',
-    nav_prints:   'Editions',
-    nav_contact:  'Contact',
-    commissions:  'Available for commissions',
+    nav_works:       'Works',
+    nav_light_test:  'Light Test',
+    nav_about:       'About',
+    nav_prints:      'Editions',
+    nav_contact:     'Contact',
+    commissions:     'Available for commissions',
 
     // Work detail
-    all_works:    'All works',
-    prev_work:    'Previous',
-    next_work:    'Next',
-    ltd_edition:  'Part of a limited edition',
-    inquiries:    'Inquiries',
+    all_works:       'All works',
+    prev_work:       'Previous',
+    next_work:       'Next',
+    ltd_edition:     'Part of a limited edition',
+    inquiries:       'Inquiries',
+
+    // Light Test detail
+    all_tests:       'All tests',
+    prev_test:       'Previous',
+    next_test:       'Next',
 
     // About
     about_h:      'About',
@@ -245,18 +305,24 @@ const T = {
   },
 
   es: {
-    nav_works:    'Obras',
-    nav_about:    'Acerca de',
-    nav_prints:   'Ediciones',
-    nav_contact:  'Contacto',
-    commissions:  'Disponible para encargos',
+    nav_works:       'Obras',
+    nav_light_test:  'Light Test',
+    nav_about:       'Acerca de',
+    nav_prints:      'Ediciones',
+    nav_contact:     'Contacto',
+    commissions:     'Disponible para encargos',
 
     // Work detail
-    all_works:    'Todas las obras',
-    prev_work:    'Anterior',
-    next_work:    'Siguiente',
-    ltd_edition:  'Parte de una edición limitada',
-    inquiries:    'Consultas',
+    all_works:       'Todas las obras',
+    prev_work:       'Anterior',
+    next_work:       'Siguiente',
+    ltd_edition:     'Parte de una edición limitada',
+    inquiries:       'Consultas',
+
+    // Light Test detail
+    all_tests:       'Todos los tests',
+    prev_test:       'Anterior',
+    next_test:       'Siguiente',
 
     // About
     about_h:      'Acerca de',
@@ -307,7 +373,7 @@ function t(key) {
 let state = { page: 'works', workIdx: null };
 
 function go(page, idx) {
-  state = { page, workIdx: page === 'work-detail' ? idx : null };
+  state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail') ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
@@ -355,6 +421,63 @@ function render() {
             ${prev !== null ? `<a class="nav-prev" onclick="go('work-detail',${prev})">← ${t('prev_work')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
             <a onclick="go('works')">${t('all_works')}</a>
             ${next !== null ? `<a class="nav-next" onclick="go('work-detail',${next})">${t('next_work')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+          </div>
+        </div>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-artist">Starlin Tatis</div>
+          <div class="work-title">${w.title}</div>
+          <div class="work-meta">
+            ${w.year}<br>
+            ${w.material}<br>
+            ${w.size} / ${w.sizeCm}
+          </div>
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            ${t('ltd_edition')}
+          </div>
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // LIGHT TEST LIST
+  if (page === 'light-test') {
+    setActive('light-test');
+    const grid = LIGHT_TEST.map((w, i) => `
+      <div class="work-item" onclick="go('light-test-detail',${i})">
+        <img src="${w.src}" alt="${w.title}"
+          onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // LIGHT TEST DETAIL
+  if (page === 'light-test-detail') {
+    setActive('light-test');
+    const i = workIdx !== null ? workIdx : 0;
+    const w = LIGHT_TEST[i] || LIGHT_TEST[0];
+    const prev = i > 0 ? i - 1 : null;
+    const next = i < LIGHT_TEST.length - 1 ? i + 1 : null;
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="work-nav">
+          <div class="work-nav-group">
+            ${prev !== null ? `<a class="nav-prev" onclick="go('light-test-detail',${prev})">← ${t('prev_test')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            <a onclick="go('light-test')">${t('all_tests')}</a>
+            ${next !== null ? `<a class="nav-next" onclick="go('light-test-detail',${next})">${t('next_test')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
           </div>
         </div>
         <div class="work-img">
