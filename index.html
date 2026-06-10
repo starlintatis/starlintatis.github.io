@@ -294,6 +294,8 @@ const T = {
     prints_p1:   'This process represents the pinnacle of black-and-white photographic printing. This photographic development technique is produced directly from digital files using laser technology, employing a LightJet 430 printer to create the negative, which is then exposed onto light sensitive Ilford Silver Gelatin paper and processed in photochemicals, combining contemporary digital precision with the tonal richness and permanence of traditional darkroom development.',
     prints_p2:   'Because the image is formed with silver rather than ink, prints are permanently free of color shifts and maintain exceptional visual consistency over time. Silver Gelatin materials are also naturally resistant to humidity, fingerprints, and fading from prolonged light exposure.',
     prints_p3:   'Two Silver Gelatin finishes: <em>Baryta Coated 310gsm</em> and <em>Resin Coated 190gsm</em>.',
+    prints_p4:   '<strong>Archival Rag Prints</strong>',
+    prints_p5:   'Estas impresiones se realizan en papeles fine art basados en elementos naturales como el algodón, bamboo o agave. Con sus distintas terminaciones, cada papel seleccionado garantiza el mejor de los acabados, tanto en trabajos a color o blanco y negro.',
     orders_h:    'Orders',
     orders_p1:   'Prints are limited editions produced to order (unframed). All prints include a border, available in 1/2 or 1/4".',
     orders_p2:   'All orders within the U.S. ship via UPS Ground or USPS.',
@@ -373,7 +375,7 @@ function t(key) {
 }
 
 // ============================================================
-let state = { page: 'light-test', workIdx: null };
+let state = { page: 'works', workIdx: null };
 
 function enterSite() {
   const splash = document.getElementById('splash');
@@ -556,6 +558,8 @@ function render() {
           <p class="about-body">${t('prints_p1')}</p>
           <p class="about-body">${t('prints_p2')}</p>
           <p class="about-body">${t('prints_p3')}</p>
+          <p class="about-body" style="margin-top:18px">${t('prints_p4')}</p>
+          <p class="about-body">${t('prints_p5')}</p>
         </div>
 
         <div class="prints-section">
