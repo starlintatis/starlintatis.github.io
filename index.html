@@ -77,6 +77,19 @@ a:hover{opacity:0.45}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
 
+/* SUBMENU — accordion Prints */
+.nav-group{display:flex;flex-direction:column;gap:1px}
+.nav-parent{font-size:13px;line-height:2.1;font-weight:400;cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none}
+.nav-parent:hover{opacity:0.45}
+.nav-parent.active{font-weight:700}
+.nav-arrow{font-size:9px;opacity:.45;transition:transform .2s ease;display:inline-block}
+.nav-group.open .nav-arrow{transform:rotate(90deg)}
+.nav-sub{display:none;flex-direction:column;gap:1px;padding-left:12px}
+.nav-group.open .nav-sub{display:flex}
+.nav-sub a{font-size:12px;line-height:2.1;font-weight:400;opacity:.7}
+.nav-sub a.active{font-weight:700;opacity:1}
+.nav-sub a:hover{opacity:0.45}
+
 /* LANG TOGGLE */
 .lang-toggle{display:flex;gap:6px;align-items:center;font-size:11px;letter-spacing:.08em;margin-bottom:16px}
 .lang-toggle button{background:none;border:none;padding:0;font-size:11px;letter-spacing:.08em;cursor:pointer;color:var(--ink);opacity:.35;font-family:Helvetica,Arial,sans-serif}
@@ -102,16 +115,41 @@ a:hover{opacity:0.45}
 </head>
 <body>
 
+
+<!-- SPLASH SCREEN -->
+<div id="splash" onclick="enterSite()" style="
+  position:fixed;inset:0;z-index:999;background:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:opacity .6s ease;
+">
+  <img src="Light Test/Test1.jpg" alt="Starlin Tatis" style="
+    width:320px;max-width:80vw;display:block;
+    filter:grayscale(10%);
+    animation:fadeIn .9s ease;
+  "/>
+  <div style="margin-top:22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.35;font-family:Helvetica,Arial,sans-serif;animation:fadeIn 1.4s ease;">
+    Starlin Tatis
+  </div>
+  <div style="margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.2;font-family:Helvetica,Arial,sans-serif;animation:fadeIn 1.8s ease;">
+    Enter
+  </div>
+</div>
+
 <div class="shell">
 
   <!-- LEFT SIDEBAR -->
   <div class="left">
     <div class="artist" onclick="go('works')">Starlin Tatis</div>
     <nav class="nav" id="nav">
-      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
-      <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Light Test</a>
+      <div class="nav-group" id="nav-prints-group">
+        <span class="nav-parent" onclick="togglePrints()" data-i18n="nav_prints_parent">Prints <span class="nav-arrow">&#9654;</span></span>
+        <div class="nav-sub">
+          <a onclick="go('works')" data-p="works" data-i18n="nav_works">Silver Prints</a>
+          <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Light Test</a>
+        </div>
+      </div>
       <a onclick="go('about')" data-p="about" data-i18n="nav_about">About</a>
-      <a onclick="go('prints')" data-p="prints" data-i18n="nav_prints">Editions</a>
+      <a onclick="go('editions')" data-p="editions" data-i18n="nav_editions">Editions</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="lang-toggle">
@@ -223,10 +261,11 @@ const CONTACT = {
 // ============================================================
 const T = {
   en: {
-    nav_works:       'Works',
+    nav_prints_parent: 'Prints',
+    nav_works:       'Silver Prints',
     nav_light_test:  'Light Test',
     nav_about:       'About',
-    nav_prints:      'Editions',
+    nav_editions:    'Editions',
     nav_contact:     'Contact',
     commissions:     'Available for commissions',
 
@@ -266,10 +305,11 @@ const T = {
   },
 
   es: {
-    nav_works:       'Obras',
+    nav_prints_parent: 'Prints',
+    nav_works:       'Silver Prints',
     nav_light_test:  'Light Test',
     nav_about:       'Acerca de',
-    nav_prints:      'Ediciones',
+    nav_editions:    'Ediciones',
     nav_contact:     'Contacto',
     commissions:     'Disponible para encargos',
 
@@ -331,7 +371,14 @@ function t(key) {
 }
 
 // ============================================================
-let state = { page: 'works', workIdx: null };
+let state = { page: 'light-test', workIdx: null };
+
+function enterSite() {
+  const splash = document.getElementById('splash');
+  splash.style.opacity = '0';
+  splash.style.pointerEvents = 'none';
+  setTimeout(() => splash.style.display = 'none', 650);
+}
 
 function go(page, idx) {
   state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail') ? idx : null };
@@ -339,10 +386,24 @@ function go(page, idx) {
   document.getElementById('right').scrollTo(0, 0);
 }
 
+function togglePrints() {
+  const grp = document.getElementById('nav-prints-group');
+  grp.classList.toggle('open');
+}
+
 function setActive(p) {
   document.querySelectorAll('#nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.p === p);
   });
+  // Auto-open accordion when a sub-page is active
+  const subPages = ['works','work-detail','light-test','light-test-detail'];
+  const grp = document.getElementById('nav-prints-group');
+  if (grp) {
+    if (subPages.includes(p)) grp.classList.add('open');
+  }
+  // Mark parent as active when any child is active
+  const parent = document.querySelector('.nav-parent');
+  if (parent) parent.classList.toggle('active', subPages.includes(p));
 }
 
 function render() {
@@ -483,8 +544,8 @@ function render() {
   }
 
   // PRINTS INFO
-  if (page === 'prints') {
-    setActive('prints');
+  if (page === 'editions') {
+    setActive('editions');
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
