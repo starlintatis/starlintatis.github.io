@@ -120,18 +120,20 @@ a:hover{opacity:0.45}
 <div id="splash" onclick="enterSite()" style="
   position:fixed;inset:0;z-index:999;background:#fff;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  cursor:pointer;transition:opacity .6s ease;
+  cursor:pointer;transition:opacity .6s ease;padding:28px;
 ">
   <img src="Light Test/Test1.jpg" alt="Starlin Tatis" style="
-    width:320px;max-width:80vw;display:block;
-    filter:grayscale(10%);
+    width:320px;max-width:72vw;display:block;
     animation:fadeIn .9s ease;
   "/>
-  <div style="margin-top:22px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.35;font-family:Helvetica,Arial,sans-serif;animation:fadeIn 1.4s ease;">
-    Starlin Tatis
-  </div>
-  <div style="margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.2;font-family:Helvetica,Arial,sans-serif;animation:fadeIn 1.8s ease;">
-    Enter
+  <!-- Bottom bar -->
+  <div style="
+    position:fixed;bottom:28px;left:28px;right:28px;
+    display:flex;align-items:flex-end;justify-content:space-between;
+    animation:fadeIn 1.4s ease;
+  ">
+    <div style="font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:-0.02em;font-family:Helvetica,Arial,sans-serif;">Starlin Tatis</div>
+    <div style="font-size:11px;opacity:.45;letter-spacing:.04em;font-family:Helvetica,Arial,sans-serif;">&#169; Starlin Tatis 2026</div>
   </div>
 </div>
 
