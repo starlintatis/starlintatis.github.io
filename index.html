@@ -190,8 +190,7 @@ const WORKS = [
     year: '2013',
     material: 'Digital Gelatin Silver Print (Resin)',
     size: '12 × 18" in',
-    sizeCm: '30.48 × 45.72 cm',
-    sold: true
+    sizeCm: '30.48 × 45.72 cm'
   },
   {
     src: 'images/work-5.jpg',
@@ -199,8 +198,7 @@ const WORKS = [
     year: '2013',
     material: 'Digital Gelatin Silver Print (Baryta)',
     size: '8 × 12" in',
-    sizeCm: '20.32 × 30.48 cm',
-    sold: true
+    sizeCm: '20.32 × 30.48 cm'
   },
    {
     src: 'images/work-6.jpg',
@@ -230,7 +228,7 @@ const LIGHT_TEST = [
   { src: 'Light Test/Test1.jpg', title: 'Test 01', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
   { src: 'Light Test/Test3.jpg', title: 'Test 03', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
   { src: 'Light Test/Test4.jpg', title: 'Test 04', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
-  { src: 'Light Test/Test5.jpg', title: 'Test 05', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm', sold: true },
+  { src: 'Light Test/Test5.jpg', title: 'Test 05', year: '2020', material: 'Hahnemühle Agave Matte 290 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
 ];
 
 // ============================================================
@@ -437,7 +435,7 @@ function render() {
           <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
-            ${w.year}${w.sold ? ' <span style="color:#aaa">· Sold</span>' : ''}<br>
+            ${w.year}<br>
             ${w.material}<br>
             ${w.size} / ${w.sizeCm}
           </div>
@@ -445,7 +443,7 @@ function render() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
             ${t('ltd_edition')}
           </div>
-          ${!w.sold ? `<a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>` : ''}
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>
         </div>
       </div>
       </div>`;
@@ -494,7 +492,7 @@ function render() {
           <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
-            ${w.year}${w.sold ? ' <span style="color:#aaa">· Sold</span>' : ''}<br>
+            ${w.year}<br>
             ${w.material}<br>
             ${w.size} / ${w.sizeCm}
           </div>
@@ -502,7 +500,7 @@ function render() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
             ${t('ltd_edition')}
           </div>
-          ${!w.sold ? `<a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>` : ''}
+          <a class="inq-btn" href="mailto:starlintatis@gmail.com?subject=Inquiry: ${w.title}">${t('inquiries')}</a>
         </div>
       </div>
       </div>`;
