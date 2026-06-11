@@ -150,7 +150,7 @@ a:hover{opacity:0.45}
 
 <script>
 // ============================================================
-// SILVER PRINTS — agrega tus obras aquí
+// WORKS — agrega tus obras aquí
 // Cada entrada tiene:
 //   src:      ruta a la imagen, ej: 'images/nombre.jpg'
 //   title:    título de la obra
@@ -217,14 +217,6 @@ const WORKS = [
     material: 'Digital Gelatin Silver Print (Resin)',
     size: '12 × 12" in',
     sizeCm: '30.48 × 30.48 cm'
-  },
-  {
-    src: 'images/work-8.jpg',
-    title: 'Untitled No.08',
-    year: '2014',
-    material: 'Digital Gelatin Silver Print (Resin)',
-    size: '12 × 18" in',
-    sizeCm: '30.48 × 45.72 cm'
   },
 ];
 
@@ -403,7 +395,7 @@ function render() {
   const R = document.getElementById('right');
   const { page, workIdx } = state;
 
-  // SILVER PRINTS LIST
+  // WORKS LIST
   if (page === 'works') {
     setActive('works');
     const grid = WORKS.map((w, i) => `
@@ -421,7 +413,7 @@ function render() {
     return;
   }
 
-  // SILVER PRINT DETAIL
+  // WORK DETAIL — navegación mejorada
   if (page === 'work-detail') {
     setActive('works');
     const i = workIdx !== null ? workIdx : 0;
@@ -547,4 +539,51 @@ function render() {
           <p class="about-body">${t('prints_p1')}</p>
           <p class="about-body">${t('prints_p2')}</p>
           <p class="about-body">${t('prints_p3')}</p>
-          <p class="about-body" style="margin-bottom:4px">${t
+          <p class="about-body" style="margin-bottom:4px">${t('prints_p4')}</p>
+          <p class="about-body">${t('prints_p5')}</p>
+        </div>
+
+        <div class="prints-section">
+          <div class="about-h">${t('orders_h')}</div>
+          <p class="about-body">${t('orders_p1')}</p>
+          <p class="about-body">${t('orders_p2')}</p>
+          <p class="about-body">${t('orders_p3')}</p>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // CONTACT
+  if (page === 'contact') {
+    setActive('contact');
+    const socialHtml = CONTACT.social.map(s =>
+      `<a href="${s.link}" style="font-weight:700">${s.name}</a>`).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="contact-block">
+          <div class="contact-h">${t('contact_h')}</div>
+          <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
+          <a href="mailto:${CONTACT.email}" style="text-decoration:underline">${CONTACT.email}</a>
+        </div>
+        <div class="contact-block">
+          <div class="contact-h">${t('location_h')}</div>
+          <p>${CONTACT.location}</p>
+        </div>
+        ${CONTACT.social.length ? `
+        <div class="contact-block">
+          <div class="contact-h">${t('social_h')}</div>
+          ${socialHtml}
+        </div>` : ''}
+      </div>
+      </div>`;
+    return;
+  }
+}
+
+// Apply saved language on load, then render
+setLang(lang);
+</script>
+</body>
+</html>
