@@ -49,6 +49,7 @@ a:hover{opacity:0.45}
 .work-artist{font-family:Baskerville,'Baskerville Old Face','Libre Baskerville',Georgia,serif;font-size:1.55rem;font-weight:400;font-style:normal;line-height:1.2;margin-bottom:4px;letter-spacing:.01em}
 .work-title{font-family:Baskerville,'Baskerville Old Face','Libre Baskerville',Georgia,serif;font-size:1.35rem;font-style:italic;font-weight:400;color:#888;margin-bottom:18px}
 .work-meta{font-size:13px;line-height:1.9;margin-bottom:6px;color:#888}
+.sold-tag{color:#aaa;font-size:11px;letter-spacing:.05em}
 .work-edition{display:flex;align-items:center;gap:6px;font-size:13px;color:#888;margin-top:2px;margin-bottom:24px}
 .work-edition svg{opacity:.6}
 .inq-btn{display:inline-block;margin-top:4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:2px;opacity:.65}
@@ -236,7 +237,7 @@ const LIGHT_TEST = [
   { src: 'Light Test/Test1.jpg', title: 'Test 01', year: '2020', material: 'Hahnemühle Photo Rag Baryta 315 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
   { src: 'Light Test/Test3.jpg', title: 'Test 03', year: '2020', material: 'Hahnemühle Photo Rag Baryta 315 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
   { src: 'Light Test/Test4.jpg', title: 'Test 04', year: '2020', material: 'Hahnemühle Photo Rag Baryta 315 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
-  { src: 'Light Test/Test5.jpg', title: 'Test 05', year: '2020', material: 'Hahnemühle Photo Rag Baryta 315 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
+  { src: 'Light Test/Test5.jpg', title: 'Test 05', year: '2020', material: 'Hahnemühle Photo Rag Baryta 315 gsm', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm', sold: true },
 ];
 
 // ============================================================
@@ -443,7 +444,7 @@ function render() {
           <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
-            ${w.year}<br>
+            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
             ${w.material}<br>
             ${w.size} / ${w.sizeCm}
           </div>
@@ -500,7 +501,7 @@ function render() {
           <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
-            ${w.year}<br>
+            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
             ${w.material}<br>
             ${w.size} / ${w.sizeCm}
           </div>
