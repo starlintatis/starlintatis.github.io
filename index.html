@@ -35,9 +35,11 @@ a:hover{opacity:0.45}
 
 /* WORKS grid — hover effect mejorado */
 .works-grid{display:grid;grid-template-columns:260px 260px;gap:240px 200px;padding:120px 32px 200px;justify-content:center}
-.work-item{display:flex;flex-direction:column;gap:14px;cursor:pointer}
+.work-item{display:flex;flex-direction:column;gap:14px;cursor:pointer;position:relative}
+.work-item .img-wrap{position:relative;display:block}
+.work-item .img-wrap::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .35s ease;pointer-events:none}
+.work-item:hover .img-wrap::after{background:rgba(0,0,0,0.5)}
 .work-item img{width:100%;height:auto;display:block;transition:opacity .35s ease}
-.work-item:hover img{opacity:.45}
 .work-item-title{font-family:Baskerville,'Baskerville Old Face','Libre Baskerville',Georgia,serif;font-size:1rem;font-style:italic;font-weight:400;color:#888;margin-bottom:3px}
 .work-item-info{font-size:11px;color:#888;line-height:1.7}
 .wg-ph{width:260px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center;background:#f2f2f2}
@@ -411,8 +413,10 @@ function render() {
     setActive('works');
     const grid = WORKS.map((w, i) => `
       <div class="work-item" onclick="go('work-detail',${i})">
-        <img src="${w.src}" alt="${w.title}"
-          onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
         <div>
           <div class="work-item-title">${w.title}</div>
           <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
@@ -472,8 +476,10 @@ function render() {
     setActive('light-test');
     const grid = LIGHT_TEST.map((w, i) => `
       <div class="work-item" onclick="go('light-test-detail',${i})">
-        <img src="${w.src}" alt="${w.title}"
-          onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
         <div>
           <div class="work-item-title">${w.title}</div>
           <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
