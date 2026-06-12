@@ -34,11 +34,13 @@ a:hover{opacity:0.45}
 .page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
 /* WORKS grid — hover effect mejorado */
-.works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding:32px}
-.work-item{display:block;background:#fff;cursor:pointer;overflow:hidden}
-.work-item img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;display:block;background:#f2f2f2;transition:filter .4s ease, transform .4s ease;filter:brightness(1)}
-.work-item:hover img{filter:brightness(0.75);transform:scale(1.03)}
-.wg-ph{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center}
+.works-grid{display:flex;flex-direction:column;align-items:center;gap:72px;padding:48px 32px 80px}
+.work-item{display:flex;flex-direction:column;gap:14px;cursor:pointer;width:260px}
+.work-item img{width:100%;height:auto;display:block;transition:opacity .35s ease}
+.work-item:hover img{opacity:.75}
+.work-item-title{font-family:Baskerville,'Baskerville Old Face','Libre Baskerville',Georgia,serif;font-size:1rem;font-style:italic;font-weight:400;color:#888;margin-bottom:3px}
+.work-item-info{font-size:11px;color:#888;line-height:1.7}
+.wg-ph{width:260px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,0,0,.25);letter-spacing:.08em;text-transform:uppercase;padding:8px;text-align:center;background:#f2f2f2}
 
 /* WORK DETAIL — navegación con fuente más pequeña */
 .work-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;padding-bottom:16px;border-bottom:1px solid #eee}
@@ -49,7 +51,7 @@ a:hover{opacity:0.45}
 .work-artist{font-family:Baskerville,'Baskerville Old Face','Libre Baskerville',Georgia,serif;font-size:1.55rem;font-weight:400;font-style:normal;line-height:1.2;margin-bottom:4px;letter-spacing:.01em}
 .work-title{font-family:Baskerville,'Baskerville Old Face','Libre Baskerville',Georgia,serif;font-size:1.35rem;font-style:italic;font-weight:400;color:#888;margin-bottom:18px}
 .work-meta{font-size:13px;line-height:1.9;margin-bottom:6px;color:#888}
-.sold-tag{color:#aaa;font-size:11px;letter-spacing:.05em}
+.sold-tag{color:#aaa;font-size:10px;letter-spacing:.06em;font-family:inherit}
 .work-edition{display:flex;align-items:center;gap:6px;font-size:13px;color:#888;margin-top:2px;margin-bottom:24px}
 .work-edition svg{opacity:.6}
 .inq-btn{display:inline-block;margin-top:4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:2px;opacity:.65}
@@ -107,7 +109,8 @@ a:hover{opacity:0.45}
   .nav a{font-size:12px;line-height:1.6}
   .ann{display:none}
   .artist{order:0;font-size:1.4rem;padding-top:0;margin-top:0}
-  .works-grid{grid-template-columns:repeat(2,1fr);gap:24px;padding:20px}
+  .works-grid{gap:48px;padding:32px 20px}
+  .work-item{width:220px}
   .content{padding:16px 16px 48px}
   .work-nav{flex-direction:column;gap:12px;align-items:flex-start}
   .work-nav-group{gap:20px}
@@ -409,6 +412,10 @@ function render() {
       <div class="work-item" onclick="go('work-detail',${i})">
         <img src="${w.src}" alt="${w.title}"
           onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
       </div>`
     ).join('');
     R.innerHTML = `
@@ -466,6 +473,10 @@ function render() {
       <div class="work-item" onclick="go('light-test-detail',${i})">
         <img src="${w.src}" alt="${w.title}"
           onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
       </div>`
     ).join('');
     R.innerHTML = `
