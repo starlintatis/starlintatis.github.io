@@ -105,12 +105,27 @@ a:hover{opacity:0.45}
 /* RESPONSIVE */
 @media(max-width:768px){
   .shell{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:100vh}
-  .left{height:auto;padding:16px 20px 12px;flex-direction:column;gap:10px;overflow:hidden;flex-shrink:0}
+  .left{height:auto;padding:16px 20px 10px;flex-direction:column;gap:0;overflow:hidden;flex-shrink:0}
   .right{height:100%;overflow-y:auto}
-  .nav{order:1;flex-direction:row;gap:16px;margin-bottom:0;flex-wrap:wrap}
-  .nav a{font-size:12px;line-height:1.6}
+
+  .artist{font-size:1.4rem;padding-top:0;margin-top:0;margin-bottom:4px}
+  .lang-toggle{margin-bottom:8px}
+
+  /* Nav en fila horizontal, permite wrap para que el submenu caiga limpio */
+  .nav{flex-direction:row;align-items:baseline;gap:16px;margin-bottom:0;flex-wrap:wrap}
+  .nav > a{font-size:12px;line-height:1.6}
+
+  /* nav-group ocupa toda la fila cuando está abierto */
+  .nav-group{flex-direction:column;align-items:flex-start}
+  .nav-group.open{flex-basis:100%}
+  .nav-parent{font-size:12px;line-height:1.6}
+  .nav-arrow{font-size:8px}
+
+  /* Submenu en horizontal cuando se despliega */
+  .nav-sub{flex-direction:row;gap:16px;padding-left:0}
+  .nav-sub a{font-size:12px;line-height:1.6}
+
   .ann{display:none}
-  .artist{order:0;font-size:1.4rem;padding-top:0;margin-top:0}
   .works-grid{grid-template-columns:1fr 1fr;gap:48px 24px;padding:32px 20px}
   .content{padding:16px 16px 48px}
   .work-nav{flex-direction:column;gap:12px;align-items:flex-start}
@@ -126,6 +141,11 @@ a:hover{opacity:0.45}
   <!-- LEFT SIDEBAR -->
   <div class="left">
     <div class="artist" onclick="go('works')">Starlin Tatis</div>
+    <div class="lang-toggle">
+      <button id="btn-en" onclick="setLang('en')" class="lang-active">EN</button>
+      <span>/</span>
+      <button id="btn-es" onclick="setLang('es')">ES</button>
+    </div>
     <nav class="nav" id="nav">
       <div class="nav-group" id="nav-prints-group">
         <span class="nav-parent" onclick="togglePrints()" data-i18n="nav_prints_parent">Prints <span class="nav-arrow">&#9654;</span></span>
@@ -138,11 +158,6 @@ a:hover{opacity:0.45}
       <a onclick="go('editions')" data-p="editions" data-i18n="nav_editions">Editions</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
-    <div class="lang-toggle">
-      <button id="btn-en" onclick="setLang('en')" class="lang-active">EN</button>
-      <span>/</span>
-      <button id="btn-es" onclick="setLang('es')">ES</button>
-    </div>
     <div class="ann">
       <a href="mailto:starlintatis@gmail.com" data-i18n="commissions">Available for commissions</a>
     </div>
