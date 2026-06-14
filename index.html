@@ -19,8 +19,8 @@ a:hover{opacity:0.45}
 /* LEFT SIDEBAR — fixed, never scrolls */
 .left{padding:28px;display:flex;flex-direction:column;height:100vh;overflow:hidden;flex-shrink:0}
 .nav{display:flex;flex-direction:column;gap:1px;margin-bottom:28px}
-.nav a{font-size:13px;line-height:2.1;font-weight:400}
-.nav a.active{font-weight:700}
+.nav a{font-size:13px;line-height:2.1;font-weight:700}
+.nav a.active{opacity:0.45}
 .ann{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.55;opacity:.5}
 .artist{order:99;margin-top:auto;font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:-0.02em;padding-top:24px;cursor:pointer}
 
@@ -84,15 +84,15 @@ a:hover{opacity:0.45}
 
 /* SUBMENU — accordion Prints */
 .nav-group{display:flex;flex-direction:column;gap:1px}
-.nav-parent{font-size:13px;line-height:2.1;font-weight:400;cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none}
+.nav-parent{font-size:13px;line-height:2.1;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none}
 .nav-parent:hover{opacity:0.45}
-.nav-parent.active{font-weight:700}
+.nav-parent.active{opacity:0.45}
 .nav-arrow{font-size:9px;opacity:.45;transition:transform .2s ease;display:inline-block}
 .nav-group.open .nav-arrow{transform:rotate(90deg)}
 .nav-sub{display:none;flex-direction:column;gap:1px;padding-left:12px}
 .nav-group.open .nav-sub{display:flex}
-.nav-sub a{font-size:12px;line-height:2.1;font-weight:400;opacity:.7}
-.nav-sub a.active{font-weight:700;opacity:1}
+.nav-sub a{font-size:12px;line-height:2.1;font-weight:700;opacity:.7}
+.nav-sub a.active{opacity:0.45}
 .nav-sub a:hover{opacity:0.45}
 
 /* LANG TOGGLE */
