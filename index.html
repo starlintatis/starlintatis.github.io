@@ -240,12 +240,6 @@ const WORKS = [
 // Si hay gaps en la numeración, ajusta los src aquí.
 // ============================================================
 const LIGHT_TEST = [
-  { src: 'Light Test/Test1.jpg', title: 'Test 01', year: '2020', material: 'C-Type Print', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
-  { src: 'Light Test/Test3.jpg', title: 'Test 03', year: '2020', material: 'C-Type Print', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
-  { src: 'Light Test/Test4.jpg', title: 'Test 04', year: '2020', material: 'C-Type Print', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
-  { src: 'Light Test/Test5.jpg', title: 'Test 05', year: '2020', material: 'C-Type Print', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm', sold: true },
-  { src: 'Light Test/Test6.jpg', title: 'Nude (A)', year: '2026', material: 'C-Type Print', size: '16 × 24" in', sizeCm: '40 × 61 cm' },
-  { src: 'Light Test/Test2.jpg', title: 'Test 02', year: '2026', material: 'C-Type Print', size: '5 × 7" to 16 × 24" in', sizeCm: '12.7 × 17.78 cm to 40.64 × 60.96 cm' },
   { src: 'Light Test/Test7.jpg', title: 'Untitled No. 1', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
   { src: 'Light Test/Test8.jpg', title: 'Untitled No. 2', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
   { src: 'Light Test/Test9.jpg', title: 'Untitled No. 3', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
@@ -753,7 +747,7 @@ function submitInquiry() {
           '<div style="font-size:13px;color:#888;line-height:1.8;max-width:36ch;margin:0 auto;">' +
             (lang === 'es'
               ? 'Tu consulta sobre <em>' + work.title + '</em> ha sido recibida. Me pondré en contacto contigo pronto.'
-              : 'Your inquiry about <em>' + work.title + '</em> has been received. I'll be in touch shortly.') +
+              : "Your inquiry about <em>" + work.title + "</em> has been received. I'll be in touch shortly.") +
           '</div>' +
           '<button class="inq-close" onclick="closeInquiry()" style="position:static;display:inline-block;margin-top:32px;opacity:.5;">✕</button>' +
         '</div>';
