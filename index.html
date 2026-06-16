@@ -459,7 +459,7 @@ function render() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
             ${t('ltd_edition')}
           </div>
-          <button class="inq-btn" onclick="openInquiry(${JSON.stringify(w).replace(/</g,'\\u003c')})">${t('inquiries')}</button>
+          <button class="inq-btn" onclick="openInquiry('works',${i})">${t('inquiries')}</button>
         </div>
       </div>
       </div>`;
@@ -521,7 +521,7 @@ function render() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
             ${t('ltd_edition')}
           </div>
-          <button class="inq-btn" onclick="openInquiry(${JSON.stringify(w).replace(/</g,'\\u003c')})">${t('inquiries')}</button>
+          <button class="inq-btn" onclick="openInquiry('light-test',${i})">${t('inquiries')}</button>
         </div>
       </div>
       </div>`;
@@ -603,54 +603,88 @@ setLang(lang);
 // ============================================================
 // INQUIRY MODAL
 // ============================================================
-function openInquiry(work) {
-  const existing = document.getElementById('inq-overlay');
+function openInquiry(series, idx) {
+  var work = series === 'works' ? WORKS[idx] : LIGHT_TEST[idx];
+  if (!work) return;
+
+  window._inqWork = work;
+
+  var existing = document.getElementById('inq-overlay');
   if (existing) existing.remove();
 
-  const overlay = document.createElement('div');
+  var isEs = lang === 'es';
+
+  var overlay = document.createElement('div');
   overlay.className = 'inq-overlay';
   overlay.id = 'inq-overlay';
 
-  const isEs = lang === 'es';
+  var modal = document.createElement('div');
+  modal.className = 'inq-modal';
 
-  overlay.innerHTML = `
-    <div class="inq-modal" role="dialog" aria-modal="true">
-      <button class="inq-close" onclick="closeInquiry()" aria-label="Close">&#x2715;</button>
-      <div class="inq-modal-header">
-        <div class="inq-thumb">
-          <img src="${work.src}" alt="${work.title}"
-            onerror="this.outerHTML='<div class=inq-thumb-ph>${work.title}</div>'"/>
-        </div>
-        <div class="inq-work-info">
-          <div class="inq-work-title">${work.title}</div>
-          <div class="inq-work-meta">
-            ${work.year}${work.sold ? ' · SOLD' : ''}<br>
-            ${work.material}<br>
-            ${work.size} / ${work.sizeCm}
-          </div>
-        </div>
-      </div>
-      <div class="inq-form-h">${isEs ? 'Datos de contacto' : 'Contact details'}</div>
-      <div class="inq-field">
-        <label>${isEs ? 'Nombre completo' : 'Full name'}</label>
-        <input type="text" id="inq-name" placeholder="${isEs ? 'Tu nombre' : 'Your name'}"/>
-      </div>
-      <div class="inq-field">
-        <label>${isEs ? 'Tel&eacute;fono' : 'Phone'}</label>
-        <input type="tel" id="inq-phone" placeholder="${isEs ? 'Tu n&uacute;mero' : 'Your number'}"/>
-      </div>
-      <div class="inq-field">
-        <label>${isEs ? 'Direcci&oacute;n' : 'Address'}</label>
-        <input type="text" id="inq-address" placeholder="${isEs ? 'Ciudad, pa&iacute;s' : 'City, country'}"/>
-      </div>
-      <div class="inq-field">
-        <label>${isEs ? 'Mensaje' : 'Message'}</label>
-        <textarea id="inq-message" placeholder="${isEs ? 'Escribe tu consulta...' : 'Write your inquiry...'}"></textarea>
-      </div>
-      <button class="inq-submit" onclick="submitInquiry(JSON.parse(this.dataset.work))" data-work='${JSON.stringify(work).replace(/'/g, "&#39;")}'>
-        ${isEs ? 'Enviar consulta' : 'Send inquiry'}
-      </button>
-    </div>`;
+  // Close button
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'inq-close';
+  closeBtn.innerHTML = '&#x2715;';
+  closeBtn.onclick = closeInquiry;
+  modal.appendChild(closeBtn);
+
+  // Header: thumb + info
+  var header = document.createElement('div');
+  header.className = 'inq-modal-header';
+
+  var thumbDiv = document.createElement('div');
+  thumbDiv.className = 'inq-thumb';
+  var img = document.createElement('img');
+  img.src = work.src;
+  img.alt = work.title;
+  img.onerror = function() { thumbDiv.innerHTML = '<div class="inq-thumb-ph">' + work.title + '</div>'; };
+  thumbDiv.appendChild(img);
+  header.appendChild(thumbDiv);
+
+  var infoDiv = document.createElement('div');
+  infoDiv.className = 'inq-work-info';
+  infoDiv.innerHTML =
+    '<div class="inq-work-title">' + work.title + '</div>' +
+    '<div class="inq-work-meta">' +
+      work.year + (work.sold ? ' · SOLD' : '') + '<br>' +
+      work.material + '<br>' +
+      work.size + ' / ' + work.sizeCm +
+    '</div>';
+  header.appendChild(infoDiv);
+  modal.appendChild(header);
+
+  // Form title
+  var formH = document.createElement('div');
+  formH.className = 'inq-form-h';
+  formH.textContent = isEs ? 'Datos de contacto' : 'Contact details';
+  modal.appendChild(formH);
+
+  function makeField(labelText, inputType, inputId, ph) {
+    var field = document.createElement('div');
+    field.className = 'inq-field';
+    var lbl = document.createElement('label');
+    lbl.textContent = labelText;
+    field.appendChild(lbl);
+    var inp = inputType === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+    if (inputType !== 'textarea') inp.type = inputType;
+    inp.id = inputId;
+    inp.placeholder = ph;
+    field.appendChild(inp);
+    return field;
+  }
+
+  modal.appendChild(makeField(isEs ? 'Nombre completo' : 'Full name', 'text', 'inq-name', isEs ? 'Tu nombre' : 'Your name'));
+  modal.appendChild(makeField(isEs ? 'Teléfono' : 'Phone', 'tel', 'inq-phone', isEs ? 'Tu número' : 'Your number'));
+  modal.appendChild(makeField(isEs ? 'Dirección' : 'Address', 'text', 'inq-address', isEs ? 'Ciudad, país' : 'City, country'));
+  modal.appendChild(makeField(isEs ? 'Mensaje' : 'Message', 'textarea', 'inq-message', isEs ? 'Escribe tu consulta...' : 'Write your inquiry...'));
+
+  var submitBtn = document.createElement('button');
+  submitBtn.className = 'inq-submit';
+  submitBtn.textContent = isEs ? 'Enviar consulta' : 'Send inquiry';
+  submitBtn.onclick = submitInquiry;
+  modal.appendChild(submitBtn);
+
+  overlay.appendChild(modal);
 
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay) closeInquiry();
@@ -671,20 +705,23 @@ function closeInquiry() {
   }
 }
 
-function submitInquiry(work) {
-  const name    = document.getElementById('inq-name').value.trim();
-  const phone   = document.getElementById('inq-phone').value.trim();
-  const address = document.getElementById('inq-address').value.trim();
-  const message = document.getElementById('inq-message').value.trim();
+function submitInquiry() {
+  var work = window._inqWork;
+  if (!work) return;
+
+  var name    = document.getElementById('inq-name').value.trim();
+  var phone   = document.getElementById('inq-phone').value.trim();
+  var address = document.getElementById('inq-address').value.trim();
+  var message = document.getElementById('inq-message').value.trim();
 
   if (!name) {
     alert(lang === 'es' ? 'Por favor ingresa tu nombre.' : 'Please enter your name.');
     return;
   }
 
-  const subject = encodeURIComponent('Inquiry: ' + work.title);
-  const sep = '----------------------------------------';
-  const body = encodeURIComponent(
+  var subject = encodeURIComponent('Inquiry: ' + work.title);
+  var sep = '----------------------------------------';
+  var body = encodeURIComponent(
     'INQUIRY — ' + work.title + '\n' + sep + '\n' +
     'Work:      ' + work.title + '\n' +
     'Year:      ' + work.year + '\n' +
