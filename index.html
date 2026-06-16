@@ -592,7 +592,9 @@ function render() {
 }
 
 // Apply saved language on load, then render
-setLang(lang);
+document.addEventListener('DOMContentLoaded', function() {
+  setLang(lang);
+});
 
 // ============================================================
 // INQUIRY MODAL
