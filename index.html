@@ -106,9 +106,11 @@ a:hover{opacity:0.45}
 
 /* UNFORGETTABLE INTRO */
 .unf-intro{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:100vh;align-items:stretch}
-.unf-intro-text{padding:56px 48px 80px;display:flex;flex-direction:column;justify-content:flex-start}
+.unf-intro-text{padding:28px 48px 80px;display:flex;flex-direction:column;justify-content:flex-start}
 .unf-intro-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:28px}
-.unf-intro-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.8rem;font-weight:700;font-style:normal;line-height:1.1;margin-bottom:28px;letter-spacing:-.01em}
+.unf-intro-h{margin-bottom:28px}
+.unf-intro-h-main{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.8rem;font-weight:700;font-style:normal;line-height:1;letter-spacing:-.01em;display:block}
+.unf-intro-h-sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;font-weight:600;font-style:normal;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:#111;display:block;margin-top:10px}
 .unf-intro-body{font-size:13.5px;line-height:1.8;max-width:42ch;color:#555;margin-bottom:40px}
 .unf-enter-btn{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:3px;cursor:pointer;color:#111;opacity:.7;background:none;border-left:none;border-right:none;border-top:none;font-family:Helvetica,Arial,sans-serif;transition:opacity .2s}
 .unf-enter-btn:hover{opacity:1}
@@ -121,7 +123,6 @@ a:hover{opacity:0.45}
   .unf-intro{grid-template-columns:1fr;min-height:auto}
   .unf-intro-text{padding:32px 20px 36px}
   .unf-intro-img{height:60vw}
-  .unf-intro-h{font-size:2rem}
 }
 
 
@@ -323,7 +324,7 @@ const T = {
     nav_unforgettable: 'Unforgettable',
     unforgettable_intro_h: 'Unforgettable — Born in Black and White',
     unforgettable_intro_p1: 'Juan Fernández is one of the most unforgettable actors of our time. I have had the honor of working alongside him and gathering this collection of photographs, which without a second thought stands among my finest work as an artist behind the lens. From the very first encounter I knew the result would become history.',
-    unforgettable_intro_p2: 'Unforgettable — Born in Black and White was born from a certainty. Building this universe together fills me with joy. It was never just about photographing the actor — it was about documenting presence, those intangible qualities that certain people project in a remarkable way. Capturing that feeling was essential, and black and white became the only language this series deserved.',
+    unforgettable_intro_p2: 'Unforgettable — Born in Black and White was born from a certainty. Building this universe together fills me with joy. It was never just about photographing the actor. It was about documenting presence, those intangible qualities that certain people project in a remarkable way. Capturing that feeling was essential, and black and white became the only language this series deserved.',
     unforgettable_enter: 'View works',
     all_unforgettable: 'All works',
     prev_unforgettable: 'Previous',
@@ -585,8 +586,10 @@ function render() {
       <div class="right-inner">
       <div class="unf-intro">
         <div class="unf-intro-text">
-          <div class="unf-intro-label">Starlin Tatis</div>
-          <div class="unf-intro-h">${t('unforgettable_intro_h')}</div>
+          <div class="unf-intro-h">
+            <span class="unf-intro-h-main">Unforgettable</span>
+            <span class="unf-intro-h-sub">Born in Black and White</span>
+          </div>
           <p class="unf-intro-body">${t('unforgettable_intro_p1')}</p>
           <p class="unf-intro-body">${t('unforgettable_intro_p2')}</p>
           <button class="unf-enter-btn" onclick="go('unforgettable')">${t('unforgettable_enter')} →</button>
