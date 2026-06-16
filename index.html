@@ -104,6 +104,26 @@ a:hover{opacity:0.45}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
 
+/* UNFORGETTABLE INTRO */
+.unf-intro{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:100vh;align-items:stretch}
+.unf-intro-text{padding:56px 48px 80px;display:flex;flex-direction:column;justify-content:flex-start}
+.unf-intro-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:28px}
+.unf-intro-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.8rem;font-weight:700;font-style:normal;line-height:1.1;margin-bottom:28px;letter-spacing:-.01em}
+.unf-intro-body{font-size:13.5px;line-height:1.8;max-width:42ch;color:#555;margin-bottom:40px}
+.unf-enter-btn{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:3px;cursor:pointer;color:#111;opacity:.7;background:none;border-left:none;border-right:none;border-top:none;font-family:Helvetica,Arial,sans-serif;transition:opacity .2s}
+.unf-enter-btn:hover{opacity:1}
+.unf-intro-img{position:relative;overflow:hidden;cursor:pointer}
+.unf-intro-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.unf-intro-img:hover img{transform:scale(1.02)}
+.unf-intro-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .4s ease;pointer-events:none}
+.unf-intro-img:hover::after{background:rgba(0,0,0,0.18)}
+@media(max-width:768px){
+  .unf-intro{grid-template-columns:1fr;min-height:auto}
+  .unf-intro-text{padding:32px 20px 36px}
+  .unf-intro-img{height:60vw}
+  .unf-intro-h{font-size:2rem}
+}
+
 
 /* LANG TOGGLE */
 .lang-toggle{display:flex;gap:4px;align-items:center;font-size:9px;letter-spacing:.06em;margin-bottom:16px}
@@ -151,6 +171,7 @@ a:hover{opacity:0.45}
     <nav class="nav" id="nav">
       <a onclick="go('works')" data-p="works" data-i18n="nav_works">Silver Prints</a>
       <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Mutación</a>
+      <a onclick="go('unforgettable-intro')" data-p="unforgettable" data-i18n="nav_unforgettable">Unforgettable</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
@@ -247,6 +268,20 @@ const LIGHT_TEST = [
 ];
 
 // ============================================================
+// UNFORGETTABLE — Juan Fernández series
+// ============================================================
+const UNFORGETTABLE = [
+  {
+    src: 'Juan Fernandez/Untitled01.jpg',
+    title: 'Untitled 01',
+    year: '2022',
+    material: 'Digital Gelatin Silver Print',
+    size: '16 × 26" in',
+    sizeCm: '40.64 × 66.04 cm'
+  },
+];
+
+// ============================================================
 // CONTACT
 // ============================================================
 const CONTACT = {
@@ -283,6 +318,16 @@ const T = {
     all_tests:       'All tests',
     prev_test:       'Previous',
     next_test:       'Next',
+
+    // Unforgettable
+    nav_unforgettable: 'Unforgettable',
+    unforgettable_intro_h: 'Unforgettable — Born in Black and White',
+    unforgettable_intro_p1: 'Juan Fernández is one of the most unforgettable actors of our time. I have had the honor of working alongside him and gathering this collection of photographs, which without a second thought stands among my finest work as an artist behind the lens. From the very first encounter I knew the result would become history.',
+    unforgettable_intro_p2: 'Unforgettable — Born in Black and White was born from a certainty. Building this universe together fills me with joy. It was never just about photographing the actor — it was about documenting presence, those intangible qualities that certain people project in a remarkable way. Capturing that feeling was essential, and black and white became the only language this series deserved.',
+    unforgettable_enter: 'View works',
+    all_unforgettable: 'All works',
+    prev_unforgettable: 'Previous',
+    next_unforgettable: 'Next',
 
     // About
     about_h:      'About',
@@ -329,6 +374,16 @@ const T = {
     all_tests:       'Todos los tests',
     prev_test:       'Anterior',
     next_test:       'Siguiente',
+
+    // Unforgettable
+    nav_unforgettable: 'Unforgettable',
+    unforgettable_intro_h: 'Unforgettable — Born in Black and White',
+    unforgettable_intro_p1: 'Juan Fernández uno de los actores más inolvidables de nuestro tiempo. He tenido el honor de trabajar a su lado y de recopilar esta colección de fotografías, que sin dudarlo un segundo se cuenta entre mis mejores trabajos como artista del lente. Desde el primer encuentro supe que el resultado se volvería historia.',
+    unforgettable_intro_p2: 'Unforgettable — Born in Black and White, nació de una certeza, construir este universo junto a el me llena de felicidad. No solo se trató de retratar al actor, se trató de documentar la presencia, cualidades intangibles que muchos seres proyectan de una forma maravillosa, plasmar esa sensación fue vital, blanco y negro formo parte del lenguaje que esta serie merecía.',
+    unforgettable_enter: 'Ver obras',
+    all_unforgettable: 'Todas las obras',
+    prev_unforgettable: 'Anterior',
+    next_unforgettable: 'Siguiente',
 
     // About
     about_h:      'Acerca de',
@@ -381,13 +436,13 @@ function t(key) {
 let state = { page: 'works', workIdx: null };
 
 function go(page, idx) {
-  state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail') ? idx : null };
+  state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail' || page === 'unforgettable-detail') ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
 
 function setActive(p) {
-  const map = { 'work-detail': 'works', 'light-test-detail': 'light-test' };
+  const map = { 'work-detail': 'works', 'light-test-detail': 'light-test', 'unforgettable-detail': 'unforgettable', 'unforgettable': 'unforgettable', 'unforgettable-intro': 'unforgettable' };
   const active = map[p] || p;
   document.querySelectorAll('#nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.p === active);
@@ -522,6 +577,91 @@ function render() {
     return;
   }
 
+  // UNFORGETTABLE INTRO
+  if (page === 'unforgettable-intro') {
+    setActive('unforgettable-intro');
+    const cover = UNFORGETTABLE[0];
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="unf-intro">
+        <div class="unf-intro-text">
+          <div class="unf-intro-label">Starlin Tatis</div>
+          <div class="unf-intro-h">${t('unforgettable_intro_h')}</div>
+          <p class="unf-intro-body">${t('unforgettable_intro_p1')}</p>
+          <p class="unf-intro-body">${t('unforgettable_intro_p2')}</p>
+          <button class="unf-enter-btn" onclick="go('unforgettable')">${t('unforgettable_enter')} →</button>
+        </div>
+        <div class="unf-intro-img" onclick="go('unforgettable')">
+          <img src="${cover.src}" alt="${cover.title}"
+            onerror="this.parentNode.style.background='#f2f2f2';this.style.display='none'"/>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // UNFORGETTABLE GRID
+  if (page === 'unforgettable') {
+    setActive('unforgettable');
+    const grid = UNFORGETTABLE.map((w, i) => `
+      <div class="work-item" onclick="go('unforgettable-detail',${i})">
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // UNFORGETTABLE DETAIL
+  if (page === 'unforgettable-detail') {
+    setActive('unforgettable');
+    const i = workIdx !== null ? workIdx : 0;
+    const w = UNFORGETTABLE[i] || UNFORGETTABLE[0];
+    const prev = i > 0 ? i - 1 : null;
+    const next = i < UNFORGETTABLE.length - 1 ? i + 1 : null;
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="work-nav">
+          <div class="work-nav-group">
+            ${prev !== null ? `<a class="nav-prev" onclick="go('unforgettable-detail',${prev})">← ${t('prev_unforgettable')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            <a onclick="go('unforgettable')">${t('all_unforgettable')}</a>
+            ${next !== null ? `<a class="nav-next" onclick="go('unforgettable-detail',${next})">${t('next_unforgettable')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+          </div>
+        </div>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-title">${w.title}</div>
+          <div class="work-meta">
+            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
+            ${w.material}<br>
+            ${w.size} / ${w.sizeCm}
+          </div>
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            ${t('ltd_edition')}
+          </div>
+          <button class="inq-btn" onclick="openInquiry('unforgettable',${i})">${t('inquiries')}</button>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
   // ABOUT
   if (page === 'about') {
     setActive('about');
@@ -600,7 +740,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // INQUIRY MODAL
 // ============================================================
 function openInquiry(series, idx) {
-  var work = series === 'works' ? WORKS[idx] : LIGHT_TEST[idx];
+  var work = series === 'works' ? WORKS[idx] : series === 'unforgettable' ? UNFORGETTABLE[idx] : LIGHT_TEST[idx];
   if (!work) return;
 
   window._inqWork = work;
