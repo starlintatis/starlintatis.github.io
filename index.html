@@ -4,10 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Starlin Tatis</title>
-
-<!-- Conexión e Inyección oficial de Clash Grotesk con todos sus pesos y cursivas -->
-<link href="https://fontshare.com[]=clash-grotesk@200,201,300,301,400,401,500,501,600,601,700,701&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@200..700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#111;--bg:#fff;--lw:290px;--serif:'Clash Grotesk',sans-serif}
@@ -105,6 +104,7 @@ a:hover{opacity:0.45}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
 
+
 /* LANG TOGGLE */
 .lang-toggle{display:flex;gap:4px;align-items:center;font-size:9px;letter-spacing:.06em;margin-bottom:16px}
 .lang-toggle button{background:none;border:none;padding:0;font-size:9px;letter-spacing:.06em;cursor:pointer;color:var(--ink);opacity:.35;font-family:'Clash Grotesk',sans-serif}
@@ -116,10 +116,376 @@ a:hover{opacity:0.45}
 @media(max-width:768px){
   .shell{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:100vh}
   .left{height:auto;padding:16px 20px 10px;flex-direction:column;gap:0;overflow:hidden;flex-shrink:0}
+  .right{height:100%;overflow-y:auto}
+
+  .artist{order:0;font-size:1.4rem;padding-top:0;margin-top:0;margin-bottom:4px}
+  .lang-toggle{order:1;margin-bottom:8px}
+  .ann{order:3}
+
+  /* Nav en fila horizontal, permite wrap para que el submenu caiga limpio */
+  .nav{flex-direction:row;align-items:baseline;gap:16px;margin-bottom:0;flex-wrap:wrap}
+  .nav > a{font-size:12px;line-height:1.6}
+
+
+  .ann{display:none}
+  .works-grid{grid-template-columns:1fr 1fr;gap:48px 24px;padding:32px 20px}
+  .content{padding:16px 16px 48px}
+  .work-nav{flex-direction:column;gap:12px;align-items:flex-start}
+  .work-nav-group{gap:20px}
 }
 </style>
 </head>
 <body>
-  <!-- El resto del contenido de tu cuerpo (body) va aquí exactamente igual -->
-</body>
-</html>
+
+
+<div class="shell">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="left">
+    <div class="artist" onclick="go('works')">Starlin Tatis</div>
+    <div class="lang-toggle">
+      <button id="btn-en" onclick="setLang('en')" class="lang-active">EN</button>
+      <span>/</span>
+      <button id="btn-es" onclick="setLang('es')">ES</button>
+    </div>
+    <nav class="nav" id="nav">
+      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Silver Prints</a>
+      <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Mutación</a>
+      <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div class="right" id="right"></div>
+
+</div>
+
+<script>
+// ============================================================
+// WORKS — agrega tus obras aquí
+// Cada entrada tiene:
+//   src:      ruta a la imagen, ej: 'images/nombre.jpg'
+//   title:    título de la obra
+//   year:     año, ej: '2019'
+//   material: tipo de impresión
+//   size:     dimensiones en pulgadas, ej: '5 × 7" in'
+//   sizeCm:   dimensiones en centímetros, ej: '12.7 × 17.8 cm'
+// ============================================================
+const WORKS = [
+  {
+    src: 'images/work-8.jpg',
+    title: 'Klaus',
+    year: '2014',
+    material: 'Digital Gelatin Silver Print (Resin)',
+    size: '12 × 18" in',
+    sizeCm: '30.48 × 45.72 cm',
+    sold: true
+  },
+  {
+    src: 'images/work-1.jpg',
+    title: 'Untitled No.01',
+    year: '2014',
+    material: 'Digital Gelatin Silver Print (Baryta)',
+    size: '11 × 17" in',
+    sizeCm: '27.94 × 43.18 cm'
+  },
+ {
+    src: 'images/work-2.jpg',
+    title: 'Untitled No.02',
+    year: '2014',
+    material: 'Digital Gelatin Silver Print (Baryta)',
+    size: '8 × 12" in',
+    sizeCm: '20.32 × 30.48 cm'
+  },
+   {
+    src: 'images/work-3.jpg',
+    title: 'Untitled No.03',
+    year: '2014',
+    material: 'Digital Gelatin Silver Print (Baryta)',
+    size: '8 × 12" in',
+    sizeCm: '20.32 × 30.48 cm'
+  },
+  {
+    src: 'images/work-4.jpg',
+    title: 'Untitled No.04',
+    year: '2013',
+    material: 'Digital Gelatin Silver Print (Resin)',
+    size: '12 × 18" in',
+    sizeCm: '30.48 × 45.72 cm',
+    sold: true
+  },
+  {
+    src: 'images/work-5.jpg',
+    title: 'EU No.01',
+    year: '2013',
+    material: 'Digital Gelatin Silver Print (Baryta)',
+    size: '8 × 12" in',
+    sizeCm: '20.32 × 30.48 cm'
+  },
+  {
+    src: 'images/work-7.jpg',
+    title: 'Ave del paraiso No.01',
+    year: '2022',
+    material: 'Digital Gelatin Silver Print (Resin)',
+    size: '12 × 12" in',
+    sizeCm: '30.48 × 30.48 cm'
+  },
+];
+
+// ============================================================
+// LIGHT TEST — Light Painting series
+// Dimensiones: from 5 × 7" to 16 × 24"
+// Los nombres de archivo están en orden de IMG_4743 en adelante.
+// Si hay gaps en la numeración, ajusta los src aquí.
+// ============================================================
+const LIGHT_TEST = [
+  { src: 'Light Test/Test7.jpg', title: 'Untitled No. 1', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
+  { src: 'Light Test/Test8.jpg', title: 'Untitled No. 2', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
+  { src: 'Light Test/Test9.jpg', title: 'Untitled No. 3', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
+  { src: 'Light Test/Test10.jpg', title: 'Untitled No. 4', year: '2026', material: 'Archival Print on Hahnemühle Paper', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
+];
+
+// ============================================================
+// CONTACT
+// ============================================================
+const CONTACT = {
+  email: 'starlintatis@gmail.com',
+  location: 'Santo Domingo, Dominican Republic',
+  social: [
+    { name: 'Instagram', link: 'https://instagram.com/starlintatis' },
+    { name: 'Patreon', link: 'https://www.patreon.com/starlintatis' },
+  ],
+  note: 'For print inquiries, exhibition proposals, and editorial commissions.'
+};
+
+// ============================================================
+// i18n — traducciones EN / ES
+// ============================================================
+const T = {
+  en: {
+    nav_prints_parent: 'Prints',
+    nav_works:       'Silver Prints',
+    nav_light_test:  'Mutación',
+    nav_about:       'About',
+    nav_editions:    'Editions',
+    nav_contact:     'Contact',
+    commissions:     'Available for commissions',
+
+    // Work detail
+    all_works:       'All works',
+    prev_work:       'Previous',
+    next_work:       'Next',
+    ltd_edition:     'Part of a limited edition',
+    inquiries:       'Inquiries',
+
+    // Light Test detail
+    all_tests:       'All tests',
+    prev_test:       'Previous',
+    next_test:       'Next',
+
+    // About
+    about_h:      'About',
+    about_p1: 'Starlin Tatis is a self-taught photographer and creative director based in Santo Domingo, Dominican Republic. A practice situated at the intersection of editorial portraiture and fashion photography since 2010, defined by a sustained attention to presence — the silence between subject and lens that transforms a photograph into something closer: a unique and memorable record.',
+    about_p2: 'Without formal academic training in large part, a visual language was built through an unwavering commitment to the artist\'s craft, developing a practice grounded in formal precision and psychological depth — taking the performing arts as near-total inspiration in fashion. The aesthetic draws from traditions of artistic portraiture and the codes of contemporary fashion, shaped entirely by the discipline of observation and constant creation, rejecting spectacle in favor of stillness.',
+    about_p3: 'His work has been exhibited at the TRImarchi Graphic Design Festival in Mar del Plata, Argentina, and Galería Espacio Falso in Santiago, Chile. Published in Inkult Magazine (Mexico City), BALAM Magazine (Buenos Aires), among others. Photographs are held in private collections across several continents.',
+
+    // Prints
+    prints_h:    'Digital Silver Gelatin Prints',
+    prints_p1:   'This process represents the pinnacle of black-and-white photographic printing. This photographic development technique is produced directly from digital files using laser technology, employing a LightJet 430 printer to create the negative, which is then exposed onto light sensitive Ilford Silver Gelatin paper and processed in photochemicals, combining contemporary digital precision with the tonal richness and permanence of traditional darkroom development.',
+    prints_p2:   'Because the image is formed with silver rather than ink, prints are permanently free of color shifts and maintain exceptional visual consistency over time. Silver Gelatin materials are also naturally resistant to humidity, fingerprints, and fading from prolonged light exposure.',
+    prints_p3:   'Two Silver Gelatin finishes: <em>Baryta Coated 310gsm</em> and <em>Resin Coated 190gsm</em>.',
+    prints_p4:   '<strong>Archival Rag Prints</strong>',
+    prints_p5:   'These prints are made on fine art papers based on natural elements such as cotton, bamboo, or agave. With their different finishes, each selected paper guarantees the best results, whether for color or black and white work.',
+    orders_h:    'Orders',
+    orders_p1:   'Prints are limited editions produced to order (unframed). All prints include a border, available in 1/2 or 1/4".',
+    orders_p2:   'All orders within the U.S. ship via UPS Ground or USPS.',
+    orders_p3:   'Estimated shipping times are subject to minor changes. Since each order is different, each is individually worked and packaged to best protect its integrity. 7 to 10 business days. Prints go through archival washing and air drying.',
+
+    // Contact
+    contact_h:   'Contact',
+    location_h:  'Location',
+    social_h:    'Social',
+    contact_note: 'For print inquiries, exhibition proposals, and editorial commissions.',
+  },
+
+  es: {
+    nav_prints_parent: 'Prints',
+    nav_works:       'Silver Prints',
+    nav_light_test:  'Mutación',
+    nav_about:       'Acerca de',
+    nav_editions:    'Ediciones',
+    nav_contact:     'Contacto',
+    commissions:     'Disponible para encargos',
+
+    // Work detail
+    all_works:       'Todas las obras',
+    prev_work:       'Anterior',
+    next_work:       'Siguiente',
+    ltd_edition:     'Parte de una edición limitada',
+    inquiries:       'Consultas',
+
+    // Light Test detail
+    all_tests:       'Todos los tests',
+    prev_test:       'Anterior',
+    next_test:       'Siguiente',
+
+    // About
+    about_h:      'Acerca de',
+    about_p1: 'Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda, desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano, un registro único y memorable.',
+    about_p2: 'Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.',
+    about_p3: 'Su obra ha sido expuesta en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), entre otros. Sus fotografías forman parte de colecciones privadas en varios continentes.',
+
+    // Prints
+    prints_h:    'Digital Silver Gelatin Prints',
+    prints_p1:   'Este proceso representa el pináculo de la impresión fotográfica en blanco y negro. Esta técnica de revelado fotográfico es producida directamente desde archivos digitales mediante tecnología láser utilizando una impresora LightJet 430 para crear el negativo que a su vez se expone sobre papel Ilford Silver Gelatin sensible a la luz, posteriormente se procesa en fotoquímicos, combinando la precisión digital contemporánea con la riqueza tonal y la permanencia del revelado en cuarto oscuro de toda la vida.',
+    prints_p2:   'Dado que la imagen se forma con plata en lugar de tinta, las impresiones están permanentemente libres de virados de color y mantienen una consistencia visual excepcional a lo largo del tiempo. Los materiales Silver Gelatin son también naturalmente resistentes a la humedad, las huellas dactilares y el desvanecimiento por exposición prolongada a la luz.',
+    prints_p3:   'Dos terminaciones del Silver Gelatin Print: Baryta Coated 310gsm y Resin Coated 190gsm.',
+    prints_p4:   '<strong>Archival Rag Prints</strong>',
+    prints_p5:   'Estas impresiones están hechas sobre papeles de bellas artes basados en elementos naturales como algodón, bambú o agave. Con sus diferentes acabados, cada papel seleccionado garantiza los mejores resultados, tanto para trabajo en color como en blanco y negro.',
+    orders_h:    'Pedidos',
+    orders_p1:   'Las impresiones son ediciones limitadas que se imprimen bajo pedido (sin enmarcar). Todas las impresiones incluyen un borde, este puede ser de 1/2 o 1/4".',
+    orders_p2:   'Todos los pedidos dentro de EE. UU. se envían a través de UPS Ground o del Servicio Postal de Estados Unidos (USPS).',
+    orders_p3:   'Los plazos de envío estimados están sujetos a pequeños cambios. Dado que cada pedido es diferente, se trabajan y empaquetan cada uno de ellos de manera óptima para proteger su integridad. De 7 a 10 días laborables. Las obras pasan por un proceso de lavado de archivo y al secado al aire.',
+
+    // Contact
+    contact_h:   'Contacto',
+    location_h:  'Ubicación',
+    social_h:    'Redes',
+    contact_note: 'Para consultas sobre impresiones, propuestas de exposición y encargos editoriales.',
+  }
+};
+
+let lang = localStorage.getItem('lang') || 'en';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  // Toggle button states
+  document.getElementById('btn-en').classList.toggle('lang-active', l === 'en');
+  document.getElementById('btn-es').classList.toggle('lang-active', l === 'es');
+  // Update static nav elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[l][key] !== undefined) el.textContent = T[l][key];
+  });
+  // Re-render current page
+  render();
+}
+
+function t(key) {
+  return T[lang][key] || T['en'][key] || key;
+}
+
+// ============================================================
+let state = { page: 'works', workIdx: null };
+
+function go(page, idx) {
+  state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail') ? idx : null };
+  render();
+  document.getElementById('right').scrollTo(0, 0);
+}
+
+function setActive(p) {
+  const map = { 'work-detail': 'works', 'light-test-detail': 'light-test' };
+  const active = map[p] || p;
+  document.querySelectorAll('#nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.p === active);
+  });
+}
+
+function render() {
+  const R = document.getElementById('right');
+  const { page, workIdx } = state;
+
+  // WORKS LIST
+  if (page === 'works') {
+    setActive('works');
+    const grid = WORKS.map((w, i) => `
+      <div class="work-item" onclick="go('work-detail',${i})">
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // WORK DETAIL — navegación mejorada
+  if (page === 'work-detail') {
+    setActive('works');
+    const i = workIdx !== null ? workIdx : 0;
+    const w = WORKS[i] || WORKS[0];
+    const prev = i > 0 ? i - 1 : null;
+    const next = i < WORKS.length - 1 ? i + 1 : null;
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="work-nav">
+          <div class="work-nav-group">
+            ${prev !== null ? `<a class="nav-prev" onclick="go('work-detail',${prev})">← ${t('prev_work')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            <a onclick="go('works')">${t('all_works')}</a>
+            ${next !== null ? `<a class="nav-next" onclick="go('work-detail',${next})">${t('next_work')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+          </div>
+        </div>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-title">${w.title}</div>
+          <div class="work-meta">
+            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
+            ${w.material}<br>
+            ${w.size} / ${w.sizeCm}
+          </div>
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            ${t('ltd_edition')}
+          </div>
+          <button class="inq-btn" onclick="openInquiry('works',${i})">${t('inquiries')}</button>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // LIGHT TEST LIST
+  if (page === 'light-test') {
+    setActive('light-test');
+    const grid = LIGHT_TEST.map((w, i) => `
+      <div class="work-item" onclick="go('light-test-detail',${i})">
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // LIGHT TEST DETAIL
+  if (page === 'light-test-detail') {
+    setActive('light-test');
+    const i = workIdx !== null ? workIdx : 0;
+    const w = LIGHT_TEST
