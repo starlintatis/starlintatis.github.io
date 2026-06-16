@@ -84,8 +84,8 @@ a:hover{opacity:0.45}
 
 
 /* LANG TOGGLE */
-.lang-toggle{display:flex;gap:6px;align-items:center;font-size:11px;letter-spacing:.08em;margin-bottom:16px}
-.lang-toggle button{background:none;border:none;padding:0;font-size:11px;letter-spacing:.08em;cursor:pointer;color:var(--ink);opacity:.35;font-family:Helvetica,Arial,sans-serif}
+.lang-toggle{display:flex;gap:4px;align-items:center;font-size:9px;letter-spacing:.06em;margin-bottom:16px}
+.lang-toggle button{background:none;border:none;padding:0;font-size:9px;letter-spacing:.06em;cursor:pointer;color:var(--ink);opacity:.35;font-family:Helvetica,Arial,sans-serif}
 .lang-toggle button.lang-active{opacity:1;font-weight:700}
 .lang-toggle button:hover{opacity:.7}
 .lang-toggle span{opacity:.25}
@@ -427,7 +427,6 @@ function render() {
           <img src="${w.src}" alt="${w.title}"/>
         </div>
         <div style="margin-top:24px">
-          <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
             ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
@@ -490,7 +489,6 @@ function render() {
           <img src="${w.src}" alt="${w.title}"/>
         </div>
         <div style="margin-top:24px">
-          <div class="work-artist">Starlin Tatis</div>
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
             ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
@@ -565,10 +563,6 @@ function render() {
           <div class="contact-h">${t('contact_h')}</div>
           <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
           <a href="mailto:${CONTACT.email}" style="text-decoration:underline">${CONTACT.email}</a>
-        </div>
-        <div class="contact-block">
-          <div class="contact-h">${t('location_h')}</div>
-          <p>${CONTACT.location}</p>
         </div>
         ${CONTACT.social.length ? `
         <div class="contact-block">
