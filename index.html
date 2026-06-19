@@ -170,7 +170,7 @@ a:hover{opacity:0.45}
       <button id="btn-es" onclick="setLang('es')">ES</button>
     </div>
     <nav class="nav" id="nav">
-      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Silver Prints</a>
+      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
       <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Mutación</a>
       <a onclick="go('unforgettable-intro')" data-p="unforgettable" data-i18n="nav_unforgettable">Unforgettable</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
@@ -253,6 +253,15 @@ const WORKS = [
     size: '12 × 12" in',
     sizeCm: '30.48 × 30.48 cm'
   },
+  {
+    src: 'images/work-9.jpg',
+    title: 'Otelo',
+    year: '2013',
+    material: 'Archival Pigment Print',
+    size: '11 × 17" in',
+    sizeCm: '27.94 × 43.18 cm',
+    sold: true
+  },
 ];
 
 // ============================================================
@@ -309,9 +318,7 @@ const CONTACT = {
 const T = {
   en: {
     nav_prints_parent: 'Prints',
-    nav_works:       'Silver Prints',
-    nav_light_test:  'Mutación',
-    nav_about:       'About',
+    nav_works:       'Works',
     nav_editions:    'Editions',
     nav_contact:     'Contact',
     commissions:     'Available for commissions',
@@ -365,9 +372,7 @@ const T = {
 
   es: {
     nav_prints_parent: 'Prints',
-    nav_works:       'Silver Prints',
-    nav_light_test:  'Mutación',
-    nav_about:       'Acerca de',
+    nav_works:       'Works',
     nav_editions:    'Ediciones',
     nav_contact:     'Contacto',
     commissions:     'Disponible para encargos',
