@@ -37,7 +37,7 @@ a:hover{opacity:0.45}
 .content{padding:32px 40px 80px}
 .page-title{font-size:1.1rem;font-weight:400;margin-bottom:36px;letter-spacing:.01em}
 
-/* WORKS grid — hover effect mejorado */
+/* Works grid */
 .works-grid{display:grid;grid-template-columns:260px 260px;gap:240px 200px;padding:120px 32px 200px;justify-content:center}
 .work-item{display:flex;flex-direction:column;gap:14px;cursor:pointer;position:relative}
 .work-item .img-wrap{position:relative;display:block}
@@ -108,7 +108,7 @@ a:hover{opacity:0.45}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
 
-/* UNFORGETTABLE INTRO */
+/* Series intro layout */
 .unf-intro{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:100vh;align-items:stretch}
 .unf-intro-text{padding:28px 48px 80px;display:flex;flex-direction:column;justify-content:flex-start}
 .unf-intro-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:28px}
@@ -187,92 +187,8 @@ a:hover{opacity:0.45}
 
 <script>
 // ============================================================
-// WORKS — agrega tus obras aquí
-// Cada entrada tiene:
-//   src:      ruta a la imagen, ej: 'images/nombre.jpg'
-//   title:    título de la obra
-//   year:     año, ej: '2019'
-//   material: tipo de impresión
-//   size:     dimensiones en pulgadas, ej: '5 × 7" in'
-//   sizeCm:   dimensiones en centímetros, ej: '12.7 × 17.8 cm'
-// ============================================================
-const WORKS = [
-  {
-    src: 'images/work-8.jpg',
-    title: 'Klaus',
-    year: '2014',
-    material: 'Digital Gelatin Silver Print',
-    size: '12 × 18" in',
-    sizeCm: '30.48 × 45.72 cm',
-    sold: true
-  },
-  {
-    src: 'images/work-1.jpg',
-    title: 'Untitled No.01',
-    year: '2014',
-    material: 'Digital Gelatin Silver Print',
-    size: '11 × 17" in',
-    sizeCm: '27.94 × 43.18 cm'
-  },
- {
-    src: 'images/work-2.jpg',
-    title: 'Untitled No.02',
-    year: '2014',
-    material: 'Digital Gelatin Silver Print',
-    size: '8 × 12" in',
-    sizeCm: '20.32 × 30.48 cm'
-  },
-   {
-    src: 'images/work-3.jpg',
-    title: 'Untitled No.03',
-    year: '2014',
-    material: 'Digital Gelatin Silver Print',
-    size: '8 × 12" in',
-    sizeCm: '20.32 × 30.48 cm'
-  },
-  {
-    src: 'images/work-4.jpg',
-    title: 'Untitled No.04',
-    year: '2013',
-    material: 'Digital Gelatin Silver Print',
-    size: '12 × 18" in',
-    sizeCm: '30.48 × 45.72 cm',
-    sold: true
-  },
-  {
-    src: 'images/work-5.jpg',
-    title: 'EU No.01',
-    year: '2013',
-    material: 'Digital Gelatin Silver Print',
-    size: '8 × 12" in',
-    sizeCm: '20.32 × 30.48 cm'
-  },
-  {
-    src: 'images/work-7.jpg',
-    title: 'Ave del paraiso No.01',
-    year: '2022',
-    material: 'Digital Gelatin Silver Print',
-    size: '12 × 12" in',
-    sizeCm: '30.48 × 30.48 cm'
-  },
-  {
-    src: 'images/work-6.jpg',
-    title: 'Otelo',
-    year: '2013',
-    material: 'Archival Pigment Print',
-    size: '11 × 17" in',
-    sizeCm: '27.94 × 43.18 cm',
-    sold: true
-  },
-  {
-    src: 'images/work-9.jpg',
-    title: 'Untitled',
-    year: '2013',
-    material: 'Archival Pigment Print',
-    size: '12 × 18" in',
-    sizeCm: '30.48 × 45.72 cm'
-  },
-];
+// LIGHT TEST — Mutación series
+
 
 // ============================================================
 // LIGHT TEST — Light Painting series
@@ -281,63 +197,18 @@ const WORKS = [
 // Si hay gaps en la numeración, ajusta los src aquí.
 // ============================================================
 const LIGHT_TEST = [
-  { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)', sold: true },
-  { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled5.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled6.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled8.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled9.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)', sold: true },
+  { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled5.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled6.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled8.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled9.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
 ];
 
-// ============================================================
-// UNFORGETTABLE — Juan Fernández series
-// ============================================================
-const UNFORGETTABLE = [
-  {
-    src: 'Juan Fernandez/Untitled01.jpg',
-    title: 'Untitled 01',
-    year: '2022',
-    material: 'Digital Gelatin Silver Print',
-    size: '16 × 26" in',
-    sizeCm: '40.64 × 66.04 cm'
-  },
-  {
-    src: 'Juan Fernandez/Peravia.jpg',
-    title: 'Peravia',
-    year: '2022',
-    material: 'Archival Pigment Print',
-    size: '11 × 17" in',
-    sizeCm: '27.94 × 43.18 cm'
-  },
-  {
-    src: 'Juan Fernandez/JF1.jpg',
-    title: 'Untitled 02',
-    year: '2022',
-    material: 'Digital Gelatin Silver Print',
-    size: '16 × 24" in',
-    sizeCm: '40.64 × 60.96 cm'
-  },
-  {
-    src: 'Juan Fernandez/JF2.jpg',
-    title: 'Untitled 03',
-    year: '2022',
-    material: 'Digital Gelatin Silver Print',
-    size: '16 × 26" in',
-    sizeCm: '40.64 × 66.04 cm'
-  },
-  {
-    src: 'Juan Fernandez/JF3.jpg',
-    title: 'Untitled 04',
-    year: '2022',
-    material: 'Digital Gelatin Silver Print',
-    size: '16 × 26" in',
-    sizeCm: '40.64 × 66.04 cm'
-  },
-];
 
 // ============================================================
 // CONTACT
@@ -507,68 +378,6 @@ function render() {
   const R = document.getElementById('right');
   const { page, workIdx } = state;
 
-  // WORKS LIST
-  if (page === 'works') {
-    setActive('works');
-    const grid = WORKS.map((w, i) => `
-      <div class="work-item" onclick="go('work-detail',${i})">
-        <div class="img-wrap">
-          <img src="${w.src}" alt="${w.title}"
-            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
-        </div>
-        <div>
-          <div class="work-item-title">${w.title}</div>
-          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
-        </div>
-      </div>`
-    ).join('');
-    R.innerHTML = `
-      <div class="right-inner">
-      <div class="content">
-        <div class="works-grid">${grid}</div>
-      </div>
-      </div>`;
-    return;
-  }
-
-  // WORK DETAIL — navegación mejorada
-  if (page === 'work-detail') {
-    setActive('works');
-    const i = workIdx !== null ? workIdx : 0;
-    const w = WORKS[i] || WORKS[0];
-    const prev = i > 0 ? i - 1 : null;
-    const next = i < WORKS.length - 1 ? i + 1 : null;
-    R.innerHTML = `
-      <div class="right-inner">
-      <div class="content">
-        <div class="work-nav">
-          <div class="work-nav-group">
-            ${prev !== null ? `<a class="nav-prev" onclick="go('work-detail',${prev})">← ${t('prev_work')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
-            <a onclick="go('works')">${t('all_works')}</a>
-            ${next !== null ? `<a class="nav-next" onclick="go('work-detail',${next})">${t('next_work')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
-          </div>
-        </div>
-        <div class="work-img">
-          <img src="${w.src}" alt="${w.title}"/>
-        </div>
-        <div style="margin-top:24px">
-          <div class="work-title">${w.title}</div>
-          <div class="work-meta">
-            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
-            ${w.material}<br>
-            ${w.size} / ${w.sizeCm}
-          </div>
-          <div class="work-edition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
-            ${t('ltd_edition')}
-          </div>
-          <button class="inq-btn" onclick="openInquiry('works',${i})">${t('inquiries')}</button>
-        </div>
-      </div>
-      </div>`;
-    return;
-  }
-
   // LIGHT TEST LIST
   if (page === 'light-test') {
     setActive('light-test');
@@ -625,93 +434,6 @@ function render() {
             ${w.edition || t('ltd_edition')}
           </div>
           <button class="inq-btn" onclick="openInquiry('light-test',${i})">${t('inquiries')}</button>
-        </div>
-      </div>
-      </div>`;
-    return;
-  }
-
-  // UNFORGETTABLE INTRO
-  if (page === 'unforgettable-intro') {
-    setActive('unforgettable-intro');
-    const cover = UNFORGETTABLE[0];
-    R.innerHTML = `
-      <div class="right-inner">
-      <div class="unf-intro">
-        <div class="unf-intro-text">
-          <div class="unf-intro-h">
-            <span class="unf-intro-h-main">Unforgettable</span>
-            <span class="unf-intro-h-sub">Born in Black and White</span>
-          </div>
-          <p class="unf-intro-body">${t('unforgettable_intro_p1')}</p>
-          <p class="unf-intro-body">${t('unforgettable_intro_p2')}</p>
-          <button class="unf-enter-btn" onclick="go('unforgettable')">${t('unforgettable_enter')} →</button>
-        </div>
-        <div class="unf-intro-img" onclick="go('unforgettable')">
-          <img src="${cover.src}" alt="${cover.title}"
-            onerror="this.parentNode.style.background='#f2f2f2';this.style.display='none'"/>
-        </div>
-      </div>
-      </div>`;
-    return;
-  }
-
-  // UNFORGETTABLE GRID
-  if (page === 'unforgettable') {
-    setActive('unforgettable');
-    const grid = UNFORGETTABLE.map((w, i) => `
-      <div class="work-item" onclick="go('unforgettable-detail',${i})">
-        <div class="img-wrap">
-          <img src="${w.src}" alt="${w.title}"
-            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
-        </div>
-        <div>
-          <div class="work-item-title">${w.title}</div>
-          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
-        </div>
-      </div>`
-    ).join('');
-    R.innerHTML = `
-      <div class="right-inner">
-      <div class="content">
-        <div class="works-grid">${grid}</div>
-      </div>
-      </div>`;
-    return;
-  }
-
-  // UNFORGETTABLE DETAIL
-  if (page === 'unforgettable-detail') {
-    setActive('unforgettable');
-    const i = workIdx !== null ? workIdx : 0;
-    const w = UNFORGETTABLE[i] || UNFORGETTABLE[0];
-    const prev = i > 0 ? i - 1 : null;
-    const next = i < UNFORGETTABLE.length - 1 ? i + 1 : null;
-    R.innerHTML = `
-      <div class="right-inner">
-      <div class="content">
-        <div class="work-nav">
-          <div class="work-nav-group">
-            ${prev !== null ? `<a class="nav-prev" onclick="go('unforgettable-detail',${prev})">← ${t('prev_unforgettable')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
-            <a onclick="go('unforgettable')">${t('all_unforgettable')}</a>
-            ${next !== null ? `<a class="nav-next" onclick="go('unforgettable-detail',${next})">${t('next_unforgettable')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
-          </div>
-        </div>
-        <div class="work-img">
-          <img src="${w.src}" alt="${w.title}"/>
-        </div>
-        <div style="margin-top:24px">
-          <div class="work-title">${w.title}</div>
-          <div class="work-meta">
-            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
-            ${w.material}<br>
-            ${w.size} / ${w.sizeCm}
-          </div>
-          <div class="work-edition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
-            ${t('ltd_edition')}
-          </div>
-          <button class="inq-btn" onclick="openInquiry('unforgettable',${i})">${t('inquiries')}</button>
         </div>
       </div>
       </div>`;
@@ -796,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // INQUIRY MODAL
 // ============================================================
 function openInquiry(series, idx) {
-  var work = series === 'works' ? WORKS[idx] : series === 'unforgettable' ? UNFORGETTABLE[idx] : LIGHT_TEST[idx];
+  var work = LIGHT_TEST[idx];
   if (!work) return;
 
   window._inqWork = work;
