@@ -23,7 +23,7 @@ a:hover{opacity:0.45}
 /* LEFT SIDEBAR — fixed, never scrolls */
 .left{padding:28px;display:flex;flex-direction:column;height:100vh;overflow:hidden;flex-shrink:0}
 .nav{display:flex;flex-direction:column;gap:1px;margin-bottom:28px}
-.nav a{font-size:13px;line-height:2.1;font-weight:700}
+.nav a{font-size:13px;line-height:2.1;font-weight:400}
 .nav a.active{opacity:0.45}
 .ann{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.55;opacity:.5}
 .artist{order:99;margin-top:auto;font-size:2rem;font-weight:700;line-height:1.05;letter-spacing:-0.02em;padding-top:24px;cursor:pointer}
@@ -167,16 +167,14 @@ a:hover{opacity:0.45}
 
   <!-- LEFT SIDEBAR -->
   <div class="left">
-    <div class="artist" onclick="go('works')">Starlin Tatis</div>
+    <div class="artist" onclick="go('light-test')">Starlin Tatis</div>
     <div class="lang-toggle">
       <button id="btn-en" onclick="setLang('en')" class="lang-active">EN</button>
       <span>/</span>
       <button id="btn-es" onclick="setLang('es')">ES</button>
     </div>
     <nav class="nav" id="nav">
-      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
       <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Mutación</a>
-      <a onclick="go('unforgettable-intro')" data-p="unforgettable" data-i18n="nav_unforgettable">Unforgettable</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
@@ -283,10 +281,10 @@ const WORKS = [
 // Si hay gaps en la numeración, ajusta los src aquí.
 // ============================================================
 const LIGHT_TEST = [
-  { src: 'Light Test/Test7.jpg', title: 'Untitled No. 1', year: '2026', material: 'Archival Pigment Print', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
-  { src: 'Light Test/Test8.jpg', title: 'Untitled No. 2', year: '2026', material: 'Archival Pigment Print', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
-  { src: 'Light Test/Test9.jpg', title: 'Untitled No. 3', year: '2026', material: 'Archival Pigment Print', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
-  { src: 'Light Test/Test10.jpg', title: 'Untitled No. 4', year: '2026', material: 'Archival Pigment Print', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm' },
+  { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2026', material: 'Archival pigment print on handmade Tesuki-Washi Echizen (110 gsm) with deckled edges', size: '20 × 30" in', sizeCm: '50.80 × 76.20 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2026', material: 'Archival pigment print on handmade Tesuki-Washi Echizen (110 gsm) with deckled edges', size: '20 × 30" in', sizeCm: '50.80 × 76.20 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2026', material: 'Archival pigment print on handmade Tesuki-Washi Echizen (110 gsm) with deckled edges', size: '20 × 30" in', sizeCm: '50.80 × 76.20 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2026', material: 'Archival pigment print on handmade Tesuki-Washi Echizen (110 gsm) with deckled edges', size: '20 × 30" in', sizeCm: '50.80 × 76.20 cm', edition: 'Edition: 1 of 10 (AP)' },
 ];
 
 // ============================================================
@@ -483,7 +481,7 @@ function t(key) {
 }
 
 // ============================================================
-let state = { page: 'works', workIdx: null };
+let state = { page: 'light-test', workIdx: null };
 
 function go(page, idx) {
   state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail' || page === 'unforgettable-detail') ? idx : null };
@@ -618,7 +616,7 @@ function render() {
           </div>
           <div class="work-edition">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
-            ${t('ltd_edition')}
+            ${w.edition || t('ltd_edition')}
           </div>
           <button class="inq-btn" onclick="openInquiry('light-test',${i})">${t('inquiries')}</button>
         </div>
