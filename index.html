@@ -167,14 +167,14 @@ a:hover{opacity:0.45}
 
   <!-- LEFT SIDEBAR -->
   <div class="left">
-    <div class="artist" onclick="go('light-test')">Starlin Tatis</div>
+    <div class="artist" onclick="go('mutacion')">Starlin Tatis</div>
     <div class="lang-toggle">
       <button id="btn-en" onclick="setLang('en')" class="lang-active">EN</button>
       <span>/</span>
       <button id="btn-es" onclick="setLang('es')">ES</button>
     </div>
     <nav class="nav" id="nav">
-      <a onclick="go('light-test')" data-p="light-test" data-i18n="nav_light_test">Mutación</a>
+      <a onclick="go('mutacion')" data-p="mutacion" data-i18n="nav_mutacion">Mutación</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
@@ -187,16 +187,9 @@ a:hover{opacity:0.45}
 
 <script>
 // ============================================================
-// LIGHT TEST — Mutación series
-
-
+// MUTACIÓN series
 // ============================================================
-// LIGHT TEST — Light Painting series
-// Dimensiones: from 5 × 7" to 16 × 24"
-// Los nombres de archivo están en orden de IMG_4743 en adelante.
-// Si hay gaps en la numeración, ajusta los src aquí.
-// ============================================================
-const LIGHT_TEST = [
+const MUTACION = [
   { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
   { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
   { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)', sold: true },
@@ -208,6 +201,8 @@ const LIGHT_TEST = [
   { src: 'Mutacion/Untitled9.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
   { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
   { src: 'Mutacion/Untitled11.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled12.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled13.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
 ];
 
 
@@ -229,23 +224,14 @@ const CONTACT = {
 // ============================================================
 const T = {
   en: {
-    nav_prints_parent: 'Prints',
-    nav_works:       'Works',
-    nav_editions:    'Editions',
     nav_contact:     'Contact',
     commissions:     'Available for commissions',
-
-    // Work detail
-    all_works:       'All works',
-    prev_work:       'Previous',
-    next_work:       'Next',
-    ltd_edition:     'Part of a limited edition',
     inquiries:       'Inquiries',
 
-    // Light Test detail
-    all_tests:       'All tests',
-    prev_test:       'Previous',
-    next_test:       'Next',
+    // Mutación detail
+    all_mutacion:       'All works',
+    prev_mutacion:       'Previous',
+    next_mutacion:       'Next',
 
     // Unforgettable
     nav_unforgettable: 'Unforgettable',
@@ -283,23 +269,14 @@ const T = {
   },
 
   es: {
-    nav_prints_parent: 'Prints',
-    nav_works:       'Works',
-    nav_editions:    'Ediciones',
     nav_contact:     'Contacto',
     commissions:     'Disponible para encargos',
-
-    // Work detail
-    all_works:       'Todas las obras',
-    prev_work:       'Anterior',
-    next_work:       'Siguiente',
-    ltd_edition:     'Parte de una edición limitada',
     inquiries:       'Consultas',
 
-    // Light Test detail
-    all_tests:       'Todos los tests',
-    prev_test:       'Anterior',
-    next_test:       'Siguiente',
+    // Mutación detail
+    all_mutacion:       'Todas las obras',
+    prev_mutacion:       'Anterior',
+    next_mutacion:       'Siguiente',
 
     // Unforgettable
     nav_unforgettable: 'Unforgettable',
@@ -359,16 +336,16 @@ function t(key) {
 }
 
 // ============================================================
-let state = { page: 'light-test', workIdx: null };
+let state = { page: 'mutacion', workIdx: null };
 
 function go(page, idx) {
-  state = { page, workIdx: (page === 'work-detail' || page === 'light-test-detail' || page === 'unforgettable-detail') ? idx : null };
+  state = { page, workIdx: (page === 'mutacion-detail' || page === 'unforgettable-detail') ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
 
 function setActive(p) {
-  const map = { 'work-detail': 'works', 'light-test-detail': 'light-test', 'unforgettable-detail': 'unforgettable', 'unforgettable': 'unforgettable', 'unforgettable-intro': 'unforgettable' };
+  const map = { 'mutacion-detail': 'mutacion', 'unforgettable-detail': 'unforgettable', 'unforgettable': 'unforgettable', 'unforgettable-intro': 'unforgettable' };
   const active = map[p] || p;
   document.querySelectorAll('#nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.p === active);
@@ -380,10 +357,10 @@ function render() {
   const { page, workIdx } = state;
 
   // LIGHT TEST LIST
-  if (page === 'light-test') {
-    setActive('light-test');
-    const grid = LIGHT_TEST.map((w, i) => `
-      <div class="work-item" onclick="go('light-test-detail',${i})">
+  if (page === 'mutacion') {
+    setActive('mutacion');
+    const grid = MUTACION.map((w, i) => `
+      <div class="work-item" onclick="go('mutacion-detail',${i})">
         <div class="img-wrap">
           <img src="${w.src}" alt="${w.title}"
             onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
@@ -404,20 +381,20 @@ function render() {
   }
 
   // LIGHT TEST DETAIL
-  if (page === 'light-test-detail') {
-    setActive('light-test');
+  if (page === 'mutacion-detail') {
+    setActive('mutacion');
     const i = workIdx !== null ? workIdx : 0;
-    const w = LIGHT_TEST[i] || LIGHT_TEST[0];
+    const w = MUTACION[i] || MUTACION[0];
     const prev = i > 0 ? i - 1 : null;
-    const next = i < LIGHT_TEST.length - 1 ? i + 1 : null;
+    const next = i < MUTACION.length - 1 ? i + 1 : null;
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
         <div class="work-nav">
           <div class="work-nav-group">
-            ${prev !== null ? `<a class="nav-prev" onclick="go('light-test-detail',${prev})">← ${t('prev_test')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
-            <a onclick="go('light-test')">${t('all_tests')}</a>
-            ${next !== null ? `<a class="nav-next" onclick="go('light-test-detail',${next})">${t('next_test')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+            ${prev !== null ? `<a class="nav-prev" onclick="go('mutacion-detail',${prev})">← ${t('prev_mutacion')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            <a onclick="go('mutacion')">${t('all_mutacion')}</a>
+            ${next !== null ? `<a class="nav-next" onclick="go('mutacion-detail',${next})">${t('next_mutacion')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
           </div>
         </div>
         <div class="work-img">
@@ -432,9 +409,9 @@ function render() {
           </div>
           <div class="work-edition">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
-            ${w.edition || t('ltd_edition')}
+            ${w.edition}
           </div>
-          <button class="inq-btn" onclick="openInquiry('light-test',${i})">${t('inquiries')}</button>
+          <button class="inq-btn" onclick="openInquiry('mutacion',${i})">${t('inquiries')}</button>
         </div>
       </div>
       </div>`;
@@ -519,7 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // INQUIRY MODAL
 // ============================================================
 function openInquiry(series, idx) {
-  var work = LIGHT_TEST[idx];
+  var work = MUTACION[idx];
   if (!work) return;
 
   window._inqWork = work;
