@@ -175,6 +175,7 @@ a:hover{opacity:0.45}
     </div>
     <nav class="nav" id="nav">
       <a onclick="go('mutacion')" data-p="mutacion" data-i18n="nav_mutacion">Mutación</a>
+      <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
@@ -207,6 +208,13 @@ const MUTACION = [
 
 
 // ============================================================
+// WORKS series
+// ============================================================
+const WORKS = [
+  { src: 'Works/work01.jpg', title: 'Untitled', year: '2013', material: 'Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Limited Edition (AP)' },
+];
+
+// ============================================================
 // CONTACT
 // ============================================================
 const CONTACT = {
@@ -225,8 +233,14 @@ const CONTACT = {
 const T = {
   en: {
     nav_contact:     'Contact',
+    nav_works:       'Works',
     commissions:     'Available for commissions',
     inquiries:       'Inquiries',
+
+    // Works detail
+    all_works:       'All works',
+    prev_works:      'Previous',
+    next_works:      'Next',
 
     // Mutación detail
     all_mutacion:       'All works',
@@ -270,8 +284,14 @@ const T = {
 
   es: {
     nav_contact:     'Contacto',
+    nav_works:       'Works',
     commissions:     'Disponible para encargos',
     inquiries:       'Consultas',
+
+    // Works detail
+    all_works:       'Todas las obras',
+    prev_works:      'Anterior',
+    next_works:      'Siguiente',
 
     // Mutación detail
     all_mutacion:       'Todas las obras',
@@ -339,13 +359,13 @@ function t(key) {
 let state = { page: 'mutacion', workIdx: null };
 
 function go(page, idx) {
-  state = { page, workIdx: (page === 'mutacion-detail' || page === 'unforgettable-detail') ? idx : null };
+  state = { page, workIdx: (page === 'mutacion-detail' || page === 'unforgettable-detail' || page === 'works-detail') ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
 
 function setActive(p) {
-  const map = { 'mutacion-detail': 'mutacion', 'unforgettable-detail': 'unforgettable', 'unforgettable': 'unforgettable', 'unforgettable-intro': 'unforgettable' };
+  const map = { 'mutacion-detail': 'mutacion', 'unforgettable-detail': 'unforgettable', 'unforgettable': 'unforgettable', 'unforgettable-intro': 'unforgettable', 'works-detail': 'works' };
   const active = map[p] || p;
   document.querySelectorAll('#nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.p === active);
@@ -412,6 +432,68 @@ function render() {
             ${w.edition}
           </div>
           <button class="inq-btn" onclick="openInquiry('mutacion',${i})">${t('inquiries')}</button>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // WORKS LIST
+  if (page === 'works') {
+    setActive('works');
+    const grid = WORKS.map((w, i) => `
+      <div class="work-item" onclick="go('works-detail',${i})">
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // WORKS DETAIL
+  if (page === 'works-detail') {
+    setActive('works');
+    const i = workIdx !== null ? workIdx : 0;
+    const w = WORKS[i] || WORKS[0];
+    const prev = i > 0 ? i - 1 : null;
+    const next = i < WORKS.length - 1 ? i + 1 : null;
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="work-nav">
+          <div class="work-nav-group">
+            ${prev !== null ? `<a class="nav-prev" onclick="go('works-detail',${prev})">← ${t('prev_works')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            <a onclick="go('works')">${t('all_works')}</a>
+            ${next !== null ? `<a class="nav-next" onclick="go('works-detail',${next})">${t('next_works')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+          </div>
+        </div>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-title">${w.title}</div>
+          <div class="work-meta">
+            ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
+            ${w.material}<br>
+            ${w.size} / ${w.sizeCm}
+          </div>
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            ${w.edition}
+          </div>
+          <button class="inq-btn" onclick="openInquiry('works',${i})">${t('inquiries')}</button>
         </div>
       </div>
       </div>`;
@@ -496,7 +578,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // INQUIRY MODAL
 // ============================================================
 function openInquiry(series, idx) {
-  var work = MUTACION[idx];
+  var workArray = series === 'works' ? WORKS : MUTACION;
+  var work = workArray[idx];
   if (!work) return;
 
   window._inqWork = work;
