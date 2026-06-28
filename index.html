@@ -174,8 +174,8 @@ a:hover{opacity:0.45}
       <button id="btn-es" onclick="setLang('es')">ES</button>
     </div>
     <nav class="nav" id="nav">
-      <a onclick="go('mutacion')" data-p="mutacion" data-i18n="nav_mutacion">Mutación</a>
       <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
+      <a onclick="go('mutacion')" data-p="mutacion" data-i18n="nav_mutacion">Mutación</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
@@ -361,7 +361,7 @@ function t(key) {
 }
 
 // ============================================================
-let state = { page: 'mutacion', workIdx: null };
+let state = { page: 'works', workIdx: null };
 
 function go(page, idx) {
   state = { page, workIdx: (page === 'mutacion-detail' || page === 'unforgettable-detail' || page === 'works-detail') ? idx : null };
