@@ -108,28 +108,6 @@ a:hover{opacity:0.45}
 .contact-block p{font-size:13.5px;line-height:1.9}
 .contact-block a{display:block;font-size:13.5px;line-height:2}
 
-/* Series intro layout */
-.unf-intro{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:100vh;align-items:stretch}
-.unf-intro-text{padding:28px 48px 80px;display:flex;flex-direction:column;justify-content:flex-start}
-.unf-intro-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:28px}
-.unf-intro-h{margin-bottom:28px}
-.unf-intro-h-main{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.8rem;font-weight:700;font-style:normal;line-height:1;letter-spacing:-.01em;display:block}
-.unf-intro-h-sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:1rem;font-weight:600;font-style:normal;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;color:#111;display:block;margin-top:10px}
-.unf-intro-body{font-size:13.5px;line-height:1.8;max-width:42ch;color:#555;margin-bottom:40px}
-.unf-enter-btn{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:3px;cursor:pointer;color:#111;opacity:.7;background:none;border-left:none;border-right:none;border-top:none;font-family:Helvetica,Arial,sans-serif;transition:opacity .2s}
-.unf-enter-btn:hover{opacity:1}
-.unf-intro-img{position:relative;overflow:hidden;cursor:pointer}
-.unf-intro-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-.unf-intro-img:hover img{transform:scale(1.02)}
-.unf-intro-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .4s ease;pointer-events:none}
-.unf-intro-img:hover::after{background:rgba(0,0,0,0.18)}
-@media(max-width:768px){
-  .unf-intro{grid-template-columns:1fr;min-height:auto}
-  .unf-intro-text{padding:32px 20px 36px}
-  .unf-intro-img{height:60vw}
-}
-
-
 /* LANG TOGGLE */
 .lang-toggle{display:flex;gap:4px;align-items:center;font-size:9px;letter-spacing:.06em;margin-bottom:16px}
 .lang-toggle button{background:none;border:none;padding:0;font-size:9px;letter-spacing:.06em;cursor:pointer;color:var(--ink);opacity:.35;font-family:Helvetica,Arial,sans-serif}
@@ -191,13 +169,13 @@ a:hover{opacity:0.45}
 // MUTACIÓN series
 // ============================================================
 const MUTACION = [
-  { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)', sold: true },
-  { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled12.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
-  { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Edition: 1 of 10 (AP)' },
+  { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)', sold: true },
+  { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Mutacion/Untitled12.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2026', material: 'Archival Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
 ];
 
 
@@ -205,12 +183,16 @@ const MUTACION = [
 // WORKS series
 // ============================================================
 const WORKS = [
-  { src: 'Works/work01.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Limited Edition (AP)' },
-  { src: 'Works/work02.jpg', title: 'Cigua', year: '2022', material: 'Digital Gelatin Silver Print', size: '16 × 20" in', sizeCm: '40.64 × 50.80 cm', edition: 'Limited Edition (AP)' },
-  { src: 'Works/work03.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Limited Edition (AP)' },
-  { src: 'Works/work04.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Limited Edition (AP)' },
-  { src: 'Works/work05.jpg', title: 'Ave del paraíso', year: '2013', material: 'Digital Gelatin Silver Print', size: '12 × 16" in', sizeCm: '30.48 × 40.64 cm', edition: 'Limited Edition (AP)' },
-  { src: 'Works/work06.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Limited Edition (AP)' },
+  { src: 'Works/work01.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work02.jpg', title: 'Cigua', year: '2022', material: 'Digital Gelatin Silver Print', size: '16 × 20" in', sizeCm: '40.64 × 50.80 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work03.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work04.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work05.jpg', title: 'Ave del paraíso', year: '2013', material: 'Digital Gelatin Silver Print', size: '12 × 16" in', sizeCm: '30.48 × 40.64 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work06.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '11 × 17" in', sizeCm: '27.94 × 43.18 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work07.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work08.jpg', title: 'Untitled', year: '2015', material: 'Digital Gelatin Silver Print', size: '16 × 24" in', sizeCm: '40.64 × 60.96 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work09.jpg', title: 'Untitled', year: '2015', material: 'Digital Gelatin Silver Print', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Works/work10.jpg', title: 'Untitled', year: '2013', material: 'Digital Gelatin Silver Print', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
 ];
 
 // ============================================================
@@ -245,16 +227,6 @@ const T = {
     all_mutacion:       'All works',
     prev_mutacion:       'Previous',
     next_mutacion:       'Next',
-
-    // Unforgettable
-    nav_unforgettable: 'Unforgettable',
-    unforgettable_intro_h: 'Unforgettable — Born in Black and White',
-    unforgettable_intro_p1: 'Juan Fernández is one of the most unforgettable actors of our time. I have had the honor of working alongside him and gathering this collection of photographs, which without a second thought stands among my finest work as an artist behind the lens. From the very first encounter I knew the result would become history.',
-    unforgettable_intro_p2: 'Unforgettable — Born in Black and White was born from a certainty. Building this universe together fills me with joy. It was never just about photographing the actor. It was about documenting presence, those intangible qualities that certain people project in a remarkable way. Capturing that feeling was essential, and black and white became the only language this series deserved.',
-    unforgettable_enter: 'View works',
-    all_unforgettable: 'All works',
-    prev_unforgettable: 'Previous',
-    next_unforgettable: 'Next',
 
     // About
     about_h:      'About',
@@ -296,16 +268,6 @@ const T = {
     all_mutacion:       'Todas las obras',
     prev_mutacion:       'Anterior',
     next_mutacion:       'Siguiente',
-
-    // Unforgettable
-    nav_unforgettable: 'Unforgettable',
-    unforgettable_intro_h: 'Unforgettable — Born in Black and White',
-    unforgettable_intro_p1: 'Juan Fernández uno de los actores más inolvidables de nuestro tiempo. He tenido el honor de trabajar a su lado y de recopilar esta colección de fotografías, que sin dudarlo un segundo se cuenta entre mis mejores trabajos como artista del lente. Desde el primer encuentro supe que el resultado se volvería historia.',
-    unforgettable_intro_p2: 'Unforgettable — Born in Black and White, nació de una certeza, construir este universo junto a el me llena de felicidad. No solo se trató de retratar al actor, se trató de documentar la presencia, cualidades intangibles que muchos seres proyectan de una forma maravillosa, plasmar esa sensación fue vital, blanco y negro formo parte del lenguaje que esta serie merecía.',
-    unforgettable_enter: 'Ver obras',
-    all_unforgettable: 'Todas las obras',
-    prev_unforgettable: 'Anterior',
-    next_unforgettable: 'Siguiente',
 
     // About
     about_h:      'Acerca de',
@@ -358,13 +320,13 @@ function t(key) {
 let state = { page: 'works', workIdx: null };
 
 function go(page, idx) {
-  state = { page, workIdx: (page === 'mutacion-detail' || page === 'unforgettable-detail' || page === 'works-detail') ? idx : null };
+  state = { page, workIdx: (page === 'mutacion-detail' || page === 'works-detail') ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
 
 function setActive(p) {
-  const map = { 'mutacion-detail': 'mutacion', 'unforgettable-detail': 'unforgettable', 'unforgettable': 'unforgettable', 'unforgettable-intro': 'unforgettable', 'works-detail': 'works' };
+  const map = { 'mutacion-detail': 'mutacion', 'works-detail': 'works' };
   const active = map[p] || p;
   document.querySelectorAll('#nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.p === active);
