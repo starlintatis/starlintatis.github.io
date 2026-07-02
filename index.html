@@ -175,8 +175,8 @@ const MUTACION = [
   { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
   { src: 'Mutacion/Untitled12.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
   { src: 'Mutacion/Untitled5.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
-  { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
-  { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
+  { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)', color: true },
+  { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)', color: true },
   { src: 'Mutacion/Untitled6.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
   { src: 'Mutacion/Untitled8.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
   { src: 'Mutacion/Untitled9.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition (A.P.)' },
@@ -340,6 +340,15 @@ function setActive(p) {
   });
 }
 
+function mutacionOrder() {
+  // Keeps original relative order, but pushes color: true works to the end
+  return MUTACION.map((w, i) => i).sort((a, b) => {
+    const ca = MUTACION[a].color ? 1 : 0;
+    const cb = MUTACION[b].color ? 1 : 0;
+    return ca - cb;
+  });
+}
+
 function render() {
   const R = document.getElementById('right');
   const { page, workIdx } = state;
@@ -347,7 +356,10 @@ function render() {
   // LIGHT TEST LIST
   if (page === 'mutacion') {
     setActive('mutacion');
-    const grid = MUTACION.map((w, i) => `
+    const order = mutacionOrder();
+    const grid = order.map((i) => {
+      const w = MUTACION[i];
+      return `
       <div class="work-item" onclick="go('mutacion-detail',${i})">
         <div class="img-wrap">
           <img src="${w.src}" alt="${w.title}"
@@ -357,8 +369,8 @@ function render() {
           <div class="work-item-title">${w.title}</div>
           <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
         </div>
-      </div>`
-    ).join('');
+      </div>`;
+    }).join('');
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
@@ -373,8 +385,10 @@ function render() {
     setActive('mutacion');
     const i = workIdx !== null ? workIdx : 0;
     const w = MUTACION[i] || MUTACION[0];
-    const prev = i > 0 ? i - 1 : null;
-    const next = i < MUTACION.length - 1 ? i + 1 : null;
+    const order = mutacionOrder();
+    const pos = order.indexOf(i);
+    const prev = pos > 0 ? order[pos - 1] : null;
+    const next = pos < order.length - 1 ? order[pos + 1] : null;
     R.innerHTML = `
       <div class="right-inner">
       <div class="content">
