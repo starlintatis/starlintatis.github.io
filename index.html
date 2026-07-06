@@ -154,6 +154,7 @@ a:hover{opacity:0.45}
     <nav class="nav" id="nav">
       <a onclick="go('works')" data-p="works" data-i18n="nav_works">Works</a>
       <a onclick="go('mutacion')" data-p="mutacion" data-i18n="nav_mutacion">Mutación</a>
+      <a onclick="go('unforgettable')" data-p="unforgettable" data-i18n="nav_unforgettable">Unforgettable</a>
       <a onclick="go('contact')" data-p="contact" data-i18n="nav_contact">Contact</a>
     </nav>
 
@@ -169,12 +170,7 @@ a:hover{opacity:0.45}
 // MUTACIÓN series
 // ============================================================
 const MUTACION = [
-  { src: 'Mutacion/Untitled1.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
-  { src: 'Mutacion/Untitled2.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
-  { src: 'Mutacion/Untitled3.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition', sold: true },
-  { src: 'Mutacion/Untitled4.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
   { src: 'Mutacion/Untitled12.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
-  { src: 'Mutacion/Untitled5.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
   { src: 'Mutacion/Untitled7.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition', color: true },
   { src: 'Mutacion/Untitled10.jpg', title: 'Untitled', year: '2020', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition', color: true },
   { src: 'Mutacion/Untitled6.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
@@ -185,6 +181,16 @@ const MUTACION = [
   { src: 'Mutacion/Untitled14.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Tesuki-Washi Echizen (110 g/m²)', size: '12 × 18" in', sizeCm: '30.48 × 45.72 cm', edition: 'Part of a limited edition' },
 ];
 
+
+// ============================================================
+// UNFORGETTABLE series
+// ============================================================
+const UNFORGETTABLE = [
+  { src: 'Unforgettable/jf1.jpg', title: '', year: '', material: '', size: '', sizeCm: '', edition: 'Part of a limited edition' },
+  { src: 'Unforgettable/jf2.jpg', title: '', year: '', material: '', size: '', sizeCm: '', edition: 'Part of a limited edition' },
+  { src: 'Unforgettable/jf3.jpg', title: '', year: '', material: '', size: '', sizeCm: '', edition: 'Part of a limited edition' },
+  { src: 'Unforgettable/jf4.jpg', title: '', year: '', material: '', size: '', sizeCm: '', edition: 'Part of a limited edition' },
+];
 
 // ============================================================
 // WORKS series
@@ -235,6 +241,12 @@ const T = {
     prev_mutacion:       'Previous',
     next_mutacion:       'Next',
 
+    // Unforgettable
+    nav_unforgettable:  'Unforgettable',
+    all_unforgettable:  'All works',
+    prev_unforgettable: 'Previous',
+    next_unforgettable: 'Next',
+
     // About
     about_h:      'About',
     about_p1: 'Starlin Tatis is a self-taught photographer and creative director based in Santo Domingo, Dominican Republic. A practice situated at the intersection of editorial portraiture and fashion photography since 2010, defined by a sustained attention to presence — the silence between subject and lens that transforms a photograph into something closer: a unique and memorable record.',
@@ -275,6 +287,12 @@ const T = {
     all_mutacion:       'Todas las obras',
     prev_mutacion:       'Anterior',
     next_mutacion:       'Siguiente',
+
+    // Unforgettable
+    nav_unforgettable:  'Unforgettable',
+    all_unforgettable:  'Todas las obras',
+    prev_unforgettable: 'Anterior',
+    next_unforgettable: 'Siguiente',
 
     // About
     about_h:      'Acerca de',
@@ -327,13 +345,13 @@ function t(key) {
 let state = { page: 'works', workIdx: null };
 
 function go(page, idx) {
-  state = { page, workIdx: (page === 'mutacion-detail' || page === 'works-detail') ? idx : null };
+  state = { page, workIdx: (page === 'mutacion-detail' || page === 'works-detail' || page === 'unforgettable-detail') ? idx : null };
   render();
   document.getElementById('right').scrollTo(0, 0);
 }
 
 function setActive(p) {
-  const map = { 'mutacion-detail': 'mutacion', 'works-detail': 'works' };
+  const map = { 'mutacion-detail': 'mutacion', 'works-detail': 'works', 'unforgettable-detail': 'unforgettable' };
   const active = map[p] || p;
   document.querySelectorAll('#nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.p === active);
@@ -364,10 +382,6 @@ function render() {
         <div class="img-wrap">
           <img src="${w.src}" alt="${w.title}"
             onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
-        </div>
-        <div>
-          <div class="work-item-title">${w.title}</div>
-          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
         </div>
       </div>`;
     }).join('');
@@ -420,6 +434,62 @@ function render() {
     return;
   }
 
+  // UNFORGETTABLE LIST
+  if (page === 'unforgettable') {
+    setActive('unforgettable');
+    const grid = UNFORGETTABLE.map((w, i) => `
+      <div class="work-item" onclick="go('unforgettable-detail',${i})">
+        <div class="img-wrap">
+          <img src="${w.src}" alt="${w.title}"
+            onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
+        </div>
+        <div>
+          <div class="work-item-title">${w.title}</div>
+          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
+        </div>
+      </div>`
+    ).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="works-grid">${grid}</div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // UNFORGETTABLE DETAIL
+  if (page === 'unforgettable-detail') {
+    setActive('unforgettable');
+    const i = workIdx !== null ? workIdx : 0;
+    const w = UNFORGETTABLE[i] || UNFORGETTABLE[0];
+    const prev = i > 0 ? i - 1 : null;
+    const next = i < UNFORGETTABLE.length - 1 ? i + 1 : null;
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="work-nav">
+          <div class="work-nav-group">
+            ${prev !== null ? `<a class="nav-prev" onclick="go('unforgettable-detail',${prev})">← ${t('prev_unforgettable')}</a>` : '<span style="opacity:0;visibility:hidden">← Previous</span>'}
+            <a onclick="go('unforgettable')">${t('all_unforgettable')}</a>
+            ${next !== null ? `<a class="nav-next" onclick="go('unforgettable-detail',${next})">${t('next_unforgettable')} →</a>` : '<span style="opacity:0;visibility:hidden">Next →</span>'}
+          </div>
+        </div>
+        <div class="work-img">
+          <img src="${w.src}" alt="${w.title}"/>
+        </div>
+        <div style="margin-top:24px">
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            ${w.edition}
+          </div>
+          <button class="inq-btn" onclick="openInquiry('unforgettable',${i})">${t('inquiries')}</button>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
   // WORKS LIST
   if (page === 'works') {
     setActive('works');
@@ -428,10 +498,6 @@ function render() {
         <div class="img-wrap">
           <img src="${w.src}" alt="${w.title}"
             onerror="this.outerHTML='<div class=wg-ph>${w.title}</div>'"/>
-        </div>
-        <div>
-          <div class="work-item-title">${w.title}</div>
-          <div class="work-item-info">${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ''}</div>
         </div>
       </div>`
     ).join('');
@@ -560,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // INQUIRY MODAL
 // ============================================================
 function openInquiry(series, idx) {
-  var workArray = series === 'works' ? WORKS : MUTACION;
+  var workArray = series === 'works' ? WORKS : (series === 'unforgettable' ? UNFORGETTABLE : MUTACION);
   var work = workArray[idx];
   if (!work) return;
 
