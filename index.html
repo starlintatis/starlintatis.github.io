@@ -171,7 +171,6 @@ a:hover{opacity:0.45}
 const MUTACION = [
   { src: 'Mutacion/Untitled13.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Awagami Bamboo', size: '20 × 30" in', sizeCm: '50.8 × 76.2 cm', edition: 'Part of a limited edition' },
   { src: 'Mutacion/Untitled14.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Awagami Bamboo', size: '20 × 30" in', sizeCm: '50.8 × 76.2 cm', edition: 'Part of a limited edition' },
-  { src: 'Mutacion/Untitled15.jpg', title: 'Untitled', year: '2026', material: 'Pigment Print on Awagami Bamboo', size: '20 × 30" in', sizeCm: '50.8 × 76.2 cm', edition: 'Part of a limited edition' },
 ];
 
 // ============================================================
@@ -451,4 +450,264 @@ function render() {
           <div class="work-title">${w.title}</div>
           <div class="work-meta">
             ${w.year}${w.sold ? ` <span class="sold-tag"><span style="font-weight:400">·</span> SOLD</span>` : ""}<br>
-            ${w.material}<br
+            ${w.material}<br>
+            ${w.size} / ${w.sizeCm}
+          </div>
+          <div class="work-edition">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+            ${w.edition}
+          </div>
+          <button class="inq-btn" onclick="openInquiry('works',${i})">${t('inquiries')}</button>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // ABOUT
+  if (page === 'about') {
+    setActive('about');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="about-photo">
+          <img src="images/about.jpg" alt="Starlin Tatis"
+            onerror="this.parentNode.style.display='none'"/>
+        </div>
+        <div class="about-h">${t('about_h')}</div>
+        <p class="about-body">${t('about_p1')}</p>
+        <p class="about-body">${t('about_p2')}</p>
+        <p class="about-body">${t('about_p3')}</p>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // PRINTS INFO
+  if (page === 'editions') {
+    setActive('editions');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="prints-section">
+          <div class="about-h">${t('prints_h')}</div>
+          <p class="about-body">${t('prints_p1')}</p>
+          <p class="about-body">${t('prints_p2')}</p>
+          <p class="about-body">${t('prints_p3')}</p>
+          <p class="about-body" style="margin-bottom:4px">${t('prints_p4')}</p>
+          <p class="about-body">${t('prints_p5')}</p>
+        </div>
+
+        <div class="prints-section">
+          <div class="about-h">${t('orders_h')}</div>
+          <p class="about-body">${t('orders_p1')}</p>
+          <p class="about-body">${t('orders_p2')}</p>
+          <p class="about-body">${t('orders_p3')}</p>
+        </div>
+      </div>
+      </div>`;
+    return;
+  }
+
+  // CONTACT
+  if (page === 'contact') {
+    setActive('contact');
+    const socialHtml = CONTACT.social.map(s =>
+      `<a href="${s.link}" style="font-weight:700">${s.name}</a>`).join('');
+    R.innerHTML = `
+      <div class="right-inner">
+      <div class="content">
+        <div class="contact-block">
+          <div class="contact-h">${t('contact_h')}</div>
+          <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
+          <a href="mailto:${CONTACT.email}" style="text-decoration:underline">${CONTACT.email}</a>
+        </div>
+        ${CONTACT.social.length ? `
+        <div class="contact-block">
+          <div class="contact-h">${t('social_h')}</div>
+          ${socialHtml}
+        </div>` : ''}
+      </div>
+      </div>`;
+    return;
+  }
+}
+
+// Apply saved language on load, then render
+document.addEventListener('DOMContentLoaded', function() {
+  setLang(lang);
+});
+
+// ============================================================
+// INQUIRY MODAL
+// ============================================================
+function openInquiry(series, idx) {
+  var workArray = series === 'works' ? WORKS : MUTACION;
+  var work = workArray[idx];
+  if (!work) return;
+
+  window._inqWork = work;
+
+  var existing = document.getElementById('inq-overlay');
+  if (existing) existing.remove();
+
+  var isEs = lang === 'es';
+
+  var overlay = document.createElement('div');
+  overlay.className = 'inq-overlay';
+  overlay.id = 'inq-overlay';
+
+  var modal = document.createElement('div');
+  modal.className = 'inq-modal';
+
+  // Close button
+  var closeBtn = document.createElement('button');
+  closeBtn.className = 'inq-close';
+  closeBtn.innerHTML = '&#x2715;';
+  closeBtn.onclick = closeInquiry;
+  modal.appendChild(closeBtn);
+
+  // Header: thumb + info
+  var header = document.createElement('div');
+  header.className = 'inq-modal-header';
+
+  var thumbDiv = document.createElement('div');
+  thumbDiv.className = 'inq-thumb';
+  var img = document.createElement('img');
+  img.src = work.src;
+  img.alt = work.title;
+  img.onerror = function() { thumbDiv.innerHTML = '<div class="inq-thumb-ph">' + work.title + '</div>'; };
+  thumbDiv.appendChild(img);
+  header.appendChild(thumbDiv);
+
+  var infoDiv = document.createElement('div');
+  infoDiv.className = 'inq-work-info';
+  infoDiv.innerHTML =
+    '<div class="inq-work-title">' + work.title + '</div>' +
+    '<div class="inq-work-meta">' +
+      work.year + (work.sold ? ' · SOLD' : '') + '<br>' +
+      work.material + '<br>' +
+      work.size + ' / ' + work.sizeCm +
+    '</div>';
+  header.appendChild(infoDiv);
+  modal.appendChild(header);
+
+  // Form title
+  var formH = document.createElement('div');
+  formH.className = 'inq-form-h';
+  formH.textContent = isEs ? 'Datos de contacto' : 'Contact details';
+  modal.appendChild(formH);
+
+  function makeField(labelText, inputType, inputId, ph) {
+    var field = document.createElement('div');
+    field.className = 'inq-field';
+    var lbl = document.createElement('label');
+    lbl.textContent = labelText;
+    field.appendChild(lbl);
+    var inp = inputType === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+    if (inputType !== 'textarea') inp.type = inputType;
+    inp.id = inputId;
+    inp.placeholder = ph;
+    field.appendChild(inp);
+    return field;
+  }
+
+  modal.appendChild(makeField(isEs ? 'Nombre completo' : 'Full name', 'text', 'inq-name', isEs ? 'Tu nombre' : 'Your name'));
+  modal.appendChild(makeField(isEs ? 'Teléfono' : 'Phone', 'tel', 'inq-phone', isEs ? 'Tu número' : 'Your number'));
+  modal.appendChild(makeField(isEs ? 'Dirección' : 'Address', 'text', 'inq-address', isEs ? 'Ciudad, país' : 'City, country'));
+  modal.appendChild(makeField(isEs ? 'Mensaje' : 'Message', 'textarea', 'inq-message', isEs ? 'Escribe tu consulta...' : 'Write your inquiry...'));
+
+  var submitBtn = document.createElement('button');
+  submitBtn.className = 'inq-submit';
+  submitBtn.textContent = isEs ? 'Enviar consulta' : 'Send inquiry';
+  submitBtn.onclick = submitInquiry;
+  modal.appendChild(submitBtn);
+
+  overlay.appendChild(modal);
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeInquiry();
+  });
+
+  document._inqKeyHandler = function(e) { if (e.key === 'Escape') closeInquiry(); };
+  document.addEventListener('keydown', document._inqKeyHandler);
+
+  document.body.appendChild(overlay);
+}
+
+function closeInquiry() {
+  const overlay = document.getElementById('inq-overlay');
+  if (overlay) overlay.remove();
+  if (document._inqKeyHandler) {
+    document.removeEventListener('keydown', document._inqKeyHandler);
+    delete document._inqKeyHandler;
+  }
+}
+
+function submitInquiry() {
+  var work = window._inqWork;
+  if (!work) return;
+
+  var name    = document.getElementById('inq-name').value.trim();
+  var phone   = document.getElementById('inq-phone').value.trim();
+  var address = document.getElementById('inq-address').value.trim();
+  var message = document.getElementById('inq-message').value.trim();
+
+  if (!name) {
+    alert(lang === 'es' ? 'Por favor ingresa tu nombre.' : 'Please enter your name.');
+    return;
+  }
+
+  var submitBtn = document.querySelector('.inq-submit');
+  submitBtn.disabled = true;
+  submitBtn.textContent = lang === 'es' ? 'Enviando...' : 'Sending...';
+
+  var payload = {
+    name: name,
+    phone: phone || '—',
+    address: address || '—',
+    message: message || '—',
+    _subject: 'Inquiry: ' + work.title,
+    work_title: work.title,
+    work_year: work.year,
+    work_material: work.material,
+    work_size: work.size + ' / ' + work.sizeCm
+  };
+
+  fetch('https://formspree.io/f/xaqzkyor', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.ok) {
+      // Show success message inside modal
+      var modal = document.querySelector('.inq-modal');
+      modal.innerHTML =
+        '<div style="padding:40px 0;text-align:center;">' +
+          '<div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;color:#111;">' +
+            (lang === 'es' ? 'Mensaje enviado' : 'Message sent') +
+          '</div>' +
+          '<div style="font-size:13px;color:#888;line-height:1.8;max-width:36ch;margin:0 auto;">' +
+            (lang === 'es'
+              ? 'Tu consulta sobre <em>' + work.title + '</em> ha sido recibida. Me pondré en contacto contigo pronto.'
+              : "Your inquiry about <em>" + work.title + "</em> has been received. I'll be in touch shortly.") +
+          '</div>' +
+          '<button class="inq-close" onclick="closeInquiry()" style="position:static;display:inline-block;margin-top:32px;opacity:.5;">✕</button>' +
+        '</div>';
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.textContent = lang === 'es' ? 'Enviar consulta' : 'Send inquiry';
+      alert(lang === 'es' ? 'Error al enviar. Intenta de nuevo.' : 'Error sending. Please try again.');
+    }
+  })
+  .catch(function() {
+    submitBtn.disabled = false;
+    submitBtn.textContent = lang === 'es' ? 'Enviar consulta' : 'Send inquiry';
+    alert(lang === 'es' ? 'Error de conexión. Intenta de nuevo.' : 'Connection error. Please try again.');
+  });
+}
+</script>
+</body>
+</html>
