@@ -46,10 +46,11 @@
     }
 
     .site-name {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0;
       cursor: pointer;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     .menu-button {
@@ -59,6 +60,8 @@
       background: transparent;
       cursor: pointer;
       font-style: italic;
+      font-size: 16px;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     .navigation {
@@ -81,12 +84,17 @@
     .navigation a {
       cursor: pointer;
       text-decoration: none;
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 16px;
+      line-height: 1.5;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     .navigation a:not(:first-child) {
       opacity: .5;
+    }
+
+    .navigation a.active {
+      opacity: 1 !important;
     }
 
     .gallery {
@@ -195,7 +203,7 @@
       cursor: pointer;
       color: var(--text);
       opacity: .35;
-      font-family: inherit;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     .lang-toggle button.lang-active {
@@ -211,11 +219,74 @@
       opacity: .25;
     }
 
+    /* ===== ABOUT / CONTACT ===== */
+    .info-page {
+      padding: 40px 60px 80px;
+      max-width: 700px;
+      margin: 0 auto;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .info-page .page-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 36px;
+      letter-spacing: .01em;
+    }
+
+    .info-page .about-body {
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .info-page .about-body a {
+      text-decoration: underline;
+    }
+
+    .info-page .contact-block {
+      margin-bottom: 36px;
+    }
+
+    .info-page .contact-block p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 6px;
+    }
+
+    .info-page .contact-block a {
+      display: block;
+      font-size: 15px;
+      line-height: 2;
+      text-decoration: underline;
+    }
+
+    .info-page .contact-h {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+      color: var(--text);
+    }
+
+    .info-page .about-photo {
+      margin-bottom: 40px;
+    }
+
+    .info-page .about-photo img {
+      width: 100%;
+      max-width: 620px;
+      display: block;
+    }
+
     @keyframes fade-in {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 1550px) {
       .site-header { width: calc(33.3333% - 24px); }
       .artwork-frame { grid-column: 5 / 9; }
@@ -240,6 +311,9 @@
         bottom: 24px;
         left: 24px;
       }
+      .info-page {
+        padding: 30px 24px 80px;
+      }
     }
 
     @media (max-width: 650px) {
@@ -248,24 +322,37 @@
         left: 12px;
         width: calc(100% - 24px);
         transform: none;
+        display: flex;
+        gap: 8px;
+        align-items: baseline;
       }
 
       .site-name {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        width: auto;
+        flex-shrink: 0;
+      }
+
+      .menu-button {
+        font-size: 14px;
+      }
+
+      .navigation a {
+        font-size: 14px;
       }
 
       .gallery {
         gap: 12px;
-        padding: 114px 12px;
+        padding: 80px 12px 80px;
       }
 
       .artwork-frame {
         grid-column: 1 / 13;
-        min-height: calc(100svh - 228px);
+        min-height: calc(100svh - 200px);
       }
 
       .artwork-image {
-        max-height: calc(100svh - 260px);
+        max-height: calc(100svh - 220px);
       }
 
       .artwork-details {
@@ -276,12 +363,13 @@
 
       .artwork-details h1,
       .artwork-details p {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       .counter {
         right: 12px;
         bottom: 12px;
+        font-size: 12px;
       }
 
       .gallery-control {
@@ -292,6 +380,20 @@
         bottom: 12px;
         left: 12px;
         font-size: 10px;
+      }
+
+      .info-page {
+        padding: 20px 16px 60px;
+      }
+
+      .info-page .about-body {
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .info-page .contact-block p,
+      .info-page .contact-block a {
+        font-size: 13px;
       }
     }
   </style>
@@ -335,6 +437,8 @@
 
   <p class="counter" id="counter"></p>
 
+  <div id="info-container" style="display:none;"></div>
+
   <script>
     // ============================================================
     // LANG
@@ -345,20 +449,50 @@
       en: {
         menu: 'Menu',
         close: 'Close',
+        all: 'All',
         works: 'Works',
         mutacion: 'Mutación Obscura',
+        about: 'About',
         contact: 'Contact',
-        inquiries: 'Inquiries',
         sold: 'Sold',
+        // About
+        about_h: 'About',
+        about_p1: 'Starlin Tatis is a self-taught photographer and creative director based in Santo Domingo, Dominican Republic. A practice situated at the intersection of editorial portraiture and fashion photography since 2010, defined by a sustained attention to presence — the silence between subject and lens that transforms a photograph into something closer: a unique and memorable record.',
+        about_p2: 'Without formal academic training in large part, a visual language was built through an unwavering commitment to the artist\'s craft, developing a practice grounded in formal precision and psychological depth — taking the performing arts as near-total inspiration in fashion. The aesthetic draws from traditions of artistic portraiture and the codes of contemporary fashion, shaped entirely by the discipline of observation and constant creation, rejecting spectacle in favor of stillness.',
+        about_p3: 'His work has been exhibited at the TRImarchi Graphic Design Festival in Mar del Plata, Argentina, and Galería Espacio Falso in Santiago, Chile. Published in Inkult Magazine (Mexico City), BALAM Magazine (Buenos Aires), among others. Photographs are held in private collections across several continents.',
+        // Contact
+        contact_h: 'Contact',
+        location_h: 'Location',
+        social_h: 'Social',
+        contact_note: 'For print inquiries, exhibition proposals, and editorial commissions.',
+        email: 'starlintatis@gmail.com',
+        location: 'Santo Domingo, Dominican Republic',
+        instagram: 'Instagram',
+        patreon: 'Patreon',
       },
       es: {
         menu: 'Menú',
         close: 'Cerrar',
+        all: 'Todas',
         works: 'Works',
         mutacion: 'Mutación Obscura',
+        about: 'Acerca de',
         contact: 'Contacto',
-        inquiries: 'Consultas',
         sold: 'Vendido',
+        // About
+        about_h: 'Acerca de',
+        about_p1: 'Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda, desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano, un registro único y memorable.',
+        about_p2: 'Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.',
+        about_p3: 'Su obra ha sido expuesta en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), entre otros. Sus fotografías forman parte de colecciones privadas en varios continentes.',
+        // Contact
+        contact_h: 'Contacto',
+        location_h: 'Ubicación',
+        social_h: 'Redes',
+        contact_note: 'Para consultas sobre impresiones, propuestas de exposición y encargos editoriales.',
+        email: 'starlintatis@gmail.com',
+        location: 'Santo Domingo, República Dominicana',
+        instagram: 'Instagram',
+        patreon: 'Patreon',
       }
     };
 
@@ -372,6 +506,17 @@
       document.getElementById('btn-en').classList.toggle('lang-active', l === 'en');
       document.getElementById('btn-es').classList.toggle('lang-active', l === 'es');
       updateMenuText();
+      const current = document.querySelector('#navigation a.active');
+      if (current) {
+        const series = current.dataset.series;
+        if (series === 'about' || series === 'contact') {
+          renderInfoPage(series);
+        } else {
+          filterSeries(series);
+        }
+      } else {
+        filterSeries('all');
+      }
     }
 
     function updateMenuText() {
@@ -386,175 +531,33 @@
     const portfolio = {
       name: "Starlin Tatis",
       navigation: [
+        { key: 'all', label: 'All' },
         { key: 'works', label: 'Works' },
         { key: 'mutacion', label: 'Mutación Obscura' },
+        { key: 'about', label: 'About' },
         { key: 'contact', label: 'Contact' }
       ],
       artworks: [
-        // WORKS (14 obras)
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "11 × 17\" in / 27.94 × 43.18 cm",
-          status: "Available",
-          image: "Works/work01.jpg",
-          series: "works"
-        },
-        {
-          title: "Cigua",
-          year: "2022",
-          material: "Digital Gelatin Silver Print",
-          size: "16 × 20\" in / 40.64 × 50.80 cm",
-          status: "Available",
-          image: "Works/work02.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "11 × 17\" in / 27.94 × 43.18 cm",
-          status: "Available",
-          image: "Works/work03.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "11 × 17\" in / 27.94 × 43.18 cm",
-          status: "Available",
-          image: "Works/work04.jpg",
-          series: "works"
-        },
-        {
-          title: "Ave del paraíso",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "12 × 16\" in / 30.48 × 40.64 cm",
-          status: "Available",
-          image: "Works/work05.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "11 × 17\" in / 27.94 × 43.18 cm",
-          status: "Available",
-          image: "Works/work06.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "16 × 24\" in / 40.64 × 60.96 cm",
-          status: "Available",
-          image: "Works/work07.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2015",
-          material: "Digital Gelatin Silver Print",
-          size: "16 × 24\" in / 40.64 × 60.96 cm",
-          status: "Available",
-          image: "Works/work08.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2015",
-          material: "Digital Gelatin Silver Print",
-          size: "12 × 18\" in / 30.48 × 45.72 cm",
-          status: "Available",
-          image: "Works/work09.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "12 × 18\" in / 30.48 × 45.72 cm",
-          status: "Available",
-          image: "Works/work10.jpg",
-          series: "works"
-        },
-        {
-          title: "The Lovers",
-          year: "2014",
-          material: "Digital Gelatin Silver Print",
-          size: "16 × 24\" in / 40.64 × 60.96 cm",
-          status: "Available",
-          image: "Works/work11.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2022",
-          material: "Pigment Print on Bamboo Baryta",
-          size: "24 × 16\" in / 60.96 × 40.64 cm",
-          status: "Available",
-          image: "Works/work12.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2023",
-          material: "Digital Gelatin Silver Print",
-          size: "16 × 24\" in / 40.64 × 60.96 cm",
-          status: "Available",
-          image: "Works/work13.jpg",
-          series: "works"
-        },
-        {
-          title: "Untitled",
-          year: "2013",
-          material: "Digital Gelatin Silver Print",
-          size: "11 × 17\" in / 27.94 × 43.18 cm",
-          status: "Available",
-          image: "Works/work14.jpg",
-          series: "works"
-        },
-        // MUTACIÓN (4 obras)
-        {
-          title: "Untitled",
-          year: "2026",
-          material: "Pigment Print on Awagami Bamboo",
-          size: "20 × 30\" in / 50.8 × 76.2 cm",
-          status: "Available",
-          image: "Mutacion/Untitled13.jpg",
-          series: "mutacion"
-        },
-        {
-          title: "Untitled",
-          year: "2026",
-          material: "Pigment Print on Awagami Bamboo",
-          size: "20 × 30\" in / 50.8 × 76.2 cm",
-          status: "Available",
-          image: "Mutacion/Untitled14.jpg",
-          series: "mutacion"
-        },
-        {
-          title: "Untitled",
-          year: "2026",
-          material: "Pigment Print on Awagami Bamboo",
-          size: "20 × 30\" in / 50.8 × 76.2 cm",
-          status: "Available",
-          image: "Mutacion/Untitled15.jpg",
-          series: "mutacion"
-        },
-        {
-          title: "Untitled",
-          year: "2026",
-          material: "Pigment Print on Awagami Bamboo",
-          size: "20 × 30\" in / 50.8 × 76.2 cm",
-          status: "Available",
-          image: "Mutacion/Untitled16.jpg",
-          series: "mutacion"
-        }
+        // WORKS
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work01.jpg", series: "works" },
+        { title: "Cigua", year: "2022", material: "Digital Gelatin Silver Print", size: "16 × 20\" in / 40.64 × 50.80 cm", status: "Available", image: "Works/work02.jpg", series: "works" },
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work03.jpg", series: "works" },
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work04.jpg", series: "works" },
+        { title: "Ave del paraíso", year: "2013", material: "Digital Gelatin Silver Print", size: "12 × 16\" in / 30.48 × 40.64 cm", status: "Available", image: "Works/work05.jpg", series: "works" },
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work06.jpg", series: "works" },
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "16 × 24\" in / 40.64 × 60.96 cm", status: "Available", image: "Works/work07.jpg", series: "works" },
+        { title: "Untitled", year: "2015", material: "Digital Gelatin Silver Print", size: "16 × 24\" in / 40.64 × 60.96 cm", status: "Available", image: "Works/work08.jpg", series: "works" },
+        { title: "Untitled", year: "2015", material: "Digital Gelatin Silver Print", size: "12 × 18\" in / 30.48 × 45.72 cm", status: "Available", image: "Works/work09.jpg", series: "works" },
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "12 × 18\" in / 30.48 × 45.72 cm", status: "Available", image: "Works/work10.jpg", series: "works" },
+        { title: "The Lovers", year: "2014", material: "Digital Gelatin Silver Print", size: "16 × 24\" in / 40.64 × 60.96 cm", status: "Available", image: "Works/work11.jpg", series: "works" },
+        { title: "Untitled", year: "2022", material: "Pigment Print on Bamboo Baryta", size: "24 × 16\" in / 60.96 × 40.64 cm", status: "Available", image: "Works/work12.jpg", series: "works" },
+        { title: "Untitled", year: "2023", material: "Digital Gelatin Silver Print", size: "16 × 24\" in / 40.64 × 60.96 cm", status: "Available", image: "Works/work13.jpg", series: "works" },
+        { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work14.jpg", series: "works" },
+        // MUTACIÓN
+        { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled13.jpg", series: "mutacion" },
+        { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled14.jpg", series: "mutacion" },
+        { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled15.jpg", series: "mutacion" },
+        { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled16.jpg", series: "mutacion" }
       ]
     };
 
@@ -563,7 +566,7 @@
     // ============================================================
     let activeIndex = 0;
     let touchStartY = null;
-    let currentSeries = 'all'; // 'all', 'works', 'mutacion'
+    let currentSeries = 'all';
 
     function getFilteredArtworks() {
       if (currentSeries === 'all') return portfolio.artworks;
@@ -581,33 +584,40 @@
       size: document.querySelector("#artwork-size"),
       status: document.querySelector("#artwork-status"),
       counter: document.querySelector("#counter"),
-      gallery: document.querySelector("#gallery")
+      gallery: document.querySelector("#gallery"),
+      infoContainer: document.querySelector("#info-container")
     };
 
     function renderNavigation() {
       const navItems = portfolio.navigation.map(item => {
-        const label = t(item.key) || item.label;
-        return `<a href="#" data-series="${item.key}" onclick="filterSeries('${item.key}'); return false;">${label}</a>`;
+        const label = t(item.key) || t('nav_' + item.key) || item.label;
+        return `<a href="#" data-series="${item.key}" onclick="navigateTo('${item.key}'); return false;">${label}</a>`;
       });
-      // Añadir "All works" al inicio
-      const allWorks = `<a href="#" data-series="all" onclick="filterSeries('all'); return false;">${lang === 'es' ? 'Todas' : 'All'}</a>`;
-      elements.navigation.innerHTML = allWorks + navItems.join('');
-      // Actualizar active
+      elements.navigation.innerHTML = navItems.join('');
       updateActiveNav();
     }
 
     function updateActiveNav() {
       document.querySelectorAll('#navigation a').forEach(a => {
-        a.style.opacity = a.dataset.series === currentSeries ? '1' : '0.5';
+        const isActive = a.dataset.series === currentSeries;
+        a.classList.toggle('active', isActive);
+        a.style.opacity = isActive ? '1' : '0.5';
       });
     }
 
-    function filterSeries(series) {
+    function navigateTo(series) {
       currentSeries = series;
-      activeIndex = 0;
+      if (series === 'about' || series === 'contact') {
+        elements.gallery.style.display = 'none';
+        elements.infoContainer.style.display = 'block';
+        renderInfoPage(series);
+      } else {
+        elements.gallery.style.display = 'grid';
+        elements.infoContainer.style.display = 'none';
+        activeIndex = 0;
+        renderArtwork();
+      }
       updateActiveNav();
-      renderArtwork();
-      // Cerrar menú en móvil
       closeMenu();
     }
 
@@ -664,13 +674,51 @@
     }
 
     // ============================================================
+    // INFO PAGE (ABOUT / CONTACT)
+    // ============================================================
+    function renderInfoPage(page) {
+      const container = elements.infoContainer;
+      if (page === 'about') {
+        container.innerHTML = `
+          <div class="info-page">
+            <div class="about-photo">
+              <img src="images/about.jpg" alt="Starlin Tatis" onerror="this.parentNode.style.display='none'" />
+            </div>
+            <div class="about-h">${t('about_h')}</div>
+            <p class="about-body">${t('about_p1')}</p>
+            <p class="about-body">${t('about_p2')}</p>
+            <p class="about-body">${t('about_p3')}</p>
+          </div>
+        `;
+      } else if (page === 'contact') {
+        container.innerHTML = `
+          <div class="info-page">
+            <div class="contact-block">
+              <div class="contact-h">${t('contact_h')}</div>
+              <p class="about-body" style="margin-bottom:8px">${t('contact_note')}</p>
+              <a href="mailto:${t('email')}" style="text-decoration:underline">${t('email')}</a>
+            </div>
+            <div class="contact-block">
+              <div class="contact-h">${t('location_h')}</div>
+              <p class="about-body">${t('location')}</p>
+            </div>
+            <div class="contact-block">
+              <div class="contact-h">${t('social_h')}</div>
+              <a href="https://instagram.com/starlintatis" style="text-decoration:underline">${t('instagram')}</a>
+              <a href="https://www.patreon.com/starlintatis" style="text-decoration:underline">${t('patreon')}</a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // ============================================================
     // INICIALIZACIÓN
     // ============================================================
     elements.siteName.textContent = portfolio.name;
     renderNavigation();
-    renderArtwork();
+    navigateTo('all');
 
-    // Eventos
     document.querySelector("#next").addEventListener("click", () => changeArtwork(1));
     document.querySelector("#previous").addEventListener("click", () => changeArtwork(-1));
 
@@ -680,9 +728,8 @@
       elements.menuButton.setAttribute("aria-expanded", String(isOpen));
     });
 
-    // Click en el nombre vuelve a "all"
     elements.siteName.addEventListener("click", () => {
-      filterSeries('all');
+      navigateTo('all');
     });
 
     window.addEventListener("keydown", (event) => {
@@ -700,27 +747,32 @@
 
     elements.gallery.addEventListener("touchend", (event) => {
       if (touchStartY === null) return;
-
       const movement = touchStartY - event.changedTouches[0].clientY;
       if (Math.abs(movement) > 40) changeArtwork(movement > 0 ? 1 : -1);
-
       touchStartY = null;
     });
 
     // ============================================================
-    // LANG — actualizar menú al cambiar idioma
+    // LANG
     // ============================================================
-    // Guardamos referencia a la función original de setLang
     const originalSetLang = setLang;
     setLang = function(l) {
       originalSetLang(l);
       renderNavigation();
       updateMenuText();
-      // Actualizar título de la obra actual
-      renderArtwork();
+      const current = document.querySelector('#navigation a.active');
+      if (current) {
+        const series = current.dataset.series;
+        if (series === 'about' || series === 'contact') {
+          renderInfoPage(series);
+        } else {
+          renderArtwork();
+        }
+      } else {
+        renderArtwork();
+      }
     };
 
-    // Aplicar idioma guardado
     setLang(lang);
   </script>
 </body>
