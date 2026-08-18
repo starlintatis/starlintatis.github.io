@@ -236,7 +236,7 @@
 
     .info-page .about-body {
       font-size: 15px;
-      line-height: 1.8;
+      line-height: 1.75;
       margin-bottom: 20px;
       color: var(--text);
     }
@@ -262,23 +262,14 @@
       text-decoration: underline;
     }
 
-    .info-page .contact-h {
+    .info-page .contact-h,
+    .info-page .about-h {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .04em;
       text-transform: uppercase;
       margin: 0 0 14px;
       color: var(--text);
-    }
-
-    .info-page .about-photo {
-      margin-bottom: 40px;
-    }
-
-    .info-page .about-photo img {
-      width: 100%;
-      max-width: 620px;
-      display: block;
     }
 
     @keyframes fade-in {
@@ -455,12 +446,10 @@
         about: 'About',
         contact: 'Contact',
         sold: 'Sold',
-        // About
         about_h: 'About',
         about_p1: 'Starlin Tatis is a self-taught photographer and creative director based in Santo Domingo, Dominican Republic. A practice situated at the intersection of editorial portraiture and fashion photography since 2010, defined by a sustained attention to presence — the silence between subject and lens that transforms a photograph into something closer: a unique and memorable record.',
         about_p2: 'Without formal academic training in large part, a visual language was built through an unwavering commitment to the artist\'s craft, developing a practice grounded in formal precision and psychological depth — taking the performing arts as near-total inspiration in fashion. The aesthetic draws from traditions of artistic portraiture and the codes of contemporary fashion, shaped entirely by the discipline of observation and constant creation, rejecting spectacle in favor of stillness.',
         about_p3: 'His work has been exhibited at the TRImarchi Graphic Design Festival in Mar del Plata, Argentina, and Galería Espacio Falso in Santiago, Chile. Published in Inkult Magazine (Mexico City), BALAM Magazine (Buenos Aires), among others. Photographs are held in private collections across several continents.',
-        // Contact
         contact_h: 'Contact',
         location_h: 'Location',
         social_h: 'Social',
@@ -479,12 +468,10 @@
         about: 'Acerca de',
         contact: 'Contacto',
         sold: 'Vendido',
-        // About
         about_h: 'Acerca de',
         about_p1: 'Starlin Tatis es un fotógrafo autodidacta y director creativo radicado en Santo Domingo, República Dominicana. Su práctica, situada en el cruce entre el retrato editorial y la fotografía de moda, desde 2010, viene definiéndose por una atención sostenida a la presencia, el silencio entre el sujeto y el lente que transforma una fotografía en algo más cercano, un registro único y memorable.',
         about_p2: 'Sin formación académica formal en gran porcentaje, construyó su lenguaje visual a través de un compromiso inquebrantable con el oficio del artista, desarrollando una práctica sustentada en la precisión formal y la profundidad psicológica; tomando las artes escénicas como casi su total inspiración en moda. Su estética bebe de las tradiciones del retrato artístico y los códigos de la moda contemporánea, moldeada enteramente por la disciplina de la observación y la creación constante, rechazando el espectáculo en favor de la quietud.',
         about_p3: 'Su obra ha sido expuesta en el TRImarchi Graphic Design Festival en Mar del Plata, Argentina, Galería Espacio Falso en Santiago de Chile. Ha sido publicada en Inkult Magazine (Ciudad de México), BALAM Magazine (Buenos Aires), entre otros. Sus fotografías forman parte de colecciones privadas en varios continentes.',
-        // Contact
         contact_h: 'Contacto',
         location_h: 'Ubicación',
         social_h: 'Redes',
@@ -538,7 +525,6 @@
         { key: 'contact', label: 'Contact' }
       ],
       artworks: [
-        // WORKS
         { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work01.jpg", series: "works" },
         { title: "Cigua", year: "2022", material: "Digital Gelatin Silver Print", size: "16 × 20\" in / 40.64 × 50.80 cm", status: "Available", image: "Works/work02.jpg", series: "works" },
         { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work03.jpg", series: "works" },
@@ -553,7 +539,6 @@
         { title: "Untitled", year: "2022", material: "Pigment Print on Bamboo Baryta", size: "24 × 16\" in / 60.96 × 40.64 cm", status: "Available", image: "Works/work12.jpg", series: "works" },
         { title: "Untitled", year: "2023", material: "Digital Gelatin Silver Print", size: "16 × 24\" in / 40.64 × 60.96 cm", status: "Available", image: "Works/work13.jpg", series: "works" },
         { title: "Untitled", year: "2013", material: "Digital Gelatin Silver Print", size: "11 × 17\" in / 27.94 × 43.18 cm", status: "Available", image: "Works/work14.jpg", series: "works" },
-        // MUTACIÓN
         { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled13.jpg", series: "mutacion" },
         { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled14.jpg", series: "mutacion" },
         { title: "Untitled", year: "2026", material: "Pigment Print on Awagami Bamboo", size: "20 × 30\" in / 50.8 × 76.2 cm", status: "Available", image: "Mutacion/Untitled15.jpg", series: "mutacion" },
@@ -605,15 +590,24 @@
       });
     }
 
+    // ============================================================
+    // NAVEGAR — OCULTA DETALLES AL ENTRAR A ABOUT/CONTACT
+    // ============================================================
     function navigateTo(series) {
       currentSeries = series;
       if (series === 'about' || series === 'contact') {
         elements.gallery.style.display = 'none';
         elements.infoContainer.style.display = 'block';
+        // Ocultar detalles de la obra
+        document.querySelector('.artwork-details').style.display = 'none';
+        document.querySelector('.counter').style.display = 'none';
         renderInfoPage(series);
       } else {
         elements.gallery.style.display = 'grid';
         elements.infoContainer.style.display = 'none';
+        // Mostrar detalles de la obra
+        document.querySelector('.artwork-details').style.display = 'block';
+        document.querySelector('.counter').style.display = 'block';
         activeIndex = 0;
         renderArtwork();
       }
@@ -626,6 +620,14 @@
       nav.classList.remove('is-open');
       document.getElementById('menu-button').textContent = t('menu');
       document.getElementById('menu-button').setAttribute('aria-expanded', 'false');
+    }
+
+    function filterSeries(series) {
+      currentSeries = series;
+      activeIndex = 0;
+      updateActiveNav();
+      renderArtwork();
+      closeMenu();
     }
 
     function renderArtwork() {
@@ -674,16 +676,13 @@
     }
 
     // ============================================================
-    // INFO PAGE (ABOUT / CONTACT)
+    // INFO PAGE (ABOUT / CONTACT) — SIN IMAGEN
     // ============================================================
     function renderInfoPage(page) {
       const container = elements.infoContainer;
       if (page === 'about') {
         container.innerHTML = `
           <div class="info-page">
-            <div class="about-photo">
-              <img src="images/about.jpg" alt="Starlin Tatis" onerror="this.parentNode.style.display='none'" />
-            </div>
             <div class="about-h">${t('about_h')}</div>
             <p class="about-body">${t('about_p1')}</p>
             <p class="about-body">${t('about_p2')}</p>
